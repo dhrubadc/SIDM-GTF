@@ -28,10 +28,9 @@ def cell_centers(r_edge):
 
 def shell_volume(r_edge):
     """
-    Return shell volume V=(r_right**3-r_left**3)/3 
-    from linear edges without subtracting cubes. 
-    The factorized form is more accurate when 
-    a shell becomes narrow.
+    Return V=(r_right**3-r_left**3)/3 from linear edges
+    without subtracting cubes. The factorized form is 
+    more accurate when a shell becomes narrow.
     """
 
     r_left = r_edge[:-1]
@@ -56,18 +55,18 @@ def log_cell_centers(ln_r_edge):
     """Return natural log of 
     cell-centered radii from logarithmic edges.
     """
-
-    ln_left = ln_r_edge[:-1]
-    ln_right = ln_r_edge[1:]
+    
     return (
-        np.logaddexp(ln_right, ln_left)
+        np.logaddexp(ln_r_edge[:-1], ln_r_edge[1:])
         - np.log(FLOAT_DTYPE(2.0))
     )
 
 def log_shell_volume(ln_r_edge):
     """
-    Return natural log of 
-    shell volume from logarithmic edges.
+    Return ln[(r_right**3-r_left**3)/3] from logarithmic edges.
+
+    ``ln_r_edge[0]`` may be ``-inf`` for the origin.  ``expm1`` avoids
+    subtracting nearly equal cubes when a Lagrangian shell becomes thin.
     """
     
     ln_left = ln_r_edge[:-1]
