@@ -1,6 +1,4 @@
-"""
-Module to construct a fixed radial grid
-"""
+"""Module to construct a fixed radial grid"""
 
 import numpy as np
 from constants import FLOAT_DTYPE
@@ -22,8 +20,7 @@ def make_radial_grid(r_first, r_max, N_shell):
 
 
 def cell_centers(r_edge):
-    """
-    Return cell midpoints from linear edges,
+    """Return cell midpoints from linear edges,
     r = (r_right+r_left) / 2.
     """
     return FLOAT_DTYPE(0.5) * (r_edge[:-1] + r_edge[1:])
@@ -48,8 +45,7 @@ def shell_volumes(r_edge):
 
 
 def log_cell_centers(ln_r_edge):
-    """
-    Return natural log of
+    """Return natural log of
     cell midpoints from logarithmic edges.
     """
     ln_left = ln_r_edge[:-1]

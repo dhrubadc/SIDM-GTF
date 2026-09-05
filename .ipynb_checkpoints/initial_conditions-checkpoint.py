@@ -1,6 +1,4 @@
-"""
-Halo initial conditions in linear variables.
-"""
+"""Halo initial conditions in linear variables."""
 
 import numpy as np
 from scipy.optimize import brentq
@@ -9,8 +7,7 @@ from grid import cell_centers
 
 
 def truncated_nfw_dimensionless(r, r_t, n):
-    """
-    Return rho (in units of rho_s)
+    """Return rho (in units of rho_s)
     as a function of r (in units of r_s)
     for a truncated NFW profile.
     """
@@ -18,8 +15,7 @@ def truncated_nfw_dimensionless(r, r_t, n):
 
 
 def nfw_dimensionless(r):
-    """
-    Return rho (in units of rho_s)
+    """Return rho (in units of rho_s)
     as a function of r (in units of r_s)
     for an NFW profile.
     """
@@ -27,16 +23,12 @@ def nfw_dimensionless(r):
 
 
 def shell_mass(rho, volume):
-    """
-    Return the Lagrangian mass of each shell
-    """
+    """Return the Lagrangian mass of each shell"""
     return rho * volume
 
 
 def enclosed_mass(dm):
-    """
-    Return enclosed mass at all shell edges
-    """
+    """Return enclosed mass at all shell edges"""
     M_edge = np.zeros(len(dm) + 1)
     M_edge[1:] = np.cumsum(dm)
 
@@ -72,10 +64,10 @@ def hydrostatic_u_from_rho(r_edge, rho, M_edge, u_outer):
 
         def shell_balance(ln_u_left):
             u_left = np.exp(ln_u_left)
-            u_face = FLOAT_DTYPE(0.5) * (u_left + u_right)
+            u_edge = FLOAT_DTYPE(0.5) * (u_left + u_right)
             return (
                 delta_ln_rho + ln_u_right - ln_u_left
-            ) / delta_ln_r + gravity_coefficient / u_face
+            ) / delta_ln_r + gravity_coefficient / u_edge
 
         lower = ln_u_right - FLOAT_DTYPE(10.0)
         upper = ln_u_right + FLOAT_DTYPE(10.0)
