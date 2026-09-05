@@ -1,19 +1,15 @@
 import numpy as np
 from constants import FLOAT_DTYPE
-from grid import log_cell_centers
+import grid
+import state
 
 
-def hydrostatic_terms_and_scale(ln_r_edge, u, ln_rho, M_edge):
+def hydrostatic_terms_and_scale(r_edge, ln_r, u, ln_u, ln_rho, M_edge):
     """
     Return the individual terms and scale of the
-    logarithmic hydrostatic residual
+    logarithmic hydrostatic residual.
     """
-    r_edge = np.exp(ln_r_edge)
-    ln_u = np.log(u)
-
-    ln_r = log_cell_centers(ln_r_edge)
     delta_ln_r = ln_r[1:] - ln_r[:-1]
-
     delta_ln_rho = ln_rho[1:] - ln_rho[:-1]
     delta_ln_u = ln_u[1:] - ln_u[:-1]
 
@@ -32,7 +28,7 @@ def hydrostatic_terms_and_scale(ln_r_edge, u, ln_rho, M_edge):
     return rho_slope, u_slope, gravity_slope, hydro_scale
 
 
-def hydrostatic_residual(ln_r_edge, u, ln_rho, M_edge):
+def hydrostatic_residual(r_edge, ln_r, u, ln_u, ln_rho, M_edge):
     """
     Return the N-1 hydrostatic residuals,
     where N is the number of shells.
@@ -41,7 +37,7 @@ def hydrostatic_residual(ln_r_edge, u, ln_rho, M_edge):
              + (3.0/2.0) * M_edge[1:-1] / (r_edge[1:-1] * u_face).
     """
     rho_slope, u_slope, gravity_slope, hydro_scale = hydrostatic_terms_and_scale(
-        ln_r_edge, u, ln_rho, M_edge
+        r_edge, ln_r, u, ln_u, ln_rho, M_edge
     )
 
     F_H = rho_slope + u_slope + gravity_slope
@@ -80,3 +76,65 @@ def energy_residual(u, u_old, V, V_old, dm, L, dt):
     scaled_F_E = F_E / energy_scale
 
     return F_E, scaled_F_E
+
+
+def residual(
+    x,
+    ln_r_edge_old,
+    u_old,
+    dt,
+    dm,
+    M_edge,
+    sigma_over_m,
+    C,
+    alpha,
+    r_inner,
+    r_outer,
+    N_shell,
+):
+    """Construct combined hydro and energy residual.
+    """
+    ln_r_edge, u = unpack_unknowns(x, r_inner, r_outer, N_shell)
+
+    state = state.state_from_unknowns(ln_r_edge, u, dm, sigma_over_m, C, alpha)
+
+    r_edge = state["r_edge"]
+    ln_r = state["ln_r"]
+    V = state["V"]
+    ln_rho = state["ln_rho"]
+    ln_u = state["ln_u"]
+    L = state["L"]
+
+    F_H, scaled_F_H = hydrostatic_residual(r_edge, ln_r, u, ln_u, ln_rho, M_edge)
+
+    r_edge_old = np.exp(ln_r_edge_old)
+    V_old = grid.shell_volumes(r_edge_old)
+
+    F_E, scaled_F_E = energy_residual(u, u_old, V, V_old, dm, L, dt)
+
+    return np.concatenate((F_H, F_E)), np.concatenate((scaled_F_H, scaled_F_E))
+
+
+def pack_unknowns(ln_r_edge, u):
+    """
+    Pack x = [ln_r_edge[1:-1], u].
+    """
+    return np.concatenate((r_edge[1:-1], u))
+
+
+def unpack_unknowns(x, r_inner, r_outer, N_shell):
+    """
+    Unpack x into ln_r_edge and u.
+    """
+    nr = N_shell - 1
+    if len(x) != 2 * N_shell - 1:
+        raise ValueError("Incorrect Newton-vector length.")
+
+    ln_r_edge = np.empty(Nshell + 1)
+    r_edge[0] = r_inner
+    r_edge[-1] = r_outer
+    r_edge[1:-1] = x[:nr]
+
+    u = x[nr:]
+
+    return ln_r_edge, u
