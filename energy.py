@@ -3,9 +3,8 @@ Conductive luminosity using linear cell variables and gradients.
 """
 
 import numpy as np
-
-from constants import FLOAT_DTYPE
-from grid import cell_centers
+import constants
+import grid
 
 
 def luminosity(r_edge, u, kappa):
@@ -25,15 +24,15 @@ def luminosity(r_edge, u, kappa):
     if len(r_edge) != N + 1 or len(kappa) != N:
         raise ValueError("Inconsistent r_edge, u, and kappa lengths.")
 
-    r = cell_centers(r_edge)
-    L = np.zeros(N + 1, dtype=FLOAT_DTYPE)
+    r = grid.cell_centers(r_edge)
+    L = np.zeros(N + 1, dtype=constants.FLOAT_DTYPE)
 
-    kappa_face = FLOAT_DTYPE(0.5) * (kappa[:-1] + kappa[1:])
+    kappa_face = constants.FLOAT_DTYPE(0.5) * (kappa[:-1] + kappa[1:])
     du = u[1:] - u[:-1]
     dr = r[1:] - r[:-1]
 
-    L[1:N] = (
-        -(FLOAT_DTYPE(2.0) / FLOAT_DTYPE(3.0)) * r_edge[1:N] ** 2 * kappa_face * du / dr
+    L[1:-1] = (
+        -constants.FLOAT_DTYPE(2.0 / 3.0) * r_edge[1:-1] ** 2 * kappa_face * du / dr
     )
 
     return L
@@ -59,7 +58,7 @@ def total_gravitational_energy(r, dm, M_edge):
     where M(r) is the arithmatic mean of enclosed mass
     at the two adjacent edges
     """
-    M_center = 0.5 * (M_edge[:-1] + M_edge[1:])
+    M_center = constants.FLOAT_DTYPE(0.5) * (M_edge[:-1] + M_edge[1:])
     return np.sum(dm * M_center / r)
 
 

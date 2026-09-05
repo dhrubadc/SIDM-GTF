@@ -2,6 +2,7 @@
 Module to construct current state from the system from ln_r_edge and u.
 """
 
+import numpy as np
 import conductivity
 import energy
 import grid
@@ -24,7 +25,7 @@ def state_from_unknowns(ln_r_edge, u, dm, sigma_over_m, C, alpha):
 
     ln_u = np.log(u)
 
-    kappa = conductivity.conductivity(rho, u, sigma_over_m, C, alpha)
+    kappa = conductivity.total_conductivity(rho, u, sigma_over_m, C, alpha)
     L = energy.luminosity(r_edge, u, kappa)
 
     return {

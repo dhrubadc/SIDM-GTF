@@ -1,5 +1,7 @@
+"""Module to calculate coupled residual"""
+
 import numpy as np
-from constants import FLOAT_DTYPE
+import constants
 import grid
 import state
 
@@ -13,15 +15,17 @@ def hydrostatic_terms_and_scale(r_edge, ln_r, u, ln_u, ln_rho, M_edge):
     delta_ln_rho = ln_rho[1:] - ln_rho[:-1]
     delta_ln_u = ln_u[1:] - ln_u[:-1]
 
-    u_face = FLOAT_DTYPE(0.5) * (u[1:] + u[:-1])
+    u_face = constants.FLOAT_DTYPE(0.5) * (u[1:] + u[:-1])
 
     rho_slope = delta_ln_rho / delta_ln_r
     u_slope = delta_ln_u / delta_ln_r
 
-    gravity_slope = FLOAT_DTYPE(3.0 / 2.0) * M_edge[1:-1] / (r_edge[1:-1] * u_face)
+    gravity_slope = (
+        constants.FLOAT_DTYPE(3.0 / 2.0) * M_edge[1:-1] / (r_edge[1:-1] * u_face)
+    )
 
     hydro_scale = np.maximum(
-        FLOAT_DTYPE(1.0),
+        constants.FLOAT_DTYPE(1.0),
         np.abs(rho_slope) + np.abs(u_slope) + np.abs(gravity_slope),
     )
 
@@ -52,7 +56,9 @@ def energy_terms(u, u_old, V, V_old, dm, L, dt):
     liner energy residual.
     """
     energy_term = u - u_old
-    compression_term = FLOAT_DTYPE(2.0 / 3.0) * u * (FLOAT_DTYPE(1.0) - V_old / V)
+    compression_term = (
+        constants.FLOAT_DTYPE(2.0 / 3.0) * u * (constants.FLOAT_DTYPE(1.0) - V_old / V)
+    )
     conduction_term = dt * energy.luminosity_divergence(L, dm)
 
     energy_scale = np.maximum(
@@ -92,8 +98,7 @@ def residual(
     r_outer,
     N_shell,
 ):
-    """Construct combined hydro and energy residual.
-    """
+    """Construct combined hydro and energy residual."""
     ln_r_edge, u = unpack_unknowns(x, r_inner, r_outer, N_shell)
 
     state = state.state_from_unknowns(ln_r_edge, u, dm, sigma_over_m, C, alpha)
