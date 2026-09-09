@@ -52,20 +52,21 @@ def total_kinetic_energy(u, dm):
     return np.sum(dm * u)
 
 
-def total_gravitational_energy(r, dm, M_edge):
+def total_gravitational_energy(r_edge, dm, M_edge):
     """
     Return sum(dm M(r)/r)
     where M(r) is the arithmatic mean of enclosed mass
     at the two adjacent edges
     """
+    r = grid.cell_centers(r_edge)
     M_center = constants.FLOAT_DTYPE(0.5) * (M_edge[:-1] + M_edge[1:])
-    return np.sum(dm * M_center / r)
+    return -np.sum(dm * M_center / r)
 
 
-def total_energy(r_edge, u, dm, M_edge, G=1.0):
+def total_energy(r_edge, u, dm, M_edge):
     """
     Return total energy E=U+W.
     """
     U = total_kinetic_energy(u, dm)
-    W = total_gravitational_energy(r, dm, M_edge)
+    W = total_gravitational_energy(r_edge, dm, M_edge)
     return U + W

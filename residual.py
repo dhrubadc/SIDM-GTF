@@ -4,6 +4,7 @@ import numpy as np
 import constants
 import grid
 import state
+import energy
 
 
 def hydrostatic_terms_and_scale(r_edge, ln_r, u, ln_u, ln_rho, M_edge):
@@ -101,14 +102,14 @@ def residual(
     """Construct combined hydro and energy residual."""
     ln_r_edge, u = unpack_unknowns(x, r_inner, r_outer, N_shell)
 
-    state = state.state_from_unknowns(ln_r_edge, u, dm, sigma_over_m, C, alpha)
+    state_this = state.state_from_unknowns(ln_r_edge, u, dm, sigma_over_m, C, alpha)
 
-    r_edge = state["r_edge"]
-    ln_r = state["ln_r"]
-    V = state["V"]
-    ln_rho = state["ln_rho"]
-    ln_u = state["ln_u"]
-    L = state["L"]
+    r_edge = state_this["r_edge"]
+    ln_r = state_this["ln_r"]
+    V = state_this["V"]
+    ln_rho = state_this["ln_rho"]
+    ln_u = state_this["ln_u"]
+    L = state_this["L"]
 
     F_H, scaled_F_H = hydrostatic_residual(r_edge, ln_r, u, ln_u, ln_rho, M_edge)
 
@@ -124,7 +125,7 @@ def pack_unknowns(ln_r_edge, u):
     """
     Pack x = [ln_r_edge[1:-1], u].
     """
-    return np.concatenate((r_edge[1:-1], u))
+    return np.concatenate((ln_r_edge[1:-1], u))
 
 
 def unpack_unknowns(x, r_inner, r_outer, N_shell):
@@ -135,10 +136,11 @@ def unpack_unknowns(x, r_inner, r_outer, N_shell):
     if len(x) != 2 * N_shell - 1:
         raise ValueError("Incorrect Newton-vector length.")
 
-    ln_r_edge = np.empty(Nshell + 1)
-    r_edge[0] = r_inner
-    r_edge[-1] = r_outer
-    r_edge[1:-1] = x[:nr]
+    ln_r_edge = np.empty(N_shell + 1, dtype=constants.FLOAT_DTYPE)
+
+    ln_r_edge[0] = -np.inf if r_inner == 0.0 else np.log(r_inner)
+    ln_r_edge[-1] = np.log(r_outer)
+    ln_r_edge[1:-1] = x[:nr]
 
     u = x[nr:]
 

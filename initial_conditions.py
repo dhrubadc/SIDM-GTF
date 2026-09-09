@@ -37,7 +37,7 @@ def enclosed_mass(dm):
     """
     Return enclosed mass at all shell edges
     """
-    M_edge = np.zeros(len(dm) + 1)
+    M_edge = np.zeros(len(dm) + 1, dtype=constants.FLOAT_DTYPE)
     M_edge[1:] = np.cumsum(dm)
 
     return M_edge
@@ -58,7 +58,7 @@ def hydrostatic_u_from_rho(r_edge, rho, M_edge, u_outer):
     r = grid.cell_centers(r_edge)
     ln_r = np.log(r)
     ln_rho = np.log(rho)
-    u = np.empty(N)
+    u = np.empty(N, dtype=constants.FLOAT_DTYPE)
     u[-1] = u_outer
 
     for i in range(N - 2, -1, -1):
