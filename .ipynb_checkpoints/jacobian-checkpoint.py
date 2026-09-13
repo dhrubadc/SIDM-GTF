@@ -7,7 +7,7 @@ def delta(m, n):
     if n == m:
         return FLOAT_DTYPE(1.0)
     else:
-        return FLOAT_DTYPE(0.0)
+        return FLOAT_DTYE(0.0)
 
 
 def dln_r_dln_redge(i, j, r_edge):
@@ -32,7 +32,7 @@ def dln_V_dln_redge(i, j, r_edge):
 
 def dln_u_du(i, k, u):
     """Detivative of log u with respect to u"""
-    return delta(i, k) / u[i]
+    return delta_func(i, k) / u[i]
 
 
 def dFHydro_dln_redge(i, j, ln_r_edge, u, state, M_edge):
@@ -74,20 +74,17 @@ def dFhydro_du(i, k, ln_r_edge, u, state, M_edge):
 
 
 def jacobian_hydro_block(ln_r_edge, u, state, M_edge, N_shell):
-    """Hydro block of the Jacobian
-    with fixed edges at ln_r_edge[0] and ln_r_edge[-1].
-    dF_dln_redge is tridiagonal and dF_du is bidiagonal.
-    """
-    dF_dln_redge = np.full((N_shell - 1, N_shell + 1), np.nan, dtype=FLOAT_DTYPE)
+    """Hydro block of the Jacobian"""
+    dF_dln_redge = np.full((N_shell - 1, N_shell - 1), np.nan, dtype=FLOAT_DTYPE)
     dF_du = np.full((N_shell - 1, N_shell), np.nan, dtype=FLOAT_DTYPE)
 
-    for i in range(0, N_shell - 1):
+    for i in range(0, N_shell - 2):
 
-        for j in range(0, N_shell + 1):
+        for j in range(0, N_shell - 2):
             dF_dln_redge[i, j] = dFHydro_dln_redge(i, j, ln_r_edge, u, state, M_edge)
 
-        for k in range(0, N_shell):
+        for k in range(0, N_shell - 1):
             dF_du[i, k] = dFhydro_du(i, k, ln_r_edge, u, state, M_edge)
 
-    jac_hydro = np.column_stack((dF_dln_redge[:, 1:-1], dF_du))
+    jac_hydro = np.column_stack((dF_dln_redge, dF_du))
     return dF_dln_redge, dF_du, jac_hydro
