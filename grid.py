@@ -1,4 +1,7 @@
-"""Module to construct a fixed radial grid."""
+"""
+Module to construct a fixed radial grid
+in dimensionless units (Nishikawa 2020).
+"""
 
 import numpy as np
 import constants
@@ -8,7 +11,7 @@ def make_radial_grid(r_first, r_outer, n_shell):
     """
     Return a radial grid in log-space
     with ln_r_edge[0] = -np.inf and
-    ln_r_edge[1:] = linspace(ln_r_first, ln_r_outer, N_shell).
+    ln_r_edge[1:] = linspace(ln_r_first, ln_r_outer, n_shell).
     """
     ln_r_edge = np.empty(n_shell + 1, dtype=constants.FLOATDTYPE)
     ln_r_edge[0] = -np.inf
@@ -18,8 +21,8 @@ def make_radial_grid(r_first, r_outer, n_shell):
 
 
 def log_cell_centers(ln_r_edge):
-    """Return natural log of
-    cell midpoints from logarithmic edges.
+    """
+    Return log of cell midpoints from logarithmic edges.
     """
     ln_left = ln_r_edge[:-1]
     ln_right = ln_r_edge[1:]
@@ -28,15 +31,12 @@ def log_cell_centers(ln_r_edge):
 
 
 def log_shell_volumes(ln_r_edge):
-    """Return natural log of
-    shell volumes from logarithmic edges.
+    """
+    Return log of shell volumes from logarithmic edges.
     """
     ln_left = ln_r_edge[:-1]
     ln_right = ln_r_edge[1:]
     delta = constants.FLOATDTYPE(3.0) * (ln_left - ln_right)
-
-    if np.any(delta >= constants.FLOATDTYPE(0.0)):
-        raise ValueError("Shell edges must be strictly increasing.")
 
     return (
         constants.FLOATDTYPE(3.0) * ln_right

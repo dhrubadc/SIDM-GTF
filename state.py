@@ -1,10 +1,12 @@
-"""Module to construct current state of the system
-from ln_r_edge and u.
+"""
+Module to construct current state of the system
+from the primary unknowns ln_r_edge and u
+in dimensionless units (Nishikawa 2020).
 """
 
 import numpy as np
 import conductivity
-import energy
+import luminosity
 import grid
 
 
@@ -14,7 +16,7 @@ import grid
 def state_from_unknowns(ln_r_edge, u, dm, sigma_over_m, beta, alpha):
     """
     Construct all state variables required by
-    residual and jacobian from the primary unknowns.
+    residual and jacobian evaluation from ln_r_edge and u.
     """
     r_edge = np.exp(ln_r_edge)
 
@@ -33,7 +35,7 @@ def state_from_unknowns(ln_r_edge, u, dm, sigma_over_m, beta, alpha):
     kappa_l = conductivity.lmfp_conductivity(rho, u, beta)
     kappa = conductivity.total_conductivity(kappa_s, kappa_l, alpha)
 
-    l = energy.luminosity(r_edge, u, kappa)
+    l = luminosity.luminosity(r_edge, u, r, kappa)
 
     return {
         "u": u,
