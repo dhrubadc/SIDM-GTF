@@ -1,15 +1,13 @@
-"""
-Physical constants.
-"""
+"""Physical constants."""
 
 import numpy as np
 
-FLOAT_DTYPE = np.float64
+FLOATDTYPE = np.float64
 
 # ============================================================
 # Conductivity constants
 # ============================================================
 
-a = FLOAT_DTYPE(4.0) / np.sqrt(FLOAT_DTYPE(np.pi))
+a = FLOATDTYPE(4.0) / np.sqrt(FLOATDTYPE(np.pi))
 
-b = FLOAT_DTYPE(25.0) * np.sqrt(FLOAT_DTYPE(np.pi)) / FLOAT_DTYPE(32.0)
+b = FLOATDTYPE(25.0) * np.sqrt(FLOATDTYPE(np.pi)) / FLOATDTYPE(32.0)

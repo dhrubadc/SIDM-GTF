@@ -106,10 +106,10 @@ def residual(
 
     r_edge = state_this["r_edge"]
     ln_r = state_this["ln_r"]
-    V = state_this["V"]
+    V = state_this["v"]
     ln_rho = state_this["ln_rho"]
     ln_u = state_this["ln_u"]
-    L = state_this["L"]
+    L = state_this["l"]
 
     F_H, scaled_F_H = hydrostatic_residual(r_edge, ln_r, u, ln_u, ln_rho, M_edge)
 
@@ -118,7 +118,7 @@ def residual(
 
     F_E, scaled_F_E = energy_residual(u, u_old, V, V_old, dm, L, dt)
 
-    return np.concatenate((F_H, F_E)), np.concatenate((scaled_F_H, scaled_F_E))
+    return np.concatenate((F_H, F_E))
 
 
 def pack_unknowns(ln_r_edge, u):
