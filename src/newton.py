@@ -1,3 +1,13 @@
+"""
+Module to implement Newton iterations
+and helper functions for packing
+and upacking of primary unknowns.
+"""
+
+import numpy as np
+import constants
+
+
 def pack_unknowns(ln_r_edge, u):
     """
     Pack x = [ln_r_edge[1:-1], u].
