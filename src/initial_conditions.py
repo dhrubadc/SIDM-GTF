@@ -96,7 +96,7 @@ def hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, m_edge, u_outer):
     return u
 
 
-def set_up_initial_conditions(r_first, r_outer, n_shell, r_t=np.inf, n=0):
+def set_up_initial_conditions(r_first, r_outer, n_shell, r_t=np.inf, n=1.0):
     """
     Set up initial condtions.
     Default is standard NFW without any truncation.
