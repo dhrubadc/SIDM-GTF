@@ -300,7 +300,7 @@ def jacobian_energy_block(state, v_old, dm, dt, alpha):
     """
     Energy block of Jacobian
     with fixed edges at ln_r_edge[0] and ln_r_edge[-1].
-    df_dln_redge is four-diagonal and df_du is bi-diagonal.
+    df_dln_redge is four-diagonal and df_du is tri-diagonal.
     """
     n_shell = len(dm)
     df_dln_redge = np.full((n_shell, n_shell + 1), np.nan, dtype=constants.FLOATDTYPE)
