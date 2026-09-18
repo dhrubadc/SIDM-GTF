@@ -7,19 +7,15 @@ import numpy as np
 import constants
 
 
-def make_radial_grid(r_first):
+def make_radial_grid(r_first, r_outer, n_shell):
     """
     Return a radial grid in log-space
     with ln_r_edge[0] = -np.inf and
     ln_r_edge[1:] = linspace(ln_r_first, ln_r_outer, n_shell).
     """
-    ln_r_edge = np.empty(constants.N_SHELL + 1, dtype=constants.FLOATDTYPE)
-
+    ln_r_edge = np.empty(n_shell + 1, dtype=constants.FLOATDTYPE)
     ln_r_edge[0] = -np.inf
-
-    ln_r_edge[1:] = np.linspace(
-        np.log(r_first), np.log(constants.R_OUTER), constants.N_SHELL
-    )
+    ln_r_edge[1:] = np.linspace(np.log(r_first), np.log(r_outer), n_shell)
 
     return ln_r_edge
 

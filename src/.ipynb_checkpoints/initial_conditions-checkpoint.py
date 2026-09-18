@@ -36,28 +36,28 @@ def enclosed_mass(dm):
     return m_edge
 
 
-def hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, u_outer):
+# pylint: disable=too-many-arguments
+# pylint: disable=too-many-positional-arguments
+# pylint: disable=too-many-locals
+def hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, m_edge, u_outer):
     """
     Integrate inwards the same hydrostatic residual
     as in residual.py to get the initial u profile.
     The outermost u is specified.
     """
-
-    u = np.empty(constants.N_SHELL, dtype=constants.FLOATDTYPE)
+    n_shell = len(ln_r)
+    u = np.empty(n_shell, dtype=constants.FLOATDTYPE)
     u[-1] = u_outer
 
-    for i in range(constants.N_SHELL - 2, -1, -1):
+    for i in range(n_shell - 2, -1, -1):
         dln_r = ln_r[i + 1] - ln_r[i]
         dln_rho = ln_rho[i + 1] - ln_rho[i]
 
-        g_coefficient = (
-            constants.M_EDGE[i + 1] * constants.FLOATDTYPE(3.0 / 2.0) / r_edge[i + 1]
-        )
+        g_coefficient = m_edge[i + 1] * constants.FLOATDTYPE(3.0 / 2.0) / r_edge[i + 1]
 
         u_right = u[i + 1]
         ln_u_right = np.log(u_right)
 
-        # pylint: disable=too-many-arguments,too-many-positional-arguments
         def shell_balance(
             ln_u_left,
             dln_r=dln_r,
@@ -96,12 +96,12 @@ def hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, u_outer):
     return u
 
 
-def set_up_initial_conditions(r_first, r_t=np.inf, n=1.0):
+def set_up_initial_conditions(r_first, r_outer, n_shell, r_t=np.inf, n=1.0):
     """
     Set up initial condtions.
     Default is standard NFW without any truncation.
     """
-    ln_r_edge = grid.make_radial_grid(r_first)
+    ln_r_edge = grid.make_radial_grid(r_first, r_outer, n_shell)
     ln_r = grid.log_cell_centers(ln_r_edge)
     ln_v = grid.log_shell_volumes(ln_r_edge)
 
@@ -112,9 +112,9 @@ def set_up_initial_conditions(r_first, r_t=np.inf, n=1.0):
     rho = truncated_nfw_dimensionless(r, r_t, n)
     ln_rho = np.log(rho)
 
-    constants.DM = shell_mass(rho, v)
-    constants.M_EDGE = enclosed_mass(constants.DM)
+    dm = shell_mass(rho, v)
+    m_edge = enclosed_mass(dm)
 
-    u = hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, u_outer=0.001)
+    u = hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, m_edge, u_outer=0.001)
 
-    return ln_r_edge, u, constants.DM, constants.M_EDGE
+    return ln_r_edge, u, dm, m_edge
