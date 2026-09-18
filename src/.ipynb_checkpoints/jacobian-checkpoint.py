@@ -5,7 +5,7 @@ for the current state of the system
 in dimensionless units (Nishikawa 2020).
 """
 
-from scipy.sparse import lil_matrix, hstack, vstack
+import numpy as np
 import constants
 
 
@@ -279,24 +279,25 @@ def jacobian_hydro_block(state):
     df_dln_redge is tri-diagonal and df_du is bi-diagonal.
     """
 
-    df_dln_redge = lil_matrix(
-        (constants.N_SHELL - 1, constants.N_SHELL + 1), dtype=constants.FLOATDTYPE
+    df_dln_redge = np.full(
+        (constants.N_SHELL - 1, constants.N_SHELL + 1),
+        np.nan,
+        dtype=constants.FLOATDTYPE,
     )
-    df_du = lil_matrix(
-        (constants.N_SHELL - 1, constants.N_SHELL), dtype=constants.FLOATDTYPE
+
+    df_du = np.full(
+        (constants.N_SHELL - 1, constants.N_SHELL), np.nan, dtype=constants.FLOATDTYPE
     )
 
     for i in range(0, constants.N_SHELL - 1):
 
-        for j in (i, i + 1, i + 2):
-            if j < constants.N_SHELL + 1:
-                df_dln_redge[i, j] = dfhydro_dln_redge(i, j, state)
+        for j in range(0, constants.N_SHELL + 1):
+            df_dln_redge[i, j] = dfhydro_dln_redge(i, j, state)
 
-        for k in (i, i + 1):
-            if k < constants.N_SHELL:
-                df_du[i, k] = dfhydro_du(i, k, state)
+        for k in range(0, constants.N_SHELL):
+            df_du[i, k] = dfhydro_du(i, k, state)
 
-    jac_hydro = hstack([df_dln_redge[:, 1:-1], df_du]).tolil()
+    jac_hydro = np.column_stack((df_dln_redge[:, 1:-1], df_du))
     return jac_hydro
 
 
@@ -307,24 +308,23 @@ def jacobian_energy_block(state, v_old, dt):
     df_dln_redge is four-diagonal and df_du is tri-diagonal.
     """
 
-    df_dln_redge = lil_matrix(
-        (constants.N_SHELL, constants.N_SHELL + 1), dtype=constants.FLOATDTYPE
+    df_dln_redge = np.full(
+        (constants.N_SHELL, constants.N_SHELL + 1), np.nan, dtype=constants.FLOATDTYPE
     )
-    df_du = lil_matrix(
-        (constants.N_SHELL, constants.N_SHELL), dtype=constants.FLOATDTYPE
+
+    df_du = np.full(
+        (constants.N_SHELL, constants.N_SHELL), np.nan, dtype=constants.FLOATDTYPE
     )
 
     for m in range(0, constants.N_SHELL):
 
-        for j in (m - 1, m, m + 1, m + 2):
-            if 0 <= j < constants.N_SHELL + 1:
-                df_dln_redge[m, j] = dfenergy_dln_r_edge(m, j, state, v_old, dt)
+        for j in range(0, constants.N_SHELL + 1):
+            df_dln_redge[m, j] = dfenergy_dln_r_edge(m, j, state, v_old, dt)
 
-        for k in (m - 1, m, m + 1):
-            if 0 <= k < constants.N_SHELL:
-                df_du[m, k] = dfenergy_du(m, k, state, v_old, dt)
+        for k in range(0, constants.N_SHELL):
+            df_du[m, k] = dfenergy_du(m, k, state, v_old, dt)
 
-    jac_energy = hstack([df_dln_redge[:, 1:-1], df_du]).tolil()
+    jac_energy = np.column_stack((df_dln_redge[:, 1:-1], df_du))
     return jac_energy
 
 
@@ -335,5 +335,5 @@ def analytic_jacobian(state, v_old, dt):
     jac_hydro = jacobian_hydro_block(state)
     jac_energy = jacobian_energy_block(state, v_old, dt)
 
-    jac = vstack([jac_hydro, jac_energy]).tolil()
+    jac = np.row_stack((jac_hydro, jac_energy))
     return jac

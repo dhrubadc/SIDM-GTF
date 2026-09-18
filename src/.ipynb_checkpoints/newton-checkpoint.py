@@ -6,6 +6,7 @@ and upacking of primary unknowns.
 
 import numpy as np
 from scipy.sparse.linalg import spsolve
+from scipy.sparse import csr_matrix
 import constants
 import residual
 import jacobian
@@ -47,13 +48,13 @@ def iterate(state_prev, dt):
     f_trial = residual.residual(state_trial, v_prev, u_prev, dt)
     j_trial = jacobian.analytic_jacobian(state_trial, v_prev, dt)
 
-    if np.max(np.abs(f_trial)) < constants.F_TOL:
+    if np.max(f_trial) < constants.F_TOL:
         print("state is same as previous time", np.max(f_trial))
         return state_trial
 
     for i in range(0, constants.ITER_MAX):
 
-        dx = spsolve(j_trial.tocsr(), -f_trial)
+        dx = spsolve(csr_matrix(j_trial), -f_trial)
 
         x_now = x_trial + dx
 
@@ -64,9 +65,9 @@ def iterate(state_prev, dt):
         f_now = residual.residual(state_now, v_prev, u_prev, dt)
         j_now = jacobian.analytic_jacobian(state_now, v_prev, dt)
 
-        print(i, np.max(np.abs(f_now)))
+        print(i, np.max(f_now))
 
-        if np.max(np.abs(f_now)) < constants.F_TOL:
+        if np.max(f_now) < constants.F_TOL:
             print("newton has converged")
             return state_now
 
