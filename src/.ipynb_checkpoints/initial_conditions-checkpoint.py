@@ -117,4 +117,4 @@ def set_up_initial_conditions(r_first, r_t=np.inf, n=1.0):
 
     u = hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, u_outer=0.001)
 
-    return ln_r_edge, u
+    return ln_r_edge, u, constants.DM, constants.M_EDGE
