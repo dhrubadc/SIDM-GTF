@@ -5,11 +5,12 @@ and upacking of primary unknowns.
 """
 
 import numpy as np
+from scipy.sparse import csr_array
 from scipy.sparse.linalg import spsolve
-import constants
-import residual
-import jacobian
-import state
+from . import constants
+from . import residual
+from . import jacobian
+from . import state
 
 
 def pack_unknowns(ln_r_edge, u):
@@ -69,24 +70,22 @@ def iterate(state_prev, dt):
     v_prev = state_prev["v"]
     u_prev = state_prev["u"]
 
-    f_trial, f_trial_scaled = residual.residual(state_prev, v_prev, u_prev, dt)
+    f_trial = residual.residual(state_prev, v_prev, u_prev, dt)
     j_trial = jacobian.analytic_jacobian(state_prev, v_prev, dt)
 
-    if np.max(np.abs(f_trial_scaled)) < constants.F_TOL:
+    if np.max(np.abs(f_trial)) < constants.F_TOL:
 
         print(
             "state is not updated and same as previous time",
             "\n max(F) = ",
             np.max(np.abs(f_trial)),
-            "\n max(F_scaled) = ",
-            np.max(np.abs(f_trial_scaled)),
         )
 
         return state_prev
 
     for i in range(1, constants.ITER_MAX):
 
-        dx = spsolve(j_trial.tocsr(), -f_trial)
+        dx = spsolve(csr_array(j_trial), -f_trial)
 
         x_now, ln_r_edge_now, u_now, alpha = increment_newton_variables(x_trial, dx)
 
@@ -102,7 +101,7 @@ def iterate(state_prev, dt):
         dx_max = max(dx_r, dx_u)
 
         state_now = state.state_from_unknowns(ln_r_edge_now, u_now)
-        f_now, f_now_scaled = residual.residual(state_now, v_prev, u_prev, dt)
+        f_now = residual.residual(state_now, v_prev, u_prev, dt)
         j_now = jacobian.analytic_jacobian(state_now, v_prev, dt)
 
         print(
@@ -110,25 +109,33 @@ def iterate(state_prev, dt):
             i,
             "\n max(F) = ",
             np.max(np.abs(f_now)),
-            "\n max(F_scaled) = ",
-            np.max(np.abs(f_now_scaled)),
             "\n max(dx) = ",
             dx_max,
             "\n alpha = ",
             alpha,
         )
 
-        if np.max(np.abs(f_now_scaled)) < constants.F_TOL:
+        if np.max(np.abs(f_now)) < constants.F_TOL:
+
             print("Newton iterations have converged in ", i, "iterations.")
+
             return state_now
 
         if dx_max < constants.X_TOL:
-            print("Newton has not converged but update stagnated")
+
+            print("Newton has stagnated after ", i, "iterations.")
+
+            if np.max(np.abs(f_now)) < constants.F_ACCEPT:
+
+                print("Stagnated but acceptable")
+                return state_now
+
+            print("Stagnated and not acceptable")
             return None
 
         f_trial = f_now
         j_trial = j_now
         x_trial = x_now
 
-    print("Newton has not converged in maximum iterations.")
+    print("Increase number of iterations")
     return None

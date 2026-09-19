@@ -6,8 +6,8 @@ in dimensionless units (Nishikawa 2020).
 
 import numpy as np
 from scipy.optimize import brentq
-import constants
-import grid
+from . import constants
+from . import grid
 
 
 def truncated_nfw_dimensionless(r, r_t, n):

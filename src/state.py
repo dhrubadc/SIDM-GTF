@@ -5,10 +5,10 @@ in dimensionless units (Nishikawa 2020).
 """
 
 import numpy as np
-import conductivity
-import luminosity
-import grid
-import constants
+from . import conductivity
+from . import luminosity
+from . import grid
+from . import constants
 
 
 def state_from_unknowns(ln_r_edge, u):

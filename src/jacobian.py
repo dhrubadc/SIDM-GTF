@@ -5,8 +5,9 @@ for the current state of the system
 in dimensionless units (Nishikawa 2020).
 """
 
-from scipy.sparse import lil_matrix, hstack, vstack
-import constants
+
+import numpy as np
+from . import constants
 
 
 def diff_quant(i, quant):
@@ -279,10 +280,10 @@ def jacobian_hydro_block(state):
     df_dln_redge is tri-diagonal and df_du is bi-diagonal.
     """
 
-    df_dln_redge = lil_matrix(
+    df_dln_redge = np.zeros(
         (constants.N_SHELL - 1, constants.N_SHELL + 1), dtype=constants.FLOATDTYPE
     )
-    df_du = lil_matrix(
+    df_du = np.zeros(
         (constants.N_SHELL - 1, constants.N_SHELL), dtype=constants.FLOATDTYPE
     )
 
@@ -296,7 +297,7 @@ def jacobian_hydro_block(state):
             if k < constants.N_SHELL:
                 df_du[i, k] = dfhydro_du(i, k, state)
 
-    jac_hydro = hstack([df_dln_redge[:, 1:-1], df_du]).tolil()
+    jac_hydro = np.hstack([df_dln_redge[:, 1:-1], df_du])
     return jac_hydro
 
 
@@ -307,12 +308,10 @@ def jacobian_energy_block(state, v_old, dt):
     df_dln_redge is four-diagonal and df_du is tri-diagonal.
     """
 
-    df_dln_redge = lil_matrix(
+    df_dln_redge = np.zeros(
         (constants.N_SHELL, constants.N_SHELL + 1), dtype=constants.FLOATDTYPE
     )
-    df_du = lil_matrix(
-        (constants.N_SHELL, constants.N_SHELL), dtype=constants.FLOATDTYPE
-    )
+    df_du = np.zeros((constants.N_SHELL, constants.N_SHELL), dtype=constants.FLOATDTYPE)
 
     for m in range(0, constants.N_SHELL):
 
@@ -324,7 +323,7 @@ def jacobian_energy_block(state, v_old, dt):
             if 0 <= k < constants.N_SHELL:
                 df_du[m, k] = dfenergy_du(m, k, state, v_old, dt)
 
-    jac_energy = hstack([df_dln_redge[:, 1:-1], df_du]).tolil()
+    jac_energy = np.hstack([df_dln_redge[:, 1:-1], df_du])
     return jac_energy
 
 
@@ -335,5 +334,5 @@ def analytic_jacobian(state, v_old, dt):
     jac_hydro = jacobian_hydro_block(state)
     jac_energy = jacobian_energy_block(state, v_old, dt)
 
-    jac = vstack([jac_hydro, jac_energy]).tolil()
+    jac = np.vstack([jac_hydro, jac_energy])
     return jac

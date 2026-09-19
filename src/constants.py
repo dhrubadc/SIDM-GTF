@@ -1,65 +1,80 @@
-"""
-Module to define the float precision and
-quantities that remain constant throughout a run
-in dimensionless units (Nishikawa 2020).
+r"""
+Define runtime constants and solver parameters
+in dimensionless units.
 """
 
 import numpy as np
 
-# =============================================================
-# float precision
-# =============================================================
 
 FLOATDTYPE = np.float64
-
-# ============================================================
-# Short Mean Free Path Conductivity constants (Nishikawa 2020)
-# ============================================================
+"""Float data type precision (default: float64).
+"""
 
 A = FLOATDTYPE(4.0) / np.sqrt(FLOATDTYPE(np.pi))
-B = FLOATDTYPE(25.0) * np.sqrt(FLOATDTYPE(np.pi)) / FLOATDTYPE(32.0)
+r"""Relevant for SMFP conductivity calculation, determined from kinetic theory. 
+"""
 
-# ===============================================================
-# cross section for scattering.
-# ===============================================================
+B = FLOATDTYPE(25.0) * np.sqrt(FLOATDTYPE(np.pi)) / FLOATDTYPE(32.0)
+r"""Relevant for SMFP conductivity calculation, determined from kinetic theory. 
+"""
 
 SIGMA_OVER_M = None
+r"""SIDM cross section per unit mass. 
+Set by user at runtime.
+"""
 
-# ===============================================================
-# Long mean free path conductivity constant
-# ===============================================================
 BETA = None
+r"""Coefficient for the LMFP conductivity.
+Set by user at runtime.
+"""
 
-# ===============================================================
-# Conductivity transition parameter
-# ===============================================================
 ALPHA = None
+r"""Determines transition between the LMPF and SMFP regimes.
+Set by user at runtime.
+"""
 
-# ===============================================================
-# lagrangian shell and enclosed mass
-# ===============================================================
 DM = None
+r"""Array of Lagrangian shell masses of shape N_SHELL.
+Set by user at runtime.
+"""
+
 M_EDGE = None
+r"""Enclosed mass array of shape N_SHELL + 1.
+Set by user at runtime.
+"""
 
-# ===============================================================
-# grid parameters (r_inner is always set to zero)
-# ===============================================================
 R_OUTER = None
+r"""Outermost grid edge (Innermost edge is zero).
+Set by user at runtime.
+"""
+
 N_SHELL = None
+r"""Number of Lagrangian shells.
+Set by user at runtime.
+"""
 
-# ==============================================================
-# Newton iteration convergence related parameters
-# ===============================================================
 F_TOL = None
+r"""Tolerance for Newton iteration convergence.
+Set by user at runtime.
+"""
+
 ITER_MAX = None
+r"""
+Maximum number of allowed Newton iterations.
+Set by user at runtime.
+"""
+
 X_TOL = None
+r"""Tolerance for determing stagnation of Newton iterations.
+Set by user at runtime.
+"""
 
-# ===============================================================
-# timestep controller
-# ===============================================================
+F_ACCEPT = None
+r"""Tolerance for accepting stagnated Newton iterations.
+Set by user at runtime.
+"""
+
 DT_TOL = None
-
-# ================================================================
-# central density for stopping run
-# ================================================================
-D_STOP = None
+r"""Controls the time-stepping of the solver.
+Set by user at runtime.
+"""

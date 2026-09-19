@@ -4,7 +4,7 @@ in dimensionless units (Nishikawa 2020).
 """
 
 import numpy as np
-import constants
+from . import constants
 
 
 def luminosity(r_edge, u, r, kappa):
