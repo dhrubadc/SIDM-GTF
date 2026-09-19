@@ -8,7 +8,7 @@ import numpy as np
 import constants
 
 
-def hydrostatic_terms_and_scale(state):
+def hydrostatic_terms(state):
     """
     Return the individual terms of each
     hydrostatic residual.
@@ -30,26 +30,20 @@ def hydrostatic_terms_and_scale(state):
         / (state["r_edge"][1:-1] * u_face)
     )
 
-    hydro_scale = np.maximum(
-        constants.FLOATDTYPE(1.0), np.abs(rho_slope) + np.abs(u_slope) + np.abs(g_term)
-    )
-
-    return rho_slope, u_slope, g_term, hydro_scale
+    return rho_slope, u_slope, g_term
 
 
 def hydrostatic_residual(state):
     """
     Return the n_shell-1 raw hydrostatic residuals.
     """
-    rho_slope, u_slope, g_term, hydro_scale = hydrostatic_terms_and_scale(state)
+    rho_slope, u_slope, g_term = hydrostatic_terms(state)
 
     fhydro = rho_slope + u_slope + g_term
-    fhydro_scaled = fhydro / hydro_scale
-
-    return fhydro, fhydro_scaled
+    return fhydro
 
 
-def energy_terms_and_scale(state, v_old, u_old, dt):
+def energy_terms(state, v_old, u_old, dt):
     """
     Return the individual terms of each
     energy residual.
@@ -62,25 +56,19 @@ def energy_terms_and_scale(state, v_old, u_old, dt):
     )
     conduction_term = dt * (state["l"][1:] - state["l"][:-1]) / constants.DM
 
-    energy_scale = np.maximum(
-        u_old, np.abs(energy_term) + np.abs(compression_term) + np.abs(conduction_term)
-    )
-
-    return energy_term, compression_term, conduction_term, energy_scale
+    return energy_term, compression_term, conduction_term
 
 
 def energy_residual(state, v_old, u_old, dt):
     """
     Return the n_shell energy residuals.
     """
-    energy_term, compression_term, conduction_term, energy_scale = (
-        energy_terms_and_scale(state, v_old, u_old, dt)
+    energy_term, compression_term, conduction_term = energy_terms(
+        state, v_old, u_old, dt
     )
 
     fenergy = energy_term + compression_term + conduction_term
-    fenergy_scaled = fenergy / energy_scale
-
-    return fenergy, fenergy_scaled
+    return fenergy
 
 
 def residual(state, v_old, u_old, dt):
@@ -88,9 +76,7 @@ def residual(state, v_old, u_old, dt):
     Construct coupled hydro and energy residual
     from the current state of the system.
     """
-    fhydro, fhydro_scaled = hydrostatic_residual(state)
-    fenergy, fenergy_scaled = energy_residual(state, v_old, u_old, dt)
+    fhydro = hydrostatic_residual(state)
+    fenergy = energy_residual(state, v_old, u_old, dt)
 
-    return np.concatenate((fhydro, fenergy)), np.concatenate(
-        (fhydro_scaled, fenergy_scaled)
-    )
+    return np.concatenate((fhydro, fenergy))
