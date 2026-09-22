@@ -67,7 +67,7 @@ def increment_newton_variables(x_trial, dx):
 
     :param dx: proposed increment in the trial solutions from solving J * dx = -F
     :type dx: np.ndarray
-    
+
     :return: physically valid new trial solutions,
              corresponding full physical state,
              and the accepted :math:`\alpha`.

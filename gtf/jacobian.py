@@ -515,8 +515,8 @@ def jacobian_energy_block(state, v_old, dt):
     :type state: dict
 
     :param v_old: cell volumes at time t-dt
-    :type v_old: np.ndarray 
-    
+    :type v_old: np.ndarray
+
     :param dt: timestep
     :type dt: :obj:`gtf.constants.FLOATDTYPE`
 

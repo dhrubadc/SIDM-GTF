@@ -99,10 +99,10 @@ def hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, u_outer):
 
     :param ln_r: log of cell midpoints
     :type ln_r: np.ndarray
-    
+
     :param ln_rho: log of density at cell midpoints
     :type ln_rho: np.ndarray
-    
+
     :param u_outer: specific energy of the last cell (strictly positive)
     :type u_outer: :obj:`gtf.constants.FLOATDTYPE`
 
@@ -170,7 +170,7 @@ def set_up_initial_conditions(r_first, r_t=np.inf, n=1.0):
 
     :param r_first: first non-zero cell edge
     :type r_first: :obj:`gtf.constants.FLOATDTYPE`
-    
+
     :param r_t: truncation radius, defaults to infinity
     :type r_t: :obj:`gtf.constants.FLOATDTYPE`
 

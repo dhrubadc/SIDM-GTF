@@ -16,6 +16,7 @@ API Reference
    gtf.newton
    gtf.initial_conditions
    gtf.energy
+   gtf.time_evolution
    
    
    
