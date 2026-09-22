@@ -13,7 +13,7 @@ def luminosity(r_edge, r, u, kappa):
     .. math::
 
        l[1:-1] &=
-       \frac{2}{3}\,r_{\rm edge}[1:-1]^2\,
+       -\ \frac{2}{3}\,r_{\rm edge}[1:-1]^2\,
        \kappa_{\rm face}\,
        \frac{\Delta u}{\Delta r}
 

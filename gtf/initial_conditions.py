@@ -15,7 +15,7 @@ def make_initial_grid(r_first):
     ln_r_edge[0] = -np.inf and
     ln_r_edge[1:] = linspace(ln_r_first, ln_r_outer, n_shell).
 
-    Here n_shell is :obj:`gtfconstants.N_SHELL` and
+    Here n_shell is :obj:`gtf.constants.N_SHELL` and
     ln_r_outer is log of :obj:`gtf.constants.R_OUTER`.
 
     :param r_first: first non-zero cell edge

@@ -473,7 +473,7 @@ def dfenergy_du(m, k, state, v_old, dt):
 
 def jacobian_hydro_block(state):
     r"""
-    Hydrostatic block of the Jacobian matrix.
+    Hydrostatic block of the jacobian matrix.
     Fixed edges at ln_r_edge[0] and ln_r_edge[-1].
     df_dln_redge is tri-diagonal and df_du is bi-diagonal.
 
@@ -507,12 +507,18 @@ def jacobian_hydro_block(state):
 
 def jacobian_energy_block(state, v_old, dt):
     r"""
-    Energy block of the Jacobian matrix.
+    Energy block of the jacobian matrix.
     Fixed edges at ln_r_edge[0] and ln_r_edge[-1].
     df_dln_redge is four-diagonal and df_du is tri-diagonal.
 
     :param state: current physical state of the system
     :type state: dict
+
+    :param v_old: cell volumes at time t-dt
+    :type v_old: np.ndarray 
+    
+    :param dt: timestep
+    :type dt: :obj:`gtf.constants.FLOATDTYPE`
 
     :return: energy block of the analytical jacobian matrix
     :rtype: np.ndarray

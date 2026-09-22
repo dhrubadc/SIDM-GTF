@@ -15,7 +15,7 @@ def hydrostatic_terms(state):
     :type state: dict
 
     :return: individual terms of each hydrostatic residual
-    :rtype: Tuple[np.ndarray, np.ndarray, np.ndarray]
+    :rtype: tuple[np.ndarray, np.ndarray, np.ndarray]
     """
     # pylint: disable=unsubscriptable-object
 
@@ -55,7 +55,7 @@ def hydrostatic_residual(state):
     :type state: dict
 
     :return: raw hydrostatic residuals
-    :type: np.ndarray
+    :rtype: np.ndarray
     """
     rho_slope, u_slope, g_term = hydrostatic_terms(state)
 
@@ -82,7 +82,7 @@ def energy_terms(state, v_old, u_old, dt):
     :type dt: :obj:`gtf.constants.FLOATDTYPE`
 
     :return: individual terms of each energy residual
-    :rtype: Tuple[np.ndarray, np.ndarray, np.ndarray]
+    :rtype: tuple[np.ndarray, np.ndarray, np.ndarray]
     """
 
     energy_term = state["u"] - u_old

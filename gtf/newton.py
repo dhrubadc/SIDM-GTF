@@ -36,7 +36,7 @@ def unpack_unknowns(x):
     :type x: np.ndarray
 
     :return: log of cell edges and specific energy at cell midpoints
-    :rtype: Tuple[np.ndarray, np.ndarray]
+    :rtype: tuple[np.ndarray, np.ndarray]
     """
     ln_r_edge = np.empty(constants.N_SHELL + 1, dtype=constants.FLOATDTYPE)
 
@@ -71,7 +71,7 @@ def increment_newton_variables(x_trial, dx):
     :return: physically valid new trial solutions,
              corresponding full physical state,
              and the accepted :math:`\alpha`.
-    :rtype: Tuple[np.ndarray, dict, :obj:`gtf.constants.FLOATDTYPE`]
+    :rtype: tuple[np.ndarray, dict, :obj:`gtf.constants.FLOATDTYPE`]
 
     Here J is the output of :obj:`gtf.jacobian.analytic_jacobian` and
     F is the output of :obj:`gtf.residual.residual`.
@@ -111,7 +111,7 @@ def iterate(state_old, dt):
     A converged solution for time t is found
     if :math:`{\rm MAX}(|F|)` < :obj:`gtf.constants.F_TOL`
 
-    A staganated but acceptable solution for time t is found
+    A stagnated but acceptable solution for time t is found
     if between last two iterations
     :math:`{\rm MAX}(|\Delta\ \ln r_{\rm edge}|, |\Delta\ u|/u)`
     < :obj:`gtf.constants.X_TOL` but :math:`{\rm MAX}(|F|)`

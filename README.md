@@ -32,7 +32,7 @@ If you use this software in a publication or want to refer to it, please cite:
 
 ### Install from PyPI
 
-The latest released version can be installed using `pip`:
+Once released, the package can be installed using `pip`:
 
 ```bash
 pip install sidm-gtf
@@ -40,7 +40,7 @@ pip install sidm-gtf
 
 ### Install from GitHub
 
-To obtain the latest released version directly from GitHub:
+To obtain the latest public version directly from GitHub:
 
 ```bash
 git clone https://github.com/dhrubadc/sidm-gtf.git
