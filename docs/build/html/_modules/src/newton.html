@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.newton &mdash; GTF 0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=837179f8"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GTF
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/src.constants.html">src.constants</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.FLOATDTYPE.html">src.constants.FLOATDTYPE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.FLOATDTYPE.html#src.constants.FLOATDTYPE"><code class="docutils literal notranslate"><span class="pre">FLOATDTYPE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.A.html">src.constants.A</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.A.html#src.constants.A"><code class="docutils literal notranslate"><span class="pre">A</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.B.html">src.constants.B</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.B.html#src.constants.B"><code class="docutils literal notranslate"><span class="pre">B</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.SIGMA_OVER_M.html">src.constants.SIGMA_OVER_M</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.SIGMA_OVER_M.html#src.constants.SIGMA_OVER_M"><code class="docutils literal notranslate"><span class="pre">SIGMA_OVER_M</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.BETA.html">src.constants.BETA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.BETA.html#src.constants.BETA"><code class="docutils literal notranslate"><span class="pre">BETA</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.ALPHA.html">src.constants.ALPHA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.ALPHA.html#src.constants.ALPHA"><code class="docutils literal notranslate"><span class="pre">ALPHA</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.DM.html">src.constants.DM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.DM.html#src.constants.DM"><code class="docutils literal notranslate"><span class="pre">DM</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.M_EDGE.html">src.constants.M_EDGE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.M_EDGE.html#src.constants.M_EDGE"><code class="docutils literal notranslate"><span class="pre">M_EDGE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.R_OUTER.html">src.constants.R_OUTER</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.R_OUTER.html#src.constants.R_OUTER"><code class="docutils literal notranslate"><span class="pre">R_OUTER</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.N_SHELL.html">src.constants.N_SHELL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.N_SHELL.html#src.constants.N_SHELL"><code class="docutils literal notranslate"><span class="pre">N_SHELL</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.F_TOL.html">src.constants.F_TOL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.F_TOL.html#src.constants.F_TOL"><code class="docutils literal notranslate"><span class="pre">F_TOL</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.ITER_MAX.html">src.constants.ITER_MAX</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.ITER_MAX.html#src.constants.ITER_MAX"><code class="docutils literal notranslate"><span class="pre">ITER_MAX</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.X_TOL.html">src.constants.X_TOL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.X_TOL.html#src.constants.X_TOL"><code class="docutils literal notranslate"><span class="pre">X_TOL</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.F_ACCEPT.html">src.constants.F_ACCEPT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.F_ACCEPT.html#src.constants.F_ACCEPT"><code class="docutils literal notranslate"><span class="pre">F_ACCEPT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.constants.DT_TOL.html">src.constants.DT_TOL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.constants.DT_TOL.html#src.constants.DT_TOL"><code class="docutils literal notranslate"><span class="pre">DT_TOL</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/src.geometry.html">src.geometry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.geometry.log_cell_centers.html">src.geometry.log_cell_centers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.geometry.log_cell_centers.html#src.geometry.log_cell_centers"><code class="docutils literal notranslate"><span class="pre">log_cell_centers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.geometry.log_cell_volumes.html">src.geometry.log_cell_volumes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.geometry.log_cell_volumes.html#src.geometry.log_cell_volumes"><code class="docutils literal notranslate"><span class="pre">log_cell_volumes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/src.conductivity.html">src.conductivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.conductivity.lmfp_conductivity.html">src.conductivity.lmfp_conductivity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.conductivity.lmfp_conductivity.html#src.conductivity.lmfp_conductivity"><code class="docutils literal notranslate"><span class="pre">lmfp_conductivity()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.conductivity.smfp_conductivity.html">src.conductivity.smfp_conductivity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.conductivity.smfp_conductivity.html#src.conductivity.smfp_conductivity"><code class="docutils literal notranslate"><span class="pre">smfp_conductivity()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.conductivity.total_conductivity.html">src.conductivity.total_conductivity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.conductivity.total_conductivity.html#src.conductivity.total_conductivity"><code class="docutils literal notranslate"><span class="pre">total_conductivity()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/src.luminosity.html">src.luminosity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.luminosity.luminosity.html">src.luminosity.luminosity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.luminosity.luminosity.html#src.luminosity.luminosity"><code class="docutils literal notranslate"><span class="pre">luminosity()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/src.state.html">src.state</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.state.state_from_unknowns.html">src.state.state_from_unknowns</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.state.state_from_unknowns.html#src.state.state_from_unknowns"><code class="docutils literal notranslate"><span class="pre">state_from_unknowns()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/src.residual.html">src.residual</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.residual.energy_residual.html">src.residual.energy_residual</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.residual.energy_residual.html#src.residual.energy_residual"><code class="docutils literal notranslate"><span class="pre">energy_residual()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.residual.energy_terms.html">src.residual.energy_terms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.residual.energy_terms.html#src.residual.energy_terms"><code class="docutils literal notranslate"><span class="pre">energy_terms()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.residual.hydrostatic_residual.html">src.residual.hydrostatic_residual</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.residual.hydrostatic_residual.html#src.residual.hydrostatic_residual"><code class="docutils literal notranslate"><span class="pre">hydrostatic_residual()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.residual.hydrostatic_terms.html">src.residual.hydrostatic_terms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.residual.hydrostatic_terms.html#src.residual.hydrostatic_terms"><code class="docutils literal notranslate"><span class="pre">hydrostatic_terms()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.residual.residual.html">src.residual.residual</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.residual.residual.html#src.residual.residual"><code class="docutils literal notranslate"><span class="pre">residual()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/src.jacobian.html">src.jacobian</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.analytic_jacobian.html">src.jacobian.analytic_jacobian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.analytic_jacobian.html#src.jacobian.analytic_jacobian"><code class="docutils literal notranslate"><span class="pre">analytic_jacobian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.delta.html">src.jacobian.delta</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.delta.html#src.jacobian.delta"><code class="docutils literal notranslate"><span class="pre">delta()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.dfenergy_dln_r_edge.html">src.jacobian.dfenergy_dln_r_edge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.dfenergy_dln_r_edge.html#src.jacobian.dfenergy_dln_r_edge"><code class="docutils literal notranslate"><span class="pre">dfenergy_dln_r_edge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.dfenergy_du.html">src.jacobian.dfenergy_du</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.dfenergy_du.html#src.jacobian.dfenergy_du"><code class="docutils literal notranslate"><span class="pre">dfenergy_du()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.dfhydro_dln_redge.html">src.jacobian.dfhydro_dln_redge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.dfhydro_dln_redge.html#src.jacobian.dfhydro_dln_redge"><code class="docutils literal notranslate"><span class="pre">dfhydro_dln_redge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.dfhydro_du.html">src.jacobian.dfhydro_du</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.dfhydro_du.html#src.jacobian.dfhydro_du"><code class="docutils literal notranslate"><span class="pre">dfhydro_du()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.diff_quant.html">src.jacobian.diff_quant</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.diff_quant.html#src.jacobian.diff_quant"><code class="docutils literal notranslate"><span class="pre">diff_quant()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.dkappa_dln_redge.html">src.jacobian.dkappa_dln_redge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.dkappa_dln_redge.html#src.jacobian.dkappa_dln_redge"><code class="docutils literal notranslate"><span class="pre">dkappa_dln_redge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.dkappa_du.html">src.jacobian.dkappa_du</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.dkappa_du.html#src.jacobian.dkappa_du"><code class="docutils literal notranslate"><span class="pre">dkappa_du()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.dl_dln_redge.html">src.jacobian.dl_dln_redge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.dl_dln_redge.html#src.jacobian.dl_dln_redge"><code class="docutils literal notranslate"><span class="pre">dl_dln_redge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.dl_du.html">src.jacobian.dl_du</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.dl_du.html#src.jacobian.dl_du"><code class="docutils literal notranslate"><span class="pre">dl_du()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.dln_r_dln_redge.html">src.jacobian.dln_r_dln_redge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.dln_r_dln_redge.html#src.jacobian.dln_r_dln_redge"><code class="docutils literal notranslate"><span class="pre">dln_r_dln_redge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.dln_u_du.html">src.jacobian.dln_u_du</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.dln_u_du.html#src.jacobian.dln_u_du"><code class="docutils literal notranslate"><span class="pre">dln_u_du()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.dln_v_dln_redge.html">src.jacobian.dln_v_dln_redge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.dln_v_dln_redge.html#src.jacobian.dln_v_dln_redge"><code class="docutils literal notranslate"><span class="pre">dln_v_dln_redge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.dr_dln_redge.html">src.jacobian.dr_dln_redge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.dr_dln_redge.html#src.jacobian.dr_dln_redge"><code class="docutils literal notranslate"><span class="pre">dr_dln_redge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.gravity_term.html">src.jacobian.gravity_term</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.gravity_term.html#src.jacobian.gravity_term"><code class="docutils literal notranslate"><span class="pre">gravity_term()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.jacobian_energy_block.html">src.jacobian.jacobian_energy_block</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.jacobian_energy_block.html#src.jacobian.jacobian_energy_block"><code class="docutils literal notranslate"><span class="pre">jacobian_energy_block()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.jacobian_hydro_block.html">src.jacobian.jacobian_hydro_block</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.jacobian_hydro_block.html#src.jacobian.jacobian_hydro_block"><code class="docutils literal notranslate"><span class="pre">jacobian_hydro_block()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.kappa_derivative_common.html">src.jacobian.kappa_derivative_common</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.kappa_derivative_common.html#src.jacobian.kappa_derivative_common"><code class="docutils literal notranslate"><span class="pre">kappa_derivative_common()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.jacobian.volume_ratio.html">src.jacobian.volume_ratio</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.jacobian.volume_ratio.html#src.jacobian.volume_ratio"><code class="docutils literal notranslate"><span class="pre">volume_ratio()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/src.newton.html">src.newton</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.newton.increment_newton_variables.html">src.newton.increment_newton_variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.newton.increment_newton_variables.html#src.newton.increment_newton_variables"><code class="docutils literal notranslate"><span class="pre">increment_newton_variables()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.newton.iterate.html">src.newton.iterate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.newton.iterate.html#src.newton.iterate"><code class="docutils literal notranslate"><span class="pre">iterate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.newton.pack_unknowns.html">src.newton.pack_unknowns</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.newton.pack_unknowns.html#src.newton.pack_unknowns"><code class="docutils literal notranslate"><span class="pre">pack_unknowns()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.newton.unpack_unknowns.html">src.newton.unpack_unknowns</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.newton.unpack_unknowns.html#src.newton.unpack_unknowns"><code class="docutils literal notranslate"><span class="pre">unpack_unknowns()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/src.initial_conditions.html">src.initial_conditions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.initial_conditions.cell_mass.html">src.initial_conditions.cell_mass</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.initial_conditions.cell_mass.html#src.initial_conditions.cell_mass"><code class="docutils literal notranslate"><span class="pre">cell_mass()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.initial_conditions.enclosed_mass.html">src.initial_conditions.enclosed_mass</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.initial_conditions.enclosed_mass.html#src.initial_conditions.enclosed_mass"><code class="docutils literal notranslate"><span class="pre">enclosed_mass()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.initial_conditions.hydrostatic_u_from_rho.html">src.initial_conditions.hydrostatic_u_from_rho</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.initial_conditions.hydrostatic_u_from_rho.html#src.initial_conditions.hydrostatic_u_from_rho"><code class="docutils literal notranslate"><span class="pre">hydrostatic_u_from_rho()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.initial_conditions.make_initial_grid.html">src.initial_conditions.make_initial_grid</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.initial_conditions.make_initial_grid.html#src.initial_conditions.make_initial_grid"><code class="docutils literal notranslate"><span class="pre">make_initial_grid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.initial_conditions.set_up_initial_conditions.html">src.initial_conditions.set_up_initial_conditions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.initial_conditions.set_up_initial_conditions.html#src.initial_conditions.set_up_initial_conditions"><code class="docutils literal notranslate"><span class="pre">set_up_initial_conditions()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.initial_conditions.truncated_nfw.html">src.initial_conditions.truncated_nfw</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.initial_conditions.truncated_nfw.html#src.initial_conditions.truncated_nfw"><code class="docutils literal notranslate"><span class="pre">truncated_nfw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/src.energy.html">src.energy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.energy.total_energy.html">src.energy.total_energy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.energy.total_energy.html#src.energy.total_energy"><code class="docutils literal notranslate"><span class="pre">total_energy()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.energy.total_gravitational_energy.html">src.energy.total_gravitational_energy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.energy.total_gravitational_energy.html#src.energy.total_gravitational_energy"><code class="docutils literal notranslate"><span class="pre">total_gravitational_energy()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/src.energy.total_kinetic_energy.html">src.energy.total_kinetic_energy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/src.energy.total_kinetic_energy.html#src.energy.total_kinetic_energy"><code class="docutils literal notranslate"><span class="pre">total_kinetic_energy()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GTF</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">src.newton</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for src.newton</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Implement Newton iterations and related helper functions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">csr_array</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">spsolve</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">residual</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">jacobian</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">state</span>
+
+
+<div class="viewcode-block" id="pack_unknowns">
+<a class="viewcode-back" href="../../_autosummary/src.newton.pack_unknowns.html#src.newton.pack_unknowns">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">pack_unknowns</span><span class="p">(</span><span class="n">ln_r_edge</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Pack unknown variables x = [ln_r_edge[1:-1], u].</span>
+
+<span class="sd">    :param ln_r_edge: log of cell edges</span>
+<span class="sd">    :type ln_r_edge: 1D array of shape :obj:`src.constants.N_SHELL` + 1</span>
+
+<span class="sd">    :param u: specific energy at cell midpoints</span>
+<span class="sd">    :type u: 1D array of shape :obj:`src.constants.N_SHELL`</span>
+
+<span class="sd">    :return: x = [ln_r_edge[1:-1], u]</span>
+<span class="sd">    :rtype: 1D array of shape 2 X :obj:`src.constants.N_SHELL` - 1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">ln_r_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">u</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="unpack_unknowns">
+<a class="viewcode-back" href="../../_autosummary/src.newton.unpack_unknowns.html#src.newton.unpack_unknowns">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">unpack_unknowns</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Unpack unknown variables x into ln_r_edge and u.</span>
+<span class="sd">    x = [ln_r_edge[1:-1], u].</span>
+
+<span class="sd">    :param x: Array of unknown variables</span>
+<span class="sd">    :type x: 1D array of shape 2 X :obj:`src.constants.N_SHELL` - 1</span>
+
+<span class="sd">    :return: log of cell edges and specific energy at cell midpoints</span>
+<span class="sd">    :rtype: Tuple[:obj:`src.constants.N_SHELL` + 1, </span>
+<span class="sd">            :obj:`src.constants.N_SHELL`]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ln_r_edge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">N_SHELL</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">FLOATDTYPE</span><span class="p">)</span>
+
+    <span class="n">ln_r_edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="n">ln_r_edge</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">R_OUTER</span><span class="p">)</span>
+    <span class="n">ln_r_edge</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span> <span class="n">constants</span><span class="o">.</span><span class="n">N_SHELL</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">u</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">N_SHELL</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">ln_r_edge</span><span class="p">,</span> <span class="n">u</span></div>
+
+
+
+<div class="viewcode-block" id="increment_newton_variables">
+<a class="viewcode-back" href="../../_autosummary/src.newton.increment_newton_variables.html#src.newton.increment_newton_variables">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">increment_newton_variables</span><span class="p">(</span><span class="n">x_trial</span><span class="p">,</span> <span class="n">dx</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implement line search to ensure</span>
+<span class="sd">    cells are always ordered and u&gt;0.</span>
+
+<span class="sd">    .. math :: </span>
+<span class="sd">    </span>
+<span class="sd">       x_{\rm new} = x_{\rm trial} + \alpha * {\rm d}x</span>
+
+<span class="sd">    :math:`\alpha` is initialized with 1.0 </span>
+<span class="sd">    and continually halfed until a physically valid :math:`x_{\rm new}`</span>
+<span class="sd">    is found (ordered cells and u&gt;0)</span>
+
+<span class="sd">    :param x_trial: trial solutions from previous iteration</span>
+<span class="sd">    :type x_trial: 1D array of shape 2 X :obj:`src.constants.N_SHELL` - 1</span>
+
+<span class="sd">    :param dx: proposed increment in the trial solutions from solving J * dx = -F</span>
+<span class="sd">    :type dx: 1D array of shape 2 X :obj:`src.constants.N_SHELL` - 1</span>
+
+<span class="sd">    :return: physically valid new trial solutions, </span>
+<span class="sd">             corresponding full physical state, </span>
+<span class="sd">             and the accepted :math:`\alpha`.</span>
+<span class="sd">    :rtype: Tuple[2 X :obj:`src.constants.N_SHELL` -1, dict, float]</span>
+
+<span class="sd">    Here J is the output of :obj:`src.jacobian.analytic_jacobian` and </span>
+<span class="sd">    F is the output of :obj:`src.residual.residual`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+
+        <span class="n">x_new</span> <span class="o">=</span> <span class="n">x_trial</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">dx</span>
+
+        <span class="n">ln_r_edge_new</span><span class="p">,</span> <span class="n">u_new</span> <span class="o">=</span> <span class="n">unpack_unknowns</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span>
+
+        <span class="n">valid_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">ln_r_edge_new</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;</span> <span class="n">ln_r_edge_new</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">valid_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">u_new</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">valid_r</span> <span class="ow">and</span> <span class="n">valid_u</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">alpha</span> <span class="o">*=</span> <span class="mf">0.5</span>
+
+    <span class="n">state_new</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">state_from_unknowns</span><span class="p">(</span><span class="n">ln_r_edge_new</span><span class="p">,</span> <span class="n">u_new</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">x_new</span><span class="p">,</span> <span class="n">state_new</span><span class="p">,</span> <span class="n">alpha</span></div>
+
+
+
+<div class="viewcode-block" id="iterate">
+<a class="viewcode-back" href="../../_autosummary/src.newton.iterate.html#src.newton.iterate">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">iterate</span><span class="p">(</span><span class="n">state_old</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="c1"># pylint: disable=too-many-locals</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implement Newton terations. </span>
+<span class="sd">    </span>
+<span class="sd">    Iteratively solve  J * dx = -F, starting from a trial solution</span>
+<span class="sd">    corresponding to the state of the system at time t-dt. </span>
+<span class="sd">    </span>
+<span class="sd">    Here J is the output of :obj:`src.jacobian.analytic_jacobian` and </span>
+<span class="sd">    F is the output of :obj:`src.residual.residual`.</span>
+
+<span class="sd">    A converged solution for time t is found </span>
+<span class="sd">    if :math:`{\rm MAX}(|F|)` &lt; :obj:`src.constants.F_TOL`</span>
+
+<span class="sd">    A staganated but acceptable solution for time t is found</span>
+<span class="sd">    if between last two iterations </span>
+<span class="sd">    :math:`{\rm MAX}(|\Delta\ \ln r_{\rm edge}|, |\Delta\ u|/u)`</span>
+<span class="sd">    &lt; :obj:`src.constants.X_TOL` but :math:`{\rm MAX}(|F|)` </span>
+<span class="sd">    &lt; :obj:`src.constants.F_ACCEPT`</span>
+
+<span class="sd">    Maximum number of iterations tried is :obj:`src.constants.ITER_MAX`.</span>
+
+<span class="sd">    :param state_old: physical state of the system at time t-dt</span>
+<span class="sd">    :type state_old: dict</span>
+
+<span class="sd">    :param dt: timestep</span>
+<span class="sd">    :type dt: float</span>
+
+<span class="sd">    :return: physical state of the system at time t</span>
+<span class="sd">    :rtype: dict or None (if a converged or acceptable state is not found)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_trial</span> <span class="o">=</span> <span class="n">pack_unknowns</span><span class="p">(</span><span class="n">state_old</span><span class="p">[</span><span class="s2">&quot;ln_r_edge&quot;</span><span class="p">],</span> <span class="n">state_old</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">])</span>
+
+    <span class="n">v_old</span> <span class="o">=</span> <span class="n">state_old</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">]</span>
+    <span class="n">u_old</span> <span class="o">=</span> <span class="n">state_old</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">]</span>
+
+    <span class="n">f_trial</span> <span class="o">=</span> <span class="n">residual</span><span class="o">.</span><span class="n">residual</span><span class="p">(</span><span class="n">state_old</span><span class="p">,</span> <span class="n">v_old</span><span class="p">,</span> <span class="n">u_old</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="n">j_trial</span> <span class="o">=</span> <span class="n">jacobian</span><span class="o">.</span><span class="n">analytic_jacobian</span><span class="p">(</span><span class="n">state_old</span><span class="p">,</span> <span class="n">v_old</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f_trial</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">F_TOL</span><span class="p">:</span>
+
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;state is not updated and same as previous time&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> max(F) = &quot;</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f_trial</span><span class="p">)),</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">state_old</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ITER_MAX</span><span class="p">):</span>
+
+        <span class="n">dx</span> <span class="o">=</span> <span class="n">spsolve</span><span class="p">(</span><span class="n">csr_array</span><span class="p">(</span><span class="n">j_trial</span><span class="p">),</span> <span class="o">-</span><span class="n">f_trial</span><span class="p">)</span>
+
+        <span class="n">x_new</span><span class="p">,</span> <span class="n">state_new</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">increment_newton_variables</span><span class="p">(</span><span class="n">x_trial</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span>
+
+        <span class="n">dx_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x_new</span><span class="p">[:</span> <span class="n">constants</span><span class="o">.</span><span class="n">N_SHELL</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x_trial</span><span class="p">[:</span> <span class="n">constants</span><span class="o">.</span><span class="n">N_SHELL</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="p">)</span>
+
+        <span class="n">dx_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x_new</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">N_SHELL</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">x_trial</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">N_SHELL</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:])</span>
+            <span class="o">/</span> <span class="n">x_trial</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">N_SHELL</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:]</span>
+        <span class="p">)</span>
+
+        <span class="n">dx_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">dx_r</span><span class="p">,</span> <span class="n">dx_u</span><span class="p">)</span>
+
+        
+        <span class="n">f_new</span> <span class="o">=</span> <span class="n">residual</span><span class="o">.</span><span class="n">residual</span><span class="p">(</span><span class="n">state_new</span><span class="p">,</span> <span class="n">v_old</span><span class="p">,</span> <span class="n">u_old</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="n">j_new</span> <span class="o">=</span> <span class="n">jacobian</span><span class="o">.</span><span class="n">analytic_jacobian</span><span class="p">(</span><span class="n">state_new</span><span class="p">,</span> <span class="n">v_old</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Newton iteration&quot;</span><span class="p">,</span>
+            <span class="n">i</span><span class="p">,</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> max(F) = &quot;</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f_new</span><span class="p">)),</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> max(dx) = &quot;</span><span class="p">,</span>
+            <span class="n">dx_max</span><span class="p">,</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> alpha = &quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f_new</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">F_TOL</span><span class="p">:</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Newton iterations have converged in &quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;iterations.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">state_new</span>
+
+        <span class="k">if</span> <span class="n">dx_max</span> <span class="o">&lt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">X_TOL</span><span class="p">:</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Newton has stagnated after &quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;iterations.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">f_new</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">F_ACCEPT</span><span class="p">:</span>
+
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stagnated but acceptable&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">state_new</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stagnated and not acceptable&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">f_trial</span> <span class="o">=</span> <span class="n">f_new</span>
+        <span class="n">j_trial</span> <span class="o">=</span> <span class="n">j_new</span>
+        <span class="n">x_trial</span> <span class="o">=</span> <span class="n">x_new</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Increase number of iterations&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Dhruba Dutta Chowdhury.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,34 +1,85 @@
-"""
-Module to set up initial conditions for an SIDM halo.
-Current support for standard and truncated NFW profiles
-in dimensionless units (Nishikawa 2020).
+r"""
+Set up initial conditions for a symmerically symmetric, isotropic SIDM halo.
+Current support for standard and truncated NFW profiles.
 """
 
 import numpy as np
 from scipy.optimize import brentq
 from . import constants
-from . import grid
+from . import geometry
 
 
-def truncated_nfw_dimensionless(r, r_t, n):
+def make_initial_grid(r_first):
+    r"""
+    Build initial radial grid in log-space.
+    ln_r_edge[0] = -np.inf and
+    ln_r_edge[1:] = linspace(ln_r_first, ln_r_outer, n_shell).
+
+    Here n_shell is :obj:`src.constants.N_SHELL` and
+    ln_r_outer is log of :obj:`src.constants.R_OUTER`.
+
+    :param r_first: first non-zero cell edge
+    :type r_first: float
+
+    :return: initial radial grid
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL` + 1
     """
-    Return rho (in units of rho_s)
-    as a function of r (in units of r_s)
-    for a truncated NFW profile.
+    ln_r_edge = np.empty(constants.N_SHELL + 1, dtype=constants.FLOATDTYPE)
+
+    ln_r_edge[0] = -np.inf
+
+    ln_r_edge[1:] = np.linspace(
+        np.log(r_first), np.log(constants.R_OUTER), constants.N_SHELL
+    )
+
+    return ln_r_edge
+
+
+def truncated_nfw(r, r_t, n):
+    r"""
+    Initial NFW profile with truncation option.
+
+    :param r: cell midpoints
+    :type r: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param r_t: truncation radius
+    :type r_t: float
+
+    :param n: truncation exponent
+    :type n: float
+
+    :return: initial density at cell midpoints
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
     """
     return np.exp(-((r / r_t) ** n)) / (r * (constants.FLOATDTYPE(1.0) + r) ** 2)
 
 
-def shell_mass(rho, volume):
+def cell_mass(rho, v):
+    r"""
+    Calculate the Lagrangian mass of each cell.
+
+    :param rho: density at cell midpoints
+    :type rho: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param v: cell volumes
+    :type v: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :return: return cell masses
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
+
     """
-    Return the Lagrangian mass of each shell.
-    """
-    return rho * volume
+    return rho * v
 
 
 def enclosed_mass(dm):
-    """
-    Return enclosed mass at all shell edges.
+    r"""
+    Calculate cumulative Lagrangian masses at all cell edges.
+
+    :param dm: Lagrangian cell masses
+    :type dm: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :return: cumulative cell masses
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL` + 1
     """
     m_edge = np.zeros(len(dm) + 1, dtype=constants.FLOATDTYPE)
     m_edge[1:] = np.cumsum(dm)
@@ -37,10 +88,26 @@ def enclosed_mass(dm):
 
 
 def hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, u_outer):
-    """
-    Integrate inwards the same hydrostatic residual
-    as in residual.py to get the initial u profile.
-    The outermost u is specified.
+    r"""
+    Calculate initial specific energy from density.
+    Integrate inwards the same hydrostatic :obj:`src.residual.hydrostatic_residual`
+    to get the initial specific energy profile.
+    The specific energy at the outermost cell is specified.
+
+    :param r_edge: cell edges
+    :type r_edge: 1D array of shape :obj:`src.constants.N_SHELL` + 1
+
+    :param ln_r: log of cell midpoints
+    :type ln_r: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param ln_rho: log of density at cell midpoints
+    :type ln_rho: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param u_outer: specific energy of the last cell (strictly positive)
+    :type u_outer: float
+
+    :return: specific energy at cell midpoints
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
     """
 
     u = np.empty(constants.N_SHELL, dtype=constants.FLOATDTYPE)
@@ -97,22 +164,36 @@ def hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, u_outer):
 
 
 def set_up_initial_conditions(r_first, r_t=np.inf, n=1.0):
-    """
+    r"""
     Set up initial condtions.
     Default is standard NFW without any truncation.
+
+    :param r_first: first non-zero cell edge
+    :type r_first: float
+
+    :param r_t: truncation radius, defaults to infinity
+    :type r_t: float
+
+    :param n: truncation exponent, defaults to 1.0
+    :type n: float
+
+    :return: log of initial cell edges and specific energy at cell midpoints
+    :rtpye: Tuple[:obj:`src.constants.N_SHELL` + 1, :obj:`src.constants.N_SHELL`]
+
+    Also sets :obj:`src.constants.DM` and :obj:`src.constants.M_EDGE`.
     """
-    ln_r_edge = grid.make_radial_grid(r_first)
-    ln_r = grid.log_cell_centers(ln_r_edge)
-    ln_v = grid.log_shell_volumes(ln_r_edge)
+    ln_r_edge = make_initial_grid(r_first)
+    ln_r = geometry.log_cell_centers(ln_r_edge)
+    ln_v = geometry.log_cell_volumes(ln_r_edge)
 
     r = np.exp(ln_r)
     v = np.exp(ln_v)
     r_edge = np.exp(ln_r_edge)
 
-    rho = truncated_nfw_dimensionless(r, r_t, n)
+    rho = truncated_nfw(r, r_t, n)
     ln_rho = np.log(rho)
 
-    constants.DM = shell_mass(rho, v)
+    constants.DM = cell_mass(rho, v)
     constants.M_EDGE = enclosed_mass(constants.DM)
 
     u = hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, u_outer=0.001)

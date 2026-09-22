@@ -1,6 +1,6 @@
 """
 Calculate kinetic, potential, and total
-energy in dimensionless units.
+energy.
 """
 
 import numpy as np
@@ -11,13 +11,17 @@ def total_kinetic_energy(u):
     r"""
     Calculate total kinetic energy.
 
-    :math:`K = \Sigma ({\rm DM}\ u)`
+    .. math::
 
-    :param u: specific energy
-    :type u: float or array-like
+       K = \Sigma ({\rm d} m\ u)
+
+    Here :math:`{\rm d} m` is :obj:`src.constants.DM`.
+
+    :param u: specific energy at cell midpoints
+    :type u: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: total kinetic energy
-    :rtype: same as u
+    :rtype: float
     """
     return np.sum(constants.DM * u)
 
@@ -26,15 +30,20 @@ def total_gravitational_energy(r):
     r"""
     Calculate total potential energy.
 
-    :math:`K = \Sigma \frac{{\rm DM}\ {\rm M}_{{\rm CENTER}}}{r}`
+    .. math::
 
-    M_CENTER = 0.5 * (M_EDGE[0:-1] + M_EDGE[1:])
+       W &= \Sigma \frac{{\rm d} m\ M_{\rm center}}{r}
 
-    :param r: cell midpoint
-    :type r: float or array-like
+       M_{\rm center} &= 0.5\ (M_{\rm edge}[0:-1] + M_{\rm edge}[1:])
+
+    Here :math:`{\rm d} m` is :obj:`src.constants.DM` and
+    :math:`M_{\rm edge}` is :obj:`src.constants.M_EDGE`.
+
+    :param r: cell midpoints
+    :type r: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: total potential energy
-    :rtype: same as r
+    :rtype: float
     """
     # pylint: disable=unsubscriptable-object
 
@@ -48,16 +57,18 @@ def total_energy(r, u):
     r"""
     Calculate total energy.
 
-    :math:`E = K + W`
+    .. math::
 
-    :param r: cell midpoint
-    :type r: float or array-like
+       E = K + W
 
-    :param u: specific energy
-    :type u: float or array-like
+    :param r: cell midpoints
+    :type r: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param u: specific energy at cell midpoints
+    :type u: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: total energy
-    :rtype: same as r and u
+    :rtype: float
     """
     ke = total_kinetic_energy(u)
     pe = total_gravitational_energy(r)

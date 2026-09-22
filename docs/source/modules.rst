@@ -7,6 +7,19 @@ API Reference
    :template: custom-module-template.rst
 
    src.constants
+   src.geometry
    src.conductivity
+   src.luminosity
+   src.state
+   src.residual
+   src.jacobian
+   src.newton
+   src.initial_conditions
    src.energy
-   src.grid
+   
+   
+   
+   
+   
+   
+   

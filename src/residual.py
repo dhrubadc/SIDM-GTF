@@ -1,7 +1,5 @@
-"""
-Module to calculate the coupled residual
-for the current state of the system
-in dimensionless units (Nishikawa 2020).
+r"""
+Calculate the fully implicit coupled hydrostatic and energy residuals.
 """
 
 import numpy as np
@@ -9,9 +7,17 @@ from . import constants
 
 
 def hydrostatic_terms(state):
-    """
-    Return the individual terms of each
+    r"""
+    Calculate individual terms of each
     hydrostatic residual.
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: individual terms of each hydrostatic residual
+    :rtype: Tuple[:obj:`src.constants.N_SHELL` -1,
+            :obj:`src.constants.N_SHELL` -1,
+            :obj:`src.constants.N_SHELL` -1]
     """
     # pylint: disable=unsubscriptable-object
 
@@ -34,8 +40,24 @@ def hydrostatic_terms(state):
 
 
 def hydrostatic_residual(state):
-    """
-    Return the n_shell-1 raw hydrostatic residuals.
+    r"""
+    Calculate the raw hydrostatic residuals defined at each interior edge.
+
+    .. math ::
+
+       F_{\rm H} &= \frac{{\rm d} \ln \rho}{{\rm d} \ln r} +
+       \frac{{\rm d} \ln u}{{\rm d} \ln r}
+       + \frac{3}{2} \frac{m_{\rm edge}[1:-1]}{r_{\rm edge}[1:-1]\ u_{\rm face}}
+
+       u_{\rm face} &= \frac{1}{2} (u[:-1] + u[1:])
+
+    Here :math:`m_{\rm edge}` is :obj:`src.constants.M_EDGE`.
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: raw hydrostatic residuals
+    :type: 1D array of shape :obj:`src.constants.N_SHELL-1`
     """
     rho_slope, u_slope, g_term = hydrostatic_terms(state)
 
@@ -45,10 +67,28 @@ def hydrostatic_residual(state):
 
 
 def energy_terms(state, v_old, u_old, dt):
-    """
-    Return the individual terms of each
+    r"""
+    Calculate individual terms of each
     energy residual.
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :param v_old: cell volumes at time t-dt
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param u_old: cell specific energies at time t-dt
+    :type u_old: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param dt: timestep
+    :type dt: float
+
+    :return: individual terms of each energy residual
+    :rtype: Tuple[:obj:`src.constants.N_SHELL`,
+            :obj:`src.constants.N_SHELL`,
+            :obj:`src.constants.N_SHELL`]
     """
+
     energy_term = state["u"] - u_old
     compression_term = (
         constants.FLOATDTYPE(2.0 / 3.0)
@@ -61,8 +101,31 @@ def energy_terms(state, v_old, u_old, dt):
 
 
 def energy_residual(state, v_old, u_old, dt):
-    """
-    Return the n_shell energy residuals.
+    r"""
+    Calculate the raw energy residuals defined at each cell midpoint.
+
+    .. math ::
+
+       F_{\rm E} = u - u_{\rm old}
+       + {\rm d}t\ \frac{{\rm d} l}{{\rm d} m} +
+       \frac{2}{3}\ u\ (1 - \frac{v_{\rm old}}{v})
+
+    Here dm is :obj:`src.constants.DM`.
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :param v_old: cell volumes at time t-dt
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param u_old: cell specific energies at time t-dt
+    :type u_old: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param dt: timestep
+    :type dt: float
+
+    :return: raw energy residuals
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
     """
     energy_term, compression_term, conduction_term = energy_terms(
         state, v_old, u_old, dt
@@ -74,9 +137,23 @@ def energy_residual(state, v_old, u_old, dt):
 
 
 def residual(state, v_old, u_old, dt):
-    """
-    Construct coupled hydro and energy residual
-    from the current state of the system.
+    r"""
+    Combine the hyrostatic and energy residuals.
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :param v_old: cell volumes at time t-dt
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param u_old: cell specific energies at time t-dt
+    :type u_old: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param dt: timestep
+    :type dt: float
+
+    :return: combined raw residual
+    :rtype: 1D array of shape 2 X :obj:`src.constants.N_SHELL` - 1
     """
     fhydro = hydrostatic_residual(state)
     fenergy = energy_residual(state, v_old, u_old, dt)

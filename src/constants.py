@@ -1,10 +1,8 @@
 r"""
-Define runtime constants and solver parameters
-in dimensionless units.
+Define float precision and runtime constants.
 """
 
 import numpy as np
-
 
 FLOATDTYPE = np.float64
 """Float data type precision (default: float64).
@@ -34,7 +32,7 @@ Set by user at runtime.
 """
 
 DM = None
-r"""Array of Lagrangian shell masses of shape N_SHELL.
+r"""Array of Lagrangian masses cells of shape N_SHELL.
 Set by user at runtime.
 """
 
@@ -49,12 +47,12 @@ Set by user at runtime.
 """
 
 N_SHELL = None
-r"""Number of Lagrangian shells.
+r"""Number of Lagrangian cells.
 Set by user at runtime.
 """
 
 F_TOL = None
-r"""Tolerance for Newton iteration convergence.
+r"""Residual tolerance for convergence of Newton iterations.
 Set by user at runtime.
 """
 
@@ -70,7 +68,7 @@ Set by user at runtime.
 """
 
 F_ACCEPT = None
-r"""Tolerance for accepting stagnated Newton iterations.
+r"""Residual tolerance for accepting stagnated Newton iterations.
 Set by user at runtime.
 """
 

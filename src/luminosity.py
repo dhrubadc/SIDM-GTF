@@ -1,19 +1,44 @@
-"""
-Module to calculate conductive luminosity
-in dimensionless units (Nishikawa 2020).
+r"""
+Calculate conductive luminosity.
 """
 
 import numpy as np
 from . import constants
 
 
-def luminosity(r_edge, u, r, kappa):
+def luminosity(r_edge, r, u, kappa):
+    r"""
+    Calculate luminosity at shell edges.
+
+    .. math::
+
+       l[1:-1] &=
+       \frac{2}{3}\,r_{\rm edge}[1:-1]^2\,
+       \kappa_{\rm face}\,
+       \frac{\Delta u}{\Delta r}
+
+       \kappa_{\rm face} &= \frac{1}{2} (\kappa[:-1] + \kappa[1:])
+
+    l[0] at r=0 and l[-1] at :math:`r=r_{\rm outer}` are fixed to 0.
+
+    Here :math:`r_{\rm outer}` is :obj:`src.constants.R_OUTER`.
+
+    :param r_edge: cell edges
+    :type r_edge: 1D array of shape :obj:`src.constants.N_SHELL` + 1
+
+    :param r: cell mid points
+    :type r: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param u: specific energy at cell midpoints
+    :type u: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param kappa: conductivity at cell midpoints
+    :type kappa: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :return: luminosity at cell edges
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL` + 1
     """
-    Return luminosity at shell edges.
-    The luminosities at r=0 and r=r_outer are fixed to 0.
-    """
-    n_shell = len(u)
-    l = np.zeros(n_shell + 1, dtype=constants.FLOATDTYPE)
+    l = np.zeros(constants.N_SHELL + 1, dtype=constants.FLOATDTYPE)
 
     kappa_face = constants.FLOATDTYPE(0.5) * (kappa[:-1] + kappa[1:])
     du = u[1:] - u[:-1]

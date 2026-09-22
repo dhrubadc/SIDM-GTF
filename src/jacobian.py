@@ -1,26 +1,38 @@
+r"""
+Calculate the analytical jacobian matrix
+corresponding to the fully implicit coupled residuals.
 """
-Module to calculate the analytical jacobian
-corresponding to the coupled residual
-for the current state of the system
-in dimensionless units (Nishikawa 2020).
-"""
-
 
 import numpy as np
 from . import constants
 
 
 def diff_quant(i, quant):
-    """
+    r"""
     Difference of a cell quantity
     between consequtive cells.
+
+    :param i: index
+    :type i: int
+
+    :param quant: physical quantity defined at cell midpoints
+    :type quant: 1D array of shape :obj:`src.constants.N_SHELL`
     """
     return quant[i + 1] - quant[i]
 
 
 def delta(m, n):
-    """
+    r"""
     Delta Function.
+
+    :param m: index
+    :type m: int
+
+    :param n: index
+    :type n: int
+
+    :return: 1 if m=n, 0 otherwise
+    :rtype: float
     """
     if n == m:
         return constants.FLOATDTYPE(1.0)
@@ -29,16 +41,37 @@ def delta(m, n):
 
 
 def volume_ratio(m, state, v_old):
-    """
-    Ratio of volume at previous timestep
-    and current volume.
+    r"""
+    Ratio of cell volume at previous timestep
+    and current cell volume.
+
+    :param m: index
+    :type m: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :param v_old: cell volumes at time t-dt
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :return: volume ratio (old to current)
+    :rtype: float
     """
     return v_old[m] / state["v"][m]
 
 
 def gravity_term(i, state):
-    """
-    Self gravity dependent term of the hydro residual.
+    r"""
+    Self gravity dependent term of the hydrostatic residual.
+
+    :param i: index
+    :type i: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: gravity term for hydrostatic residual
+    :rtype: float
     """
     # pylint: disable=unsubscriptable-object
 
@@ -50,8 +83,17 @@ def gravity_term(i, state):
 
 
 def kappa_derivative_common(i, state):
-    """
-    Common coefficient for the kappa derivatives.
+    r"""
+    Common coefficient for kappa derivatives.
+
+    :param i: index
+    :type i: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: common term for kappa derivatives
+    :rtype: float
     """
     return state["kappa_s"][i] ** (constants.ALPHA) / (
         state["kappa_s"][i] ** constants.ALPHA + state["kappa_l"][i] ** constants.ALPHA
@@ -59,9 +101,21 @@ def kappa_derivative_common(i, state):
 
 
 def dln_r_dln_redge(i, j, state):
-    """
-    Derivative of ln_r
-    with respect to ln_r_edge.
+    r"""
+    Calculate derivative of :math:`\ln\ r`
+    with respect to :math:`\ln\ r_{\rm edge}`.
+
+    :param i: index
+    :type i: int
+
+    :param j: index
+    :type j: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: derivative of :math:`\ln\ r` with respect to :math:`\ln\ r_{\rm edge}`
+    :rtype: float
     """
     den = state["r_edge"][i] + state["r_edge"][i + 1]
     num = state["r_edge"][i] * delta(i, j) + state["r_edge"][i + 1] * delta(i + 1, j)
@@ -69,9 +123,21 @@ def dln_r_dln_redge(i, j, state):
 
 
 def dr_dln_redge(i, j, state):
-    """
-    Derivative of r
-    with respect to ln_r_edge.
+    r"""
+    Calculate derivative of :math:`r`
+    with respect to :math:`\ln\ r_{\rm edge}`.
+
+    :param i: index
+    :type i: int
+
+    :param j: index
+    :type j: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: derivative of :math:`r` with respect to :math:`\ln\ r_{\rm edge}`
+    :rtype: float
     """
     return constants.FLOATDTYPE(0.5) * (
         state["r_edge"][i] * delta(i, j) + state["r_edge"][i + 1] * delta(i + 1, j)
@@ -79,9 +145,21 @@ def dr_dln_redge(i, j, state):
 
 
 def dln_v_dln_redge(i, j, state):
-    """
-    Derivative of ln_v
-    with respect to ln_r_edge.
+    r"""
+    Calculate derivative of :math:`\ln\ v`
+    with respect to :math:`\ln\ r_{\rm edge}`.
+
+    :param i: index
+    :type i: int
+
+    :param j: index
+    :type j: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: derivative of :math:`\ln\ v` with respect to :math:`\ln\ r_{\rm edge}`
+    :rtype: float
     """
     den = state["r_edge"][i + 1] ** 3.0 - state["r_edge"][i] ** 3.0
 
@@ -93,17 +171,41 @@ def dln_v_dln_redge(i, j, state):
 
 
 def dln_u_du(i, k, state):
-    """
-    Detivative of ln_u
-    with respect to u.
+    r"""
+    Detivative of :math:`\ln\ u`
+    with respect to :math:`u`.
+
+    :param i: index
+    :type i: int
+
+    :param k: index
+    :type k: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: derivative of :math:`\ln\ u` with respect to :math:`u`
+    :rtype: float
     """
     return delta(i, k) / state["u"][i]
 
 
 def dfhydro_dln_redge(i, j, state):
-    """
-    Derivative of hydro residual
-    with respect to ln_r_edge.
+    r"""
+    Calculate derivative of the hydrostatic residual
+    with respect to :math:`\ln\ r_{\rm edge}`.
+
+    :param i: index
+    :type i: int
+
+    :param j: index
+    :type j: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: derivative of hydrostatic residual with respect to :math:`\ln\ r_{\rm edge}`
+    :rtype: float
     """
     dln_r = diff_quant(i, state["ln_r"])
     dln_rho = diff_quant(i, state["ln_rho"]) + diff_quant(i, state["ln_u"])
@@ -121,9 +223,21 @@ def dfhydro_dln_redge(i, j, state):
 
 
 def dfhydro_du(i, k, state):
-    """
-    Derivative of hydro residual
-    with respect to u.
+    r"""
+    Derivative of the hydrostatic residual
+    with respect to :math:`u`.
+
+    :param i: index
+    :type i: int
+
+    :param k: index
+    :type k: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: derivative of hydrostatic residual with respect to :math:`u`
+    :rtype: float
     """
     dln_r = diff_quant(i, state["ln_r"])
     g_term = gravity_term(i, state)
@@ -137,18 +251,42 @@ def dfhydro_du(i, k, state):
 
 
 def dkappa_dln_redge(i, j, state):
-    """
-    Derivative of kappa
-    with respect to ln_redge.
+    r"""
+    Calculate derivative of :math:`\kappa`
+    with respect to :math:`\ln\ r_{\rm edge}`.
+
+    :param i: index
+    :type i: int
+
+    :param j: index
+    :type j: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: derivative of :math:`\kappa` with respect to :math:`\ln\ r_{\rm edge}`
+    :rtype: float
     """
     kappa_common = kappa_derivative_common(i, state)
     return -state["kappa"][i] * kappa_common * dln_v_dln_redge(i, j, state)
 
 
 def dkappa_du(i, k, state):
-    """
-    Derivative of kappa
-    with respect to u.
+    r"""
+    Calculate derivative of :math:`\kappa`
+    with respect to :math:`u`.
+
+    :param i: index
+    :type i: int
+
+    :param k: index
+    :type k: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: derivative of :math:`\kappa` with respect to :math:`u`
+    :rtype: float
     """
     kappa_common = kappa_derivative_common(i, state)
     return (
@@ -160,9 +298,21 @@ def dkappa_du(i, k, state):
 
 
 def dl_dln_redge(i, j, state):
-    """
-    Derivative of l at the interior edges
-    with respect to ln_r_edge.
+    r"""
+    Calculate derivative of :math:`l`
+    with respect to :math:`\ln\ r_{\rm edge}`.
+
+    :param i: index
+    :type i: int
+
+    :param j: index
+    :type j: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: derivative of :math:`l` with respect to :math:`\ln\ r_{\rm edge}`
+    :rtype: float
     """
     dr = diff_quant(i, state["r"])
     du = diff_quant(i, state["u"])
@@ -191,9 +341,21 @@ def dl_dln_redge(i, j, state):
 
 
 def dl_du(i, k, state):
-    """
-    Derivative of l at the interior edges
-    with respect to u.
+    r"""
+    Calculate derivative of :math:`l`
+    with respect to :math:`u`
+
+    :param i:  index
+    :type i: int
+
+    :param k: index
+    :type k: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: derivative of :math:`l` with respect to :math:`u`
+    :rtype: float
     """
     dr = diff_quant(i, state["r"])
     du = diff_quant(i, state["u"])
@@ -217,9 +379,27 @@ def dl_du(i, k, state):
 
 
 def dfenergy_dln_r_edge(m, j, state, v_old, dt):
-    """
-    Derivative of energy residual
-    with respect to ln_r_edge.
+    r"""
+    Calculate derivative of the energy residual
+    with respect to :math:`\ln\ r_{\rm edge}`.
+
+    :param m: index
+    :type m: int
+
+    :param j: index
+    :type j: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :param v_old: cell volumes at time t-dt
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param dt: timestep
+    :type dt: float
+
+    :return: derivative of energy residual with respect to :math:`\ln\ r_{\rm edge}`
+    :rtype: float
     """
     # pylint: disable=unsubscriptable-object
 
@@ -248,9 +428,27 @@ def dfenergy_dln_r_edge(m, j, state, v_old, dt):
 
 
 def dfenergy_du(m, k, state, v_old, dt):
-    """
-    Derivative of energy residual
-    with respect to u.
+    r"""
+    Calculate derivative of the energy residual
+    with :math:`u`.
+
+    :param m: index
+    :type m: int
+
+    :param k: index
+    :type k: int
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :param v_old: cell volumes at time t-dt
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param dt: timestep
+    :type dt: float
+
+    :return: derivative of energy residual with respect to :math:`u`
+    :rtype: float
     """
     # pylint: disable=unsubscriptable-object
 
@@ -274,10 +472,17 @@ def dfenergy_du(m, k, state, v_old, dt):
 
 
 def jacobian_hydro_block(state):
-    """
-    Hydro block of the Jacobian
-    with fixed edges at ln_r_edge[0] and ln_r_edge[-1].
+    r"""
+    Hydrostatic block of the Jacobian matrix.
+    Fixed edges at ln_r_edge[0] and ln_r_edge[-1].
     df_dln_redge is tri-diagonal and df_du is bi-diagonal.
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: hydrostatic block of the analytical jacobian matrix
+    :rtype: 2D array of shape
+            (:obj:`src.constants.N_SHELL` - 1, 2 X :obj:`src.constants.N_SHELL` - 1)
     """
 
     df_dln_redge = np.zeros(
@@ -302,10 +507,17 @@ def jacobian_hydro_block(state):
 
 
 def jacobian_energy_block(state, v_old, dt):
-    """
-    Energy block of Jacobian
-    with fixed edges at ln_r_edge[0] and ln_r_edge[-1].
+    r"""
+    Energy block of the Jacobian matrix.
+    Fixed edges at ln_r_edge[0] and ln_r_edge[-1].
     df_dln_redge is four-diagonal and df_du is tri-diagonal.
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :return: energy block of the analytical jacobian matrix
+    :rtype: 2D array of shape
+            (:obj:`src.constants.N_SHELL`, 2 X :obj:`src.constants.N_SHELL` - 1)
     """
 
     df_dln_redge = np.zeros(
@@ -328,8 +540,21 @@ def jacobian_energy_block(state, v_old, dt):
 
 
 def analytic_jacobian(state, v_old, dt):
-    """
-    Analytical jacobian for the coupled residual.
+    r"""
+    Analytical jacobian matrix corresponding to the coupled residuals.
+
+    :param state: current physical state of the system
+    :type state: dict
+
+    :param v_old: cell volumes at time t-dt
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
+
+    :param dt: timestep
+    :type dt: float
+
+    :return: analytical jacobian matrix
+    :rtype: 2D array of shape
+            (2 X :obj:`src.constants.N_SHELL` - 1, 2 X :obj:`src.constants.N_SHELL` - 1)
     """
     jac_hydro = jacobian_hydro_block(state)
     jac_energy = jacobian_energy_block(state, v_old, dt)
