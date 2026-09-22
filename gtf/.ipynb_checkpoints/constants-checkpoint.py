@@ -5,7 +5,7 @@ Define float precision and runtime constants.
 import numpy as np
 
 FLOATDTYPE = np.float64
-"""Float data type precision, defaults to np.float64.
+"""Float data type precision, defaults to float64.
 """
 
 A = FLOATDTYPE(4.0) / np.sqrt(FLOATDTYPE(np.pi))
@@ -27,7 +27,7 @@ Set by user at runtime.
 """
 
 ALPHA = None
-r"""Determines transition between the LMFP and SMFP regimes.
+r"""Determines transition between the LMPF and SMFP regimes.
 Set by user at runtime.
 """
 
@@ -63,7 +63,7 @@ Set by user at runtime.
 """
 
 X_TOL = None
-r"""Tolerance for determining stagnation of Newton iterations.
+r"""Tolerance for determing stagnation of Newton iterations.
 Set by user at runtime.
 """
 

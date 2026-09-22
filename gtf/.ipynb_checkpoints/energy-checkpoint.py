@@ -15,13 +15,13 @@ def total_kinetic_energy(u):
 
        K = \Sigma ({\rm d} m\ u)
 
-    Here :math:`{\rm d} m` is :obj:`gtf.constants.DM`.
+    Here :math:`{\rm d} m` is :obj:`src.constants.DM`.
 
     :param u: specific energy at cell midpoints
-    :type u: np.ndarray
+    :type u: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: total kinetic energy
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     return np.sum(constants.DM * u)
 
@@ -36,14 +36,14 @@ def total_gravitational_energy(r):
 
        M_{\rm center} &= 0.5\ (M_{\rm edge}[0:-1] + M_{\rm edge}[1:])
 
-    Here :math:`{\rm d} m` is :obj:`gtf.constants.DM` and
-    :math:`M_{\rm edge}` is :obj:`gtf.constants.M_EDGE`.
+    Here :math:`{\rm d} m` is :obj:`src.constants.DM` and
+    :math:`M_{\rm edge}` is :obj:`src.constants.M_EDGE`.
 
     :param r: cell midpoints
-    :type r: np.ndarray
+    :type r: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: total potential energy
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     # pylint: disable=unsubscriptable-object
 
@@ -62,13 +62,13 @@ def total_energy(r, u):
        E = K + W
 
     :param r: cell midpoints
-    :type r: np.ndarray
+    :type r: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param u: specific energy at cell midpoints
-    :type u: np.ndarray
+    :type u: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: total energy
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     ke = total_kinetic_energy(u)
     pe = total_gravitational_energy(r)

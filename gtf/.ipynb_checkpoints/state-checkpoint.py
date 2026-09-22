@@ -16,10 +16,10 @@ def state_from_unknowns(ln_r_edge, u):
     residual and jacobian evaluations.
 
     :param ln_r_edge: log of cell edges
-    :type ln_r_edge: np.ndarray
+    :type ln_r_edge: 1D array of shape :obj:`src.constants.N_SHELL` + 1
 
     :param u: specific energy at cell midpoints
-    :type u: np.ndarray
+    :type u: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: dictionary containing the relevant state variables
     :rtype: dict

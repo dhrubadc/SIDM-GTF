@@ -1,5 +1,5 @@
 r"""
-Set up initial conditions for a spherically symmetric, isotropic SIDM halo.
+Set up initial conditions for a symmerically symmetric, isotropic SIDM halo.
 Current support for standard and truncated NFW profiles.
 """
 
@@ -15,14 +15,14 @@ def make_initial_grid(r_first):
     ln_r_edge[0] = -np.inf and
     ln_r_edge[1:] = linspace(ln_r_first, ln_r_outer, n_shell).
 
-    Here n_shell is :obj:`gtfconstants.N_SHELL` and
-    ln_r_outer is log of :obj:`gtf.constants.R_OUTER`.
+    Here n_shell is :obj:`src.constants.N_SHELL` and
+    ln_r_outer is log of :obj:`src.constants.R_OUTER`.
 
     :param r_first: first non-zero cell edge
-    :type r_first: :obj:`gtf.constants.FLOATDTYPE`
+    :type r_first: float
 
     :return: initial radial grid
-    :rtype: np.ndarray
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL` + 1
     """
     ln_r_edge = np.empty(constants.N_SHELL + 1, dtype=constants.FLOATDTYPE)
 
@@ -40,16 +40,16 @@ def truncated_nfw(r, r_t, n):
     Initial NFW profile with truncation option.
 
     :param r: cell midpoints
-    :type r: np.ndarray
+    :type r: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param r_t: truncation radius
-    :type r_t: :obj:`gtf.constants.FLOATDTYPE`
+    :type r_t: float
 
     :param n: truncation exponent
-    :type n: :obj:`gtf.constants.FLOATDTYPE`
+    :type n: float
 
     :return: initial density at cell midpoints
-    :rtype: np.ndarray
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
     """
     return np.exp(-((r / r_t) ** n)) / (r * (constants.FLOATDTYPE(1.0) + r) ** 2)
 
@@ -59,13 +59,13 @@ def cell_mass(rho, v):
     Calculate the Lagrangian mass of each cell.
 
     :param rho: density at cell midpoints
-    :type rho: np.ndarray
+    :type rho: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param v: cell volumes
-    :type v: np.ndarray
+    :type v: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: return cell masses
-    :rtype: np.ndarray
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
 
     """
     return rho * v
@@ -76,10 +76,10 @@ def enclosed_mass(dm):
     Calculate cumulative Lagrangian masses at all cell edges.
 
     :param dm: Lagrangian cell masses
-    :type dm: np.ndarray
+    :type dm: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: cumulative cell masses
-    :rtype: np.ndarray
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL` + 1
     """
     m_edge = np.zeros(len(dm) + 1, dtype=constants.FLOATDTYPE)
     m_edge[1:] = np.cumsum(dm)
@@ -90,24 +90,24 @@ def enclosed_mass(dm):
 def hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, u_outer):
     r"""
     Calculate initial specific energy from density.
-    Integrate inwards the same hydrostatic :obj:`gtf.residual.hydrostatic_residual`
+    Integrate inwards the same hydrostatic :obj:`src.residual.hydrostatic_residual`
     to get the initial specific energy profile.
     The specific energy at the outermost cell is specified.
 
     :param r_edge: cell edges
-    :type r_edge: np.ndarray
+    :type r_edge: 1D array of shape :obj:`src.constants.N_SHELL` + 1
 
     :param ln_r: log of cell midpoints
-    :type ln_r: np.ndarray
-    
+    :type ln_r: 1D array of shape :obj:`src.constants.N_SHELL`
+
     :param ln_rho: log of density at cell midpoints
-    :type ln_rho: np.ndarray
-    
+    :type ln_rho: 1D array of shape :obj:`src.constants.N_SHELL`
+
     :param u_outer: specific energy of the last cell (strictly positive)
-    :type u_outer: :obj:`gtf.constants.FLOATDTYPE`
+    :type u_outer: float
 
     :return: specific energy at cell midpoints
-    :rtype: np.ndarray
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
     """
 
     u = np.empty(constants.N_SHELL, dtype=constants.FLOATDTYPE)
@@ -165,22 +165,22 @@ def hydrostatic_u_from_rho(r_edge, ln_r, ln_rho, u_outer):
 
 def set_up_initial_conditions(r_first, r_t=np.inf, n=1.0):
     r"""
-    Set up initial conditions.
+    Set up initial condtions.
     Default is standard NFW without any truncation.
 
     :param r_first: first non-zero cell edge
-    :type r_first: :obj:`gtf.constants.FLOATDTYPE`
-    
+    :type r_first: float
+
     :param r_t: truncation radius, defaults to infinity
-    :type r_t: :obj:`gtf.constants.FLOATDTYPE`
+    :type r_t: float
 
     :param n: truncation exponent, defaults to 1.0
-    :type n: :obj:`gtf.constants.FLOATDTYPE`
+    :type n: float
 
     :return: log of initial cell edges and specific energy at cell midpoints
-    :rtype: Tuple[np.ndarray, np.ndarray]
+    :rtpye: Tuple[:obj:`src.constants.N_SHELL` + 1, :obj:`src.constants.N_SHELL`]
 
-    Also sets :obj:`gtf.constants.DM` and :obj:`gtf.constants.M_EDGE`.
+    Also sets :obj:`src.constants.DM` and :obj:`src.constants.M_EDGE`.
     """
     ln_r_edge = make_initial_grid(r_first)
     ln_r = geometry.log_cell_centers(ln_r_edge)

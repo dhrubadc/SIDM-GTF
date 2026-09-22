@@ -19,10 +19,10 @@ def log_cell_centers(ln_r_edge):
        \right) - \ln 2
 
     :param ln_r_edge: log of cell edges
-    :type ln_r_edge: np.ndarray
+    :type ln_r_edge: 1D array of shape :obj:`src.constants.N_SHELL` + 1
 
     :return: log of cell midpoints
-    :rtype: np.ndarray
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
     """
     ln_left = ln_r_edge[:-1]
     ln_right = ln_r_edge[1:]
@@ -43,10 +43,10 @@ def log_cell_volumes(ln_r_edge):
        \right) - \ln 3
 
     :param ln_r_edge: log of cell edges
-    :type ln_r_edge: np.ndarray
+    :type ln_r_edge: 1D array of shape :obj:`src.constants.N_SHELL` + 1
 
     :return: log of cell volumes
-    :rtype: np.ndarray
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
     """
     ln_left = ln_r_edge[:-1]
     ln_right = ln_r_edge[1:]

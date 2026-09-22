@@ -16,13 +16,13 @@ def pack_unknowns(ln_r_edge, u):
     Pack unknown variables x = [ln_r_edge[1:-1], u].
 
     :param ln_r_edge: log of cell edges
-    :type ln_r_edge: np.ndarray
+    :type ln_r_edge: 1D array of shape :obj:`src.constants.N_SHELL` + 1
 
     :param u: specific energy at cell midpoints
-    :type u: np.ndarray
+    :type u: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: x = [ln_r_edge[1:-1], u]
-    :rtype: np.ndarray
+    :rtype: 1D array of shape 2 X :obj:`src.constants.N_SHELL` - 1
     """
     return np.concatenate((ln_r_edge[1:-1], u))
 
@@ -33,10 +33,11 @@ def unpack_unknowns(x):
     x = [ln_r_edge[1:-1], u].
 
     :param x: Array of unknown variables
-    :type x: np.ndarray
+    :type x: 1D array of shape 2 X :obj:`src.constants.N_SHELL` - 1
 
     :return: log of cell edges and specific energy at cell midpoints
-    :rtype: Tuple[np.ndarray, np.ndarray]
+    :rtype: Tuple[:obj:`src.constants.N_SHELL` + 1,
+            :obj:`src.constants.N_SHELL`]
     """
     ln_r_edge = np.empty(constants.N_SHELL + 1, dtype=constants.FLOATDTYPE)
 
@@ -59,22 +60,22 @@ def increment_newton_variables(x_trial, dx):
        x_{\rm new} = x_{\rm trial} + \alpha\ {\rm d}x
 
     :math:`\alpha` is initialized with 1.0
-    and continually halved until a physically valid :math:`x_{\rm new}`
+    and continually halfed until a physically valid :math:`x_{\rm new}`
     is found (ordered cells and u>0)
 
     :param x_trial: trial solutions from previous iteration
-    :type x_trial: np.ndarray
+    :type x_trial: 1D array of shape 2 X :obj:`src.constants.N_SHELL` - 1
 
     :param dx: proposed increment in the trial solutions from solving J * dx = -F
-    :type dx: np.ndarray
-    
+    :type dx: 1D array of shape 2 X :obj:`src.constants.N_SHELL` - 1
+
     :return: physically valid new trial solutions,
              corresponding full physical state,
              and the accepted :math:`\alpha`.
-    :rtype: Tuple[np.ndarray, dict, :obj:`gtf.constants.FLOATDTYPE`]
+    :rtype: Tuple[2 X :obj:`src.constants.N_SHELL` -1, dict, float]
 
-    Here J is the output of :obj:`gtf.jacobian.analytic_jacobian` and
-    F is the output of :obj:`gtf.residual.residual`.
+    Here J is the output of :obj:`src.jacobian.analytic_jacobian` and
+    F is the output of :obj:`src.residual.residual`.
     """
     alpha = 1.0
 
@@ -100,30 +101,30 @@ def increment_newton_variables(x_trial, dx):
 def iterate(state_old, dt):
     # pylint: disable=too-many-locals
     r"""
-    Implement Newton iterations.
+    Implement Newton terations.
 
     Iteratively solve  J * dx = -F, starting from a trial solution
     corresponding to the state of the system at time t-dt.
 
-    Here J is the output of :obj:`gtf.jacobian.analytic_jacobian` and
-    F is the output of :obj:`gtf.residual.residual`.
+    Here J is the output of :obj:`src.jacobian.analytic_jacobian` and
+    F is the output of :obj:`src.residual.residual`.
 
     A converged solution for time t is found
-    if :math:`{\rm MAX}(|F|)` < :obj:`gtf.constants.F_TOL`
+    if :math:`{\rm MAX}(|F|)` < :obj:`src.constants.F_TOL`
 
     A staganated but acceptable solution for time t is found
     if between last two iterations
     :math:`{\rm MAX}(|\Delta\ \ln r_{\rm edge}|, |\Delta\ u|/u)`
-    < :obj:`gtf.constants.X_TOL` but :math:`{\rm MAX}(|F|)`
-    < :obj:`gtf.constants.F_ACCEPT`
+    < :obj:`src.constants.X_TOL` but :math:`{\rm MAX}(|F|)`
+    < :obj:`src.constants.F_ACCEPT`
 
-    Maximum number of iterations tried is :obj:`gtf.constants.ITER_MAX`.
+    Maximum number of iterations tried is :obj:`src.constants.ITER_MAX`.
 
     :param state_old: physical state of the system at time t-dt
     :type state_old: dict
 
     :param dt: timestep
-    :type dt: :obj:`gtf.constants.FLOATDTYPE`
+    :type dt: float
 
     :return: physical state of the system at time t
     :rtype: dict or None (if a converged or acceptable state is not found)

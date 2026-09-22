@@ -21,22 +21,22 @@ def luminosity(r_edge, r, u, kappa):
 
     l[0] at r=0 and l[-1] at :math:`r=r_{\rm outer}` are fixed to 0.
 
-    Here :math:`r_{\rm outer}` is :obj:`gtf.constants.R_OUTER`.
+    Here :math:`r_{\rm outer}` is :obj:`src.constants.R_OUTER`.
 
     :param r_edge: cell edges
-    :type r_edge: np.ndarray
+    :type r_edge: 1D array of shape :obj:`src.constants.N_SHELL` + 1
 
-    :param r: cell midpoints
-    :type r: np.ndarray
+    :param r: cell mid points
+    :type r: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param u: specific energy at cell midpoints
-    :type u: np.ndarray
+    :type u: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param kappa: conductivity at cell midpoints
-    :type kappa: np.ndarray
+    :type kappa: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: luminosity at cell edges
-    :rtype: np.ndarray
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL` + 1
     """
     l = np.zeros(constants.N_SHELL + 1, dtype=constants.FLOATDTYPE)
 

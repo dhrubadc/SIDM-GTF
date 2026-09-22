@@ -17,15 +17,15 @@ def smfp_conductivity(u):
        (\frac{2}{3} u)^{1/2}
        \frac{1}{\sigma_{m}^2}
 
-    Here :math:`b` is :obj:`gtf.constants.B`,
-    :math:`a` is :obj:`gtf.constants.A`,
-    and :math:`\sigma_{m}` is :obj:`gtf.constants.SIGMA_OVER_M`.
+    Here :math:`b` is :obj:`src.constants.B`,
+    :math:`a` is :obj:`src.constants.A`,
+    and :math:`\sigma_{m}` is :obj:`src.constants.SIGMA_OVER_M`.
 
     :param u: specific energy at cell midpoints
-    :type u: np.ndarray
+    :type u: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: SMFP conductivity at cell midpoints
-    :rtype: np.ndarray
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
     """
     v = np.sqrt((constants.FLOATDTYPE(2.0) / constants.FLOATDTYPE(3.0)) * u)
     return (
@@ -47,16 +47,16 @@ def lmfp_conductivity(rho, u):
       \rho
       (\frac{2}{3} u)^{3/2}
 
-    Here :math:`\beta` is :obj:`gtf.constants.BETA`.
+    Here :math:`\beta` is :obj:`src.constants.BETA`.
 
     :param rho: density at cell midpoints
-    :type rho: np.ndarray
+    :type rho: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param u: specific energy at cell midpoints
-    :type u: np.ndarray
+    :type u: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: LMFP conductivity at cell midpoints
-    :rtype: np.ndarray
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
     """
     v = np.sqrt((constants.FLOATDTYPE(2.0) / constants.FLOATDTYPE(3.0)) * u)
     return constants.FLOATDTYPE(1.5) * constants.BETA * rho * v**3
@@ -71,16 +71,16 @@ def total_conductivity(kappa_s, kappa_l):
       \kappa = \frac{\kappa_s \kappa_l}
       {(\kappa_s^{\alpha} + \kappa_l^{\alpha})^{1/\alpha}}
 
-    Here :math:`\alpha` is :obj:`gtf.constants.ALPHA`.
+    Here :math:`\alpha` is :obj:`src.constants.ALPHA`.
 
     :param kappa_s: SMFP conductivity at cell midpoints
-    :type kappa_s: np.ndarray
+    :type kappa_s: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param kappa_l: LMFP conductivity at cell midpoints
-    :type kappa_l: np.ndarray
+    :type kappa_l: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: total conductivity at cell midpoints
-    :rtype: np.ndarray
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
     """
     num = kappa_s * kappa_l
     den = (kappa_s ** (constants.ALPHA) + kappa_l ** (constants.ALPHA)) ** (

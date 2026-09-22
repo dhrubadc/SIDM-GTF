@@ -10,20 +10,20 @@ from . import constants
 def diff_quant(i, quant):
     r"""
     Difference of a cell quantity
-    between consecutive cells.
+    between consequtive cells.
 
     :param i: index
     :type i: int
 
     :param quant: physical quantity defined at cell midpoints
-    :type quant: np.ndarray
+    :type quant: 1D array of shape :obj:`src.constants.N_SHELL`
     """
     return quant[i + 1] - quant[i]
 
 
 def delta(m, n):
     r"""
-    Kronecker delta function.
+    Delta Function.
 
     :param m: index
     :type m: int
@@ -32,7 +32,7 @@ def delta(m, n):
     :type n: int
 
     :return: 1 if m=n, 0 otherwise
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     if n == m:
         return constants.FLOATDTYPE(1.0)
@@ -52,10 +52,10 @@ def volume_ratio(m, state, v_old):
     :type state: dict
 
     :param v_old: cell volumes at time t-dt
-    :type v_old: np.ndarray
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :return: volume ratio (old to current)
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     return v_old[m] / state["v"][m]
 
@@ -71,7 +71,7 @@ def gravity_term(i, state):
     :type state: dict
 
     :return: gravity term for hydrostatic residual
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     # pylint: disable=unsubscriptable-object
 
@@ -93,7 +93,7 @@ def kappa_derivative_common(i, state):
     :type state: dict
 
     :return: common term for kappa derivatives
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     return state["kappa_s"][i] ** (constants.ALPHA) / (
         state["kappa_s"][i] ** constants.ALPHA + state["kappa_l"][i] ** constants.ALPHA
@@ -115,7 +115,7 @@ def dln_r_dln_redge(i, j, state):
     :type state: dict
 
     :return: derivative of :math:`\ln\ r` with respect to :math:`\ln\ r_{\rm edge}`
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     den = state["r_edge"][i] + state["r_edge"][i + 1]
     num = state["r_edge"][i] * delta(i, j) + state["r_edge"][i + 1] * delta(i + 1, j)
@@ -137,7 +137,7 @@ def dr_dln_redge(i, j, state):
     :type state: dict
 
     :return: derivative of :math:`r` with respect to :math:`\ln\ r_{\rm edge}`
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     return constants.FLOATDTYPE(0.5) * (
         state["r_edge"][i] * delta(i, j) + state["r_edge"][i + 1] * delta(i + 1, j)
@@ -159,7 +159,7 @@ def dln_v_dln_redge(i, j, state):
     :type state: dict
 
     :return: derivative of :math:`\ln\ v` with respect to :math:`\ln\ r_{\rm edge}`
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     den = state["r_edge"][i + 1] ** 3.0 - state["r_edge"][i] ** 3.0
 
@@ -172,7 +172,7 @@ def dln_v_dln_redge(i, j, state):
 
 def dln_u_du(i, k, state):
     r"""
-    Derivative of :math:`\ln\ u`
+    Detivative of :math:`\ln\ u`
     with respect to :math:`u`.
 
     :param i: index
@@ -185,7 +185,7 @@ def dln_u_du(i, k, state):
     :type state: dict
 
     :return: derivative of :math:`\ln\ u` with respect to :math:`u`
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     return delta(i, k) / state["u"][i]
 
@@ -205,7 +205,7 @@ def dfhydro_dln_redge(i, j, state):
     :type state: dict
 
     :return: derivative of hydrostatic residual with respect to :math:`\ln\ r_{\rm edge}`
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     dln_r = diff_quant(i, state["ln_r"])
     dln_rho = diff_quant(i, state["ln_rho"]) + diff_quant(i, state["ln_u"])
@@ -237,7 +237,7 @@ def dfhydro_du(i, k, state):
     :type state: dict
 
     :return: derivative of hydrostatic residual with respect to :math:`u`
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     dln_r = diff_quant(i, state["ln_r"])
     g_term = gravity_term(i, state)
@@ -265,7 +265,7 @@ def dkappa_dln_redge(i, j, state):
     :type state: dict
 
     :return: derivative of :math:`\kappa` with respect to :math:`\ln\ r_{\rm edge}`
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     kappa_common = kappa_derivative_common(i, state)
     return -state["kappa"][i] * kappa_common * dln_v_dln_redge(i, j, state)
@@ -286,7 +286,7 @@ def dkappa_du(i, k, state):
     :type state: dict
 
     :return: derivative of :math:`\kappa` with respect to :math:`u`
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     kappa_common = kappa_derivative_common(i, state)
     return (
@@ -312,7 +312,7 @@ def dl_dln_redge(i, j, state):
     :type state: dict
 
     :return: derivative of :math:`l` with respect to :math:`\ln\ r_{\rm edge}`
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     dr = diff_quant(i, state["r"])
     du = diff_quant(i, state["u"])
@@ -355,7 +355,7 @@ def dl_du(i, k, state):
     :type state: dict
 
     :return: derivative of :math:`l` with respect to :math:`u`
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     dr = diff_quant(i, state["r"])
     du = diff_quant(i, state["u"])
@@ -393,13 +393,13 @@ def dfenergy_dln_r_edge(m, j, state, v_old, dt):
     :type state: dict
 
     :param v_old: cell volumes at time t-dt
-    :type v_old: np.ndarray
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param dt: timestep
-    :type dt: :obj:`gtf.constants.FLOATDTYPE`
+    :type dt: float
 
     :return: derivative of energy residual with respect to :math:`\ln\ r_{\rm edge}`
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     # pylint: disable=unsubscriptable-object
 
@@ -442,13 +442,13 @@ def dfenergy_du(m, k, state, v_old, dt):
     :type state: dict
 
     :param v_old: cell volumes at time t-dt
-    :type v_old: np.ndarray
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param dt: timestep
-    :type dt: :obj:`gtf.constants.FLOATDTYPE`
+    :type dt: float
 
     :return: derivative of energy residual with respect to :math:`u`
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: float
     """
     # pylint: disable=unsubscriptable-object
 
@@ -481,7 +481,8 @@ def jacobian_hydro_block(state):
     :type state: dict
 
     :return: hydrostatic block of the analytical jacobian matrix
-    :rtype: np.ndarray
+    :rtype: 2D array of shape
+            (:obj:`src.constants.N_SHELL` - 1, 2 X :obj:`src.constants.N_SHELL` - 1)
     """
 
     df_dln_redge = np.zeros(
@@ -515,7 +516,8 @@ def jacobian_energy_block(state, v_old, dt):
     :type state: dict
 
     :return: energy block of the analytical jacobian matrix
-    :rtype: np.ndarray
+    :rtype: 2D array of shape
+            (:obj:`src.constants.N_SHELL`, 2 X :obj:`src.constants.N_SHELL` - 1)
     """
 
     df_dln_redge = np.zeros(
@@ -545,13 +547,14 @@ def analytic_jacobian(state, v_old, dt):
     :type state: dict
 
     :param v_old: cell volumes at time t-dt
-    :type v_old: np.ndarray
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param dt: timestep
-    :type dt: :obj:`gtf.constants.FLOATDTYPE`
+    :type dt: float
 
     :return: analytical jacobian matrix
-    :rtype: np.ndarray
+    :rtype: 2D array of shape
+            (2 X :obj:`src.constants.N_SHELL` - 1, 2 X :obj:`src.constants.N_SHELL` - 1)
     """
     jac_hydro = jacobian_hydro_block(state)
     jac_energy = jacobian_energy_block(state, v_old, dt)

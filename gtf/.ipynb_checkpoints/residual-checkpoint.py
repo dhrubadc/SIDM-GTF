@@ -15,7 +15,9 @@ def hydrostatic_terms(state):
     :type state: dict
 
     :return: individual terms of each hydrostatic residual
-    :rtype: Tuple[np.ndarray, np.ndarray, np.ndarray]
+    :rtype: Tuple[:obj:`src.constants.N_SHELL` -1,
+            :obj:`src.constants.N_SHELL` -1,
+            :obj:`src.constants.N_SHELL` -1]
     """
     # pylint: disable=unsubscriptable-object
 
@@ -49,13 +51,13 @@ def hydrostatic_residual(state):
 
        u_{\rm face} &= \frac{1}{2} (u[:-1] + u[1:])
 
-    Here :math:`m_{\rm edge}` is :obj:`gtf.constants.M_EDGE`.
+    Here :math:`m_{\rm edge}` is :obj:`src.constants.M_EDGE`.
 
     :param state: current physical state of the system
     :type state: dict
 
     :return: raw hydrostatic residuals
-    :type: np.ndarray
+    :type: 1D array of shape :obj:`src.constants.N_SHELL-1`
     """
     rho_slope, u_slope, g_term = hydrostatic_terms(state)
 
@@ -73,16 +75,18 @@ def energy_terms(state, v_old, u_old, dt):
     :type state: dict
 
     :param v_old: cell volumes at time t-dt
-    :type v_old: np.ndarray
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param u_old: cell specific energies at time t-dt
-    :type u_old: np.ndarray
+    :type u_old: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param dt: timestep
-    :type dt: :obj:`gtf.constants.FLOATDTYPE`
+    :type dt: float
 
     :return: individual terms of each energy residual
-    :rtype: Tuple[np.ndarray, np.ndarray, np.ndarray]
+    :rtype: Tuple[:obj:`src.constants.N_SHELL`,
+            :obj:`src.constants.N_SHELL`,
+            :obj:`src.constants.N_SHELL`]
     """
 
     energy_term = state["u"] - u_old
@@ -106,22 +110,22 @@ def energy_residual(state, v_old, u_old, dt):
        + {\rm d}t\ \frac{{\rm d} l}{{\rm d} m} +
        \frac{2}{3}\ u\ (1 - \frac{v_{\rm old}}{v})
 
-    Here dm is :obj:`gtf.constants.DM`.
+    Here dm is :obj:`src.constants.DM`.
 
     :param state: current physical state of the system
     :type state: dict
 
     :param v_old: cell volumes at time t-dt
-    :type v_old: np.ndarray
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param u_old: cell specific energies at time t-dt
-    :type u_old: np.ndarray
+    :type u_old: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param dt: timestep
-    :type dt: :obj:`gtf.constants.FLOATDTYPE`
+    :type dt: float
 
     :return: raw energy residuals
-    :rtype: np.ndarray
+    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`
     """
     energy_term, compression_term, conduction_term = energy_terms(
         state, v_old, u_old, dt
@@ -134,22 +138,22 @@ def energy_residual(state, v_old, u_old, dt):
 
 def residual(state, v_old, u_old, dt):
     r"""
-    Combine the hydrostatic and energy residuals.
+    Combine the hyrostatic and energy residuals.
 
     :param state: current physical state of the system
     :type state: dict
 
     :param v_old: cell volumes at time t-dt
-    :type v_old: np.ndarray
+    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param u_old: cell specific energies at time t-dt
-    :type u_old: np.ndarray
+    :type u_old: 1D array of shape :obj:`src.constants.N_SHELL`
 
     :param dt: timestep
-    :type dt: :obj:`gtf.constants.FLOATDTYPE`
+    :type dt: float
 
     :return: combined raw residual
-    :rtype: np.ndarray
+    :rtype: 1D array of shape 2 X :obj:`src.constants.N_SHELL` - 1
     """
     fhydro = hydrostatic_residual(state)
     fenergy = energy_residual(state, v_old, u_old, dt)
