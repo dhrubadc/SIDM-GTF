@@ -14,7 +14,7 @@ authors:
   - family-names: Croton
     given-names: Darren J.
     affiliation: "Swinburne University of Technology"
-repository-code: "https://github.com/MBradley1985/dhrubadc/sidm-gtf"
+repository-code: "https://github.com/dhrubadc/GTF"
 license: MIT
 version: "0.1.0"
 date-released: "2026-09-23"
