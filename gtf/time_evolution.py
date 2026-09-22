@@ -24,7 +24,7 @@ def evolve(state_init, rho_stop, dt_init=0.001):
     :param state_init: physical state of the system at t=0
     :type state_init: dict
 
-    :param rho_stop: maximum central density at which to stop the evolution 
+    :param rho_stop: maximum central density for stoping the evolution 
     :type rho_stop: :obj:`gtf.constants.FLOATDTYPE`
 
     :param dt_init: initial trial dt, defaults to 0.001
