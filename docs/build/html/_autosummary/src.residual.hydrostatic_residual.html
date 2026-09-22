@@ -355,8 +355,8 @@
 <span class="sig-prename descclassname"><span class="pre">src.residual.</span></span><span class="sig-name descname"><span class="pre">hydrostatic_residual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/residual.html#hydrostatic_residual"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.residual.hydrostatic_residual" title="Link to this definition"></a></dt>
 <dd><p>Calculate the raw hydrostatic residuals defined at each interior edge.</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}F_{\rm H} &amp;= \frac{{\rm d} \ln \rho}{{\rm d} \ln r} + 
-\frac{{\rm d} \ln u}{{\rm d} \ln r} 
+\[ \begin{align}\begin{aligned}F_{\rm H} &amp;= \frac{{\rm d} \ln \rho}{{\rm d} \ln r} +
+\frac{{\rm d} \ln u}{{\rm d} \ln r}
 + \frac{3}{2} \frac{m_{\rm edge}[1:-1]}{r_{\rm edge}[1:-1]\ u_{\rm face}}\\u_{\rm face} &amp;= \frac{1}{2} (u[:-1] + u[1:])\end{aligned}\end{align} \]</div>
 <p>Here <span class="math notranslate nohighlight">\(m_{\rm edge}\)</span> is <a class="reference internal" href="src.constants.M_EDGE.html#src.constants.M_EDGE" title="src.constants.M_EDGE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.constants.M_EDGE</span></code></a>.</p>
 <dl class="field-list simple">

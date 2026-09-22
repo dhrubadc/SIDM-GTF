@@ -355,8 +355,8 @@
 <span class="sig-prename descclassname"><span class="pre">src.residual.</span></span><span class="sig-name descname"><span class="pre">energy_residual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_old</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u_old</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/residual.html#energy_residual"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.residual.energy_residual" title="Link to this definition"></a></dt>
 <dd><p>Calculate the raw energy residuals defined at each cell midpoint.</p>
 <div class="math notranslate nohighlight">
-\[F_{\rm E} = u - u_{\rm old} 
-+ {\rm d}t\ \frac{{\rm d} l}{{\rm d} m} + 
+\[F_{\rm E} = u - u_{\rm old}
++ {\rm d}t\ \frac{{\rm d} l}{{\rm d} m} +
 \frac{2}{3}\ u\ (1 - \frac{v_{\rm old}}{v})\]</div>
 <p>Here dm is <a class="reference internal" href="src.constants.DM.html#src.constants.DM" title="src.constants.DM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.constants.DM</span></code></a>.</p>
 <dl class="field-list simple">

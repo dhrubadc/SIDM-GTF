@@ -57,7 +57,7 @@ def increment_newton_variables(x_trial, dx):
 
     .. math ::
 
-       x_{\rm new} = x_{\rm trial} + \alpha * {\rm d}x
+       x_{\rm new} = x_{\rm trial} + \alpha\ {\rm d}x
 
     :math:`\alpha` is initialized with 1.0
     and continually halfed until a physically valid :math:`x_{\rm new}`

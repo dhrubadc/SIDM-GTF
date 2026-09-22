@@ -362,8 +362,8 @@
 <span class="sd">    :type state: dict</span>
 
 <span class="sd">    :return: individual terms of each hydrostatic residual</span>
-<span class="sd">    :rtype: Tuple[:obj:`src.constants.N_SHELL` -1, </span>
-<span class="sd">            :obj:`src.constants.N_SHELL` -1, </span>
+<span class="sd">    :rtype: Tuple[:obj:`src.constants.N_SHELL` -1,</span>
+<span class="sd">            :obj:`src.constants.N_SHELL` -1,</span>
 <span class="sd">            :obj:`src.constants.N_SHELL` -1]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># pylint: disable=unsubscriptable-object</span>
@@ -394,9 +394,9 @@
 <span class="sd">    Calculate the raw hydrostatic residuals defined at each interior edge.</span>
 
 <span class="sd">    .. math ::</span>
-<span class="sd">    </span>
-<span class="sd">       F_{\rm H} &amp;= \frac{{\rm d} \ln \rho}{{\rm d} \ln r} + </span>
-<span class="sd">       \frac{{\rm d} \ln u}{{\rm d} \ln r} </span>
+
+<span class="sd">       F_{\rm H} &amp;= \frac{{\rm d} \ln \rho}{{\rm d} \ln r} +</span>
+<span class="sd">       \frac{{\rm d} \ln u}{{\rm d} \ln r}</span>
 <span class="sd">       + \frac{3}{2} \frac{m_{\rm edge}[1:-1]}{r_{\rm edge}[1:-1]\ u_{\rm face}}</span>
 
 <span class="sd">       u_{\rm face} &amp;= \frac{1}{2} (u[:-1] + u[1:])</span>
@@ -437,11 +437,11 @@
 <span class="sd">    :type dt: float</span>
 
 <span class="sd">    :return: individual terms of each energy residual</span>
-<span class="sd">    :rtype: Tuple[:obj:`src.constants.N_SHELL`, </span>
-<span class="sd">            :obj:`src.constants.N_SHELL`, </span>
+<span class="sd">    :rtype: Tuple[:obj:`src.constants.N_SHELL`,</span>
+<span class="sd">            :obj:`src.constants.N_SHELL`,</span>
 <span class="sd">            :obj:`src.constants.N_SHELL`]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
     <span class="n">energy_term</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">u_old</span>
     <span class="n">compression_term</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">constants</span><span class="o">.</span><span class="n">FLOATDTYPE</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span>
@@ -462,8 +462,8 @@
 
 <span class="sd">    .. math ::</span>
 
-<span class="sd">       F_{\rm E} = u - u_{\rm old} </span>
-<span class="sd">       + {\rm d}t\ \frac{{\rm d} l}{{\rm d} m} + </span>
+<span class="sd">       F_{\rm E} = u - u_{\rm old}</span>
+<span class="sd">       + {\rm d}t\ \frac{{\rm d} l}{{\rm d} m} +</span>
 <span class="sd">       \frac{2}{3}\ u\ (1 - \frac{v_{\rm old}}{v})</span>
 
 <span class="sd">    Here dm is :obj:`src.constants.DM`.</span>

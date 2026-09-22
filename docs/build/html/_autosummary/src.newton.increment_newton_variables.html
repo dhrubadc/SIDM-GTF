@@ -356,8 +356,8 @@
 <dd><p>Implement line search to ensure
 cells are always ordered and u&gt;0.</p>
 <div class="math notranslate nohighlight">
-\[x_{\rm new} = x_{\rm trial} + \alpha * {\rm d}x\]</div>
-<p><span class="math notranslate nohighlight">\(\alpha\)</span> is initialized with 1.0 
+\[x_{\rm new} = x_{\rm trial} + \alpha\ {\rm d}x\]</div>
+<p><span class="math notranslate nohighlight">\(\alpha\)</span> is initialized with 1.0
 and continually halfed until a physically valid <span class="math notranslate nohighlight">\(x_{\rm new}\)</span>
 is found (ordered cells and u&gt;0)</p>
 <dl class="field-list simple">
@@ -368,15 +368,15 @@ is found (ordered cells and u&gt;0)</p>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>physically valid new trial solutions, 
-corresponding full physical state, 
+<dd class="field-even"><p>physically valid new trial solutions,
+corresponding full physical state,
 and the accepted <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Tuple[2 X <a class="reference internal" href="src.constants.N_SHELL.html#src.constants.N_SHELL" title="src.constants.N_SHELL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.constants.N_SHELL</span></code></a> -1, dict, float]</p>
 </dd>
 </dl>
-<p>Here J is the output of <a class="reference internal" href="src.jacobian.analytic_jacobian.html#src.jacobian.analytic_jacobian" title="src.jacobian.analytic_jacobian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.jacobian.analytic_jacobian</span></code></a> and 
+<p>Here J is the output of <a class="reference internal" href="src.jacobian.analytic_jacobian.html#src.jacobian.analytic_jacobian" title="src.jacobian.analytic_jacobian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.jacobian.analytic_jacobian</span></code></a> and
 F is the output of <a class="reference internal" href="src.residual.residual.html#src.residual.residual" title="src.residual.residual"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.residual.residual</span></code></a>.</p>
 </dd></dl>
 

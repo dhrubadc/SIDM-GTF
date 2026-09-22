@@ -5,7 +5,7 @@ Define float precision and runtime constants.
 import numpy as np
 
 FLOATDTYPE = np.float64
-"""Float data type precision (default: float64).
+"""Float data type precision, defaults to float64.
 """
 
 A = FLOATDTYPE(4.0) / np.sqrt(FLOATDTYPE(np.pi))
@@ -32,12 +32,12 @@ Set by user at runtime.
 """
 
 DM = None
-r"""Array of Lagrangian masses cells of shape N_SHELL.
+r"""Array of Lagrangian masses cells of shape :obj:`N_SHELL`.
 Set by user at runtime.
 """
 
 M_EDGE = None
-r"""Enclosed mass array of shape N_SHELL + 1.
+r"""Enclosed mass array of shape :obj:`N_SHELL` + 1.
 Set by user at runtime.
 """
 

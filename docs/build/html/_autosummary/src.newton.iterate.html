@@ -356,14 +356,14 @@
 <dd><p>Implement Newton terations.</p>
 <p>Iteratively solve  J * dx = -F, starting from a trial solution
 corresponding to the state of the system at time t-dt.</p>
-<p>Here J is the output of <a class="reference internal" href="src.jacobian.analytic_jacobian.html#src.jacobian.analytic_jacobian" title="src.jacobian.analytic_jacobian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.jacobian.analytic_jacobian</span></code></a> and 
+<p>Here J is the output of <a class="reference internal" href="src.jacobian.analytic_jacobian.html#src.jacobian.analytic_jacobian" title="src.jacobian.analytic_jacobian"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.jacobian.analytic_jacobian</span></code></a> and
 F is the output of <a class="reference internal" href="src.residual.residual.html#src.residual.residual" title="src.residual.residual"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.residual.residual</span></code></a>.</p>
-<p>A converged solution for time t is found 
+<p>A converged solution for time t is found
 if <span class="math notranslate nohighlight">\({\rm MAX}(|F|)\)</span> &lt; <a class="reference internal" href="src.constants.F_TOL.html#src.constants.F_TOL" title="src.constants.F_TOL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.constants.F_TOL</span></code></a></p>
 <p>A staganated but acceptable solution for time t is found
-if between last two iterations 
+if between last two iterations
 <span class="math notranslate nohighlight">\({\rm MAX}(|\Delta\ \ln r_{\rm edge}|, |\Delta\ u|/u)\)</span>
-&lt; <a class="reference internal" href="src.constants.X_TOL.html#src.constants.X_TOL" title="src.constants.X_TOL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.constants.X_TOL</span></code></a> but <span class="math notranslate nohighlight">\({\rm MAX}(|F|)\)</span> 
+&lt; <a class="reference internal" href="src.constants.X_TOL.html#src.constants.X_TOL" title="src.constants.X_TOL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.constants.X_TOL</span></code></a> but <span class="math notranslate nohighlight">\({\rm MAX}(|F|)\)</span>
 &lt; <a class="reference internal" href="src.constants.F_ACCEPT.html#src.constants.F_ACCEPT" title="src.constants.F_ACCEPT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.constants.F_ACCEPT</span></code></a></p>
 <p>Maximum number of iterations tried is <a class="reference internal" href="src.constants.ITER_MAX.html#src.constants.ITER_MAX" title="src.constants.ITER_MAX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">src.constants.ITER_MAX</span></code></a>.</p>
 <dl class="field-list simple">

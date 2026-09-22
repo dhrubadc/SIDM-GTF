@@ -514,7 +514,7 @@
 <a class="viewcode-back" href="../../_autosummary/src.jacobian.dln_v_dln_redge.html#src.jacobian.dln_v_dln_redge">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">dln_v_dln_redge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate derivative of :math:`\ln\ v` </span>
+<span class="sd">    Calculate derivative of :math:`\ln\ v`</span>
 <span class="sd">    with respect to :math:`\ln\ r_{\rm edge}`.</span>
 
 <span class="sd">    :param i: index</span>
@@ -543,7 +543,7 @@
 <a class="viewcode-back" href="../../_autosummary/src.jacobian.dln_u_du.html#src.jacobian.dln_u_du">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">dln_u_du</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Detivative of :math:`\ln\ u` </span>
+<span class="sd">    Detivative of :math:`\ln\ u`</span>
 <span class="sd">    with respect to :math:`u`.</span>
 
 <span class="sd">    :param i: index</span>
@@ -632,7 +632,7 @@
 <a class="viewcode-back" href="../../_autosummary/src.jacobian.dkappa_dln_redge.html#src.jacobian.dkappa_dln_redge">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">dkappa_dln_redge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate derivative of :math:`\kappa` </span>
+<span class="sd">    Calculate derivative of :math:`\kappa`</span>
 <span class="sd">    with respect to :math:`\ln\ r_{\rm edge}`.</span>
 
 <span class="sd">    :param i: index</span>
@@ -656,7 +656,7 @@
 <a class="viewcode-back" href="../../_autosummary/src.jacobian.dkappa_du.html#src.jacobian.dkappa_du">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">dkappa_du</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate derivative of :math:`\kappa` </span>
+<span class="sd">    Calculate derivative of :math:`\kappa`</span>
 <span class="sd">    with respect to :math:`u`.</span>
 
 <span class="sd">    :param i: index</span>
@@ -685,7 +685,7 @@
 <a class="viewcode-back" href="../../_autosummary/src.jacobian.dl_dln_redge.html#src.jacobian.dl_dln_redge">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">dl_dln_redge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate derivative of :math:`l` </span>
+<span class="sd">    Calculate derivative of :math:`l`</span>
 <span class="sd">    with respect to :math:`\ln\ r_{\rm edge}`.</span>
 
 <span class="sd">    :param i: index</span>
@@ -731,7 +731,7 @@
 <a class="viewcode-back" href="../../_autosummary/src.jacobian.dl_du.html#src.jacobian.dl_du">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">dl_du</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calculate derivative of :math:`l` </span>
+<span class="sd">    Calculate derivative of :math:`l`</span>
 <span class="sd">    with respect to :math:`u`</span>
 
 <span class="sd">    :param i:  index</span>
@@ -879,7 +879,8 @@
 <span class="sd">    :type state: dict</span>
 
 <span class="sd">    :return: hydrostatic block of the analytical jacobian matrix</span>
-<span class="sd">    :rtype: 2D array of shape (:obj:`src.constants.N_SHELL` - 1, 2 X :obj:`src.constants.N_SHELL` - 1)</span>
+<span class="sd">    :rtype: 2D array of shape</span>
+<span class="sd">            (:obj:`src.constants.N_SHELL` - 1, 2 X :obj:`src.constants.N_SHELL` - 1)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">df_dln_redge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
@@ -916,7 +917,8 @@
 <span class="sd">    :type state: dict</span>
 
 <span class="sd">    :return: energy block of the analytical jacobian matrix</span>
-<span class="sd">    :rtype: 2D array of shape (:obj:`src.constants.N_SHELL`, 2 X :obj:`src.constants.N_SHELL` - 1)</span>
+<span class="sd">    :rtype: 2D array of shape</span>
+<span class="sd">            (:obj:`src.constants.N_SHELL`, 2 X :obj:`src.constants.N_SHELL` - 1)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">df_dln_redge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
@@ -955,7 +957,8 @@
 <span class="sd">    :type dt: float</span>
 
 <span class="sd">    :return: analytical jacobian matrix</span>
-<span class="sd">    :rtype: 2D array of shape (2 X :obj:`src.constants.N_SHELL` - 1, 2 X :obj:`src.constants.N_SHELL` - 1)</span>
+<span class="sd">    :rtype: 2D array of shape</span>
+<span class="sd">            (2 X :obj:`src.constants.N_SHELL` - 1, 2 X :obj:`src.constants.N_SHELL` - 1)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">jac_hydro</span> <span class="o">=</span> <span class="n">jacobian_hydro_block</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">jac_energy</span> <span class="o">=</span> <span class="n">jacobian_energy_block</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">v_old</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
