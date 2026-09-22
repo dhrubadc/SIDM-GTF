@@ -40,14 +40,11 @@ gtf.constants.FLOATDTYPE
       ~FLOATDTYPE.hex
       ~FLOATDTYPE.is_integer
       ~FLOATDTYPE.item
-      ~FLOATDTYPE.itemset
       ~FLOATDTYPE.max
       ~FLOATDTYPE.mean
       ~FLOATDTYPE.min
-      ~FLOATDTYPE.newbyteorder
       ~FLOATDTYPE.nonzero
       ~FLOATDTYPE.prod
-      ~FLOATDTYPE.ptp
       ~FLOATDTYPE.put
       ~FLOATDTYPE.ravel
       ~FLOATDTYPE.repeat
@@ -63,6 +60,7 @@ gtf.constants.FLOATDTYPE
       ~FLOATDTYPE.sum
       ~FLOATDTYPE.swapaxes
       ~FLOATDTYPE.take
+      ~FLOATDTYPE.to_device
       ~FLOATDTYPE.tobytes
       ~FLOATDTYPE.tofile
       ~FLOATDTYPE.tolist
@@ -83,13 +81,17 @@ gtf.constants.FLOATDTYPE
       ~FLOATDTYPE.T
       ~FLOATDTYPE.base
       ~FLOATDTYPE.data
+      ~FLOATDTYPE.device
       ~FLOATDTYPE.dtype
       ~FLOATDTYPE.flags
       ~FLOATDTYPE.flat
       ~FLOATDTYPE.imag
+      ~FLOATDTYPE.itemset
       ~FLOATDTYPE.itemsize
       ~FLOATDTYPE.nbytes
       ~FLOATDTYPE.ndim
+      ~FLOATDTYPE.newbyteorder
+      ~FLOATDTYPE.ptp
       ~FLOATDTYPE.real
       ~FLOATDTYPE.shape
       ~FLOATDTYPE.size
