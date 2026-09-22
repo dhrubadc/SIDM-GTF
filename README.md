@@ -1,6 +1,6 @@
-# SIDM Gravothermal Solver
+# SIDM Gravothermal Fluid Solver
 
-A one-dimensional Lagrangian fully-implicit coupled gravo-thermal fluid solver for
+A one-dimensional Lagrangian fully-implicit coupled gravothermal fluid solver for
 self-interacting dark matter halos.
 
 ## Features
@@ -8,14 +8,13 @@ self-interacting dark matter halos.
 - Spherically symmetric halo evolution
 - Hydrostatic equilibrium
 - Conductive heat transport
-- Short- and long-mean-free-path conductivity
 - Fully implicit time integration
 - Coupled hydrostatic and energy residuals
-- Newton iteration
+- Newton iterations
 - Analytical Jacobian
 - NFW initial conditions
 
 ## Installation
 
 ```bash
-pip install sidm-gravothermal
+pip install sidm-gtf
