@@ -1,0 +1,8 @@
+LICENSE
+README.md
+pyproject.toml
+gtf/sidm_gtf.egg-info/PKG-INFO
+gtf/sidm_gtf.egg-info/SOURCES.txt
+gtf/sidm_gtf.egg-info/dependency_links.txt
+gtf/sidm_gtf.egg-info/requires.txt
+gtf/sidm_gtf.egg-info/top_level.txt
