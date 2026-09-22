@@ -5,3 +5,4 @@ build/
 # Python
 __pycache__/
 .ipynbcheckpoints/
+*.egg-info/
