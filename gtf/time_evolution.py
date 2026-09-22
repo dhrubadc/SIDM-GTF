@@ -6,6 +6,7 @@ initial state.
 import numpy as np
 from . import constants
 from . import newton
+from . import output
 
 
 def evolve(state_init, rho_stop, dt_init=0.001):
@@ -24,28 +25,31 @@ def evolve(state_init, rho_stop, dt_init=0.001):
     :param state_init: physical state of the system at t=0
     :type state_init: dict
 
-    :param rho_stop: maximum central density for stoping the evolution 
+    :param rho_stop: maximum central density for stoping the evolution
     :type rho_stop: :obj:`gtf.constants.FLOATDTYPE`
 
     :param dt_init: initial trial dt, defaults to 0.001
     :type dt_init: :obj:`gtf.constants.FLOATDTYPE`
 
-    rho_stop must be greater than the central density at t=0 
+    rho_stop must be greater than the central density at t=0
     for time evolution to proceed.
     """
     if np.exp(state_init["ln_rho"]).max() > rho_stop:
         raise RuntimeError("Increase rho_stop")
 
+    history = []
+
     t = 0
-    
     state_old = state_init
     dt_trial = dt_init
+
+    snapshot_index = 1
 
     while np.exp(state_old["ln_rho"]).max() <= rho_stop:
 
         dt_step = dt_trial
 
-        state_new = newton.iterate(state_old, dt_step)
+        state_new, f_max, n_iter = newton.iterate(state_old, dt_step)
 
         if state_new is None:
             raise RuntimeError("Newton iterations failed")
@@ -70,6 +74,14 @@ def evolve(state_init, rho_stop, dt_init=0.001):
         # Accept the timestep.
         t += dt_step
 
+        output.write_snapshot(
+            t, state_new["r_edge"][1:-1], state_new["u"], snapshot_index
+        )
+
+        history.append([t, dt_step, eps_u, eps_r, eps, f_max, n_iter])
+
+        snapshot_index += 1
+
         dt_trial = dt_step * constants.FLOATDTYPE(0.99) * constants.DT_TOL / eps
 
         print(
@@ -87,3 +99,5 @@ def evolve(state_init, rho_stop, dt_init=0.001):
         )
 
         state_old = state_new
+
+    output.write_stats(history)

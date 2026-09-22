@@ -125,8 +125,10 @@ def iterate(state_old, dt):
     :param dt: timestep
     :type dt: :obj:`gtf.constants.FLOATDTYPE`
 
-    :return: physical state of the system at time t
-    :rtype: dict or None (if a converged or acceptable state is not found)
+    :return: physical state of the system at time t,
+             :math:`{\rm MAX}(|F|)`, number of iterations
+    :rtype: tuple(dict, :obj:`gtf.constants.FLOATDTYPE`, int)
+            or None if a converged or acceptable state is not found
     """
     x_trial = pack_unknowns(state_old["ln_r_edge"], state_old["u"])
 
@@ -136,7 +138,9 @@ def iterate(state_old, dt):
     f_trial = residual.residual(state_old, v_old, u_old, dt)
     j_trial = jacobian.analytic_jacobian(state_old, v_old, dt)
 
-    if np.max(np.abs(f_trial)) < constants.F_TOL:
+    f_max = np.max(np.abs(f_trial))
+
+    if f_max < constants.F_TOL:
 
         print(
             "state is not updated and same as previous time",
@@ -144,7 +148,7 @@ def iterate(state_old, dt):
             np.max(np.abs(f_trial)),
         )
 
-        return state_old
+        return state_old, f_max, 0
 
     for i in range(1, constants.ITER_MAX):
 
@@ -177,19 +181,21 @@ def iterate(state_old, dt):
             alpha,
         )
 
-        if np.max(np.abs(f_new)) < constants.F_TOL:
+        f_max = np.max(np.abs(f_new))
+
+        if f_max < constants.F_TOL:
 
             print("Newton iterations have converged in ", i, "iterations.")
-            return state_new
+            return state_new, f_max, i
 
         if dx_max < constants.X_TOL:
 
             print("Newton has stagnated after ", i, "iterations.")
 
-            if np.max(np.abs(f_new)) < constants.F_ACCEPT:
+            if f_max < constants.F_ACCEPT:
 
                 print("Stagnated but acceptable")
-                return state_new
+                return state_new, f_max, i
 
             print("Stagnated and not acceptable")
             return None
