@@ -4,16 +4,16 @@ A one-dimensional Lagrangian fully-implicit coupled gravothermal fluid solver fo
 self-interacting dark matter halos. The code and associated tests will be 
 described in Dutta Chowdhury and Croton (in prep).
 
-## Features
+## Key Features
 
 - Spherically symmetric halo evolution
-- Hydrostatic equilibrium
+- Hydrostatic equilibrium and energy conservation
 - Conductive heat transport
 - Fully implicit time integration
 - Coupled hydrostatic and energy residuals
-- Newton iterations
 - Analytical Jacobian
-- NFW initial conditions (with optional truncation)
+- Newton iterations for root finding
+- Currently supports NFW initial conditions (with optional truncation)
 
 ## Citation
 
@@ -30,5 +30,31 @@ If you use this software in a publication, please cite:
 
 ## Installation
 
+### Install from PyPI
+
+The latest released version can be installed using `pip`:
+
 ```bash
 pip install sidm-gtf
+```
+
+### Install from GitHub
+
+To obtain the latest released version directly from GitHub:
+
+```bash
+git clone https://github.com/dhrubadc/sidm-gtf.git
+cd sidm-gtf
+pip install .
+```
+
+In both cases, you can then import the package in Python:
+
+```python
+import gtf
+```
+
+
+
+
+
