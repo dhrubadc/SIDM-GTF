@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.abspath("../.."))
 
 #project info
 
-project = 'sidm-gtf'
+project = 'SIDM-GTF'
 copyright = '2026, Dhruba Dutta Chowdhury'
 author = 'Dhruba Dutta Chowdhury'
 release = '0.1.0'

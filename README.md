@@ -24,7 +24,7 @@ If you use this software in a publication or want to refer to it, please cite:
   title = {A Fully-Implicit Coupled Gravothermal Fluid Solver for SIDM Halos},
   author = {Dutta Chowdhury, Dhruba and Croton, Darren J.},
   year = 2026,
-  journal = {In prep},
+  journal = {in prep},
 }
 ```
 
@@ -35,7 +35,7 @@ If you use this software in a publication or want to refer to it, please cite:
 Once released, the package can be installed using `pip`:
 
 ```bash
-pip install sidm-gtf
+pip install SIDM-GTF
 ```
 
 ### Install from GitHub
@@ -43,8 +43,8 @@ pip install sidm-gtf
 To obtain the latest public version directly from GitHub:
 
 ```bash
-git clone https://github.com/dhrubadc/sidm-gtf.git
-cd sidm-gtf
+git clone https://github.com/dhrubadc/SIDM-GTF.git
+cd SIDM-GTF
 pip install .
 ```
 

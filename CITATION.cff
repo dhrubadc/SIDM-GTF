@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 type: software
-title: "sidm-gtf"
+title: "SIDM-GTF"
 abstract: >
   A one-dimensional spherically symmetric fully-implicit 
   coupled gravothermal fluid solver for the evolution 
