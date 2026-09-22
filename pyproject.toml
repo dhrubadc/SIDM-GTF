@@ -25,4 +25,4 @@ test = [
 ]
 
 [tool.setuptools.packages.find]
-where = ["gtf"]
+where = ["."]
