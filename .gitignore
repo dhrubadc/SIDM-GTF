@@ -1,6 +1,7 @@
 # Build artifacts
 dist/
 build/
+_autosummary/
 
 # Python
 __pycache__/
