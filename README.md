@@ -13,7 +13,20 @@ described in Dutta Chowdhury and Croton (in prep).
 - Coupled hydrostatic and energy residuals
 - Newton iterations
 - Analytical Jacobian
-- NFW initial conditions
+- NFW initial conditions (with optional truncation)
+
+## Citation
+
+If you use this software in a publication, please cite:
+
+```bibtex
+@article{duttachowdhury26,
+  title = {A Fully-Implicit Coupled Gravothermal Fluid Solver for SIDM Halos},
+  author = {Dutta Chowdhury, Dhruba and Croton, Darren J.},
+  year = 2026,
+  journal = {In prep},
+}
+```
 
 ## Installation
 
