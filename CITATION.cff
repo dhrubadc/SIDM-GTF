@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "sidm-gtf"
+abstract: >
+  A one-dimensional spherically symmetric fully-implicit 
+  coupled gravothermal fluid solver for the evolution 
+  of self-interacting dark matter halos.
+
+authors:
+  - family-names: Dutta Chowdhury
+    given-names:  Dhruba
+    affiliation: "Swinburne University of Technology"
+  - family-names: Croton
+    given-names: Darren J.
+    affiliation: "Swinburne University of Technology"
+repository-code: "https://github.com/MBradley1985/dhrubadc/sidm-gtf"
+license: MIT
+version: "0.1.0"
+date-released: "2026-09-23"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Dutta Chowdhury
+      given-names: Dhruba
+    - family-names: Croton
+      given-names: Darren J.
+  title: "A fully-implicit coupled gravothermal fluid solver for SIDM halos"
+  journal: "in preparation"
+  year: 2026
