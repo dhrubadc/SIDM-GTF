@@ -24,8 +24,8 @@ def evolve(state_init, dstop, dt_init=0.001):
     :param state_init: physical state of the system at t=0
     :type state_init: dict
 
-    :param dstop: central density for stopping the evolution
-    :type dstop: :obj:`gtf.constants.FLOATDTYPE`
+    :param rho_stop: maximum central density at which to stop the evolution
+    :type rho_stop: :obj:`gtf.constants.FLOATDTYPE`
 
     :param dt_init: initial trial dt, defaults to 0.001
     :type dt_init: :obj:`gtf.constants.FLOATDTYPE`
@@ -35,7 +35,7 @@ def evolve(state_init, dstop, dt_init=0.001):
     state_old = state_init
     dt_trial = dt_init
 
-    while np.exp(state_old["ln_rho"]).max() <= dstop:
+    while np.exp(state_old["ln_rho"]).max() <= rho_stop:
 
         dt_step = dt_trial
 
@@ -61,23 +61,23 @@ def evolve(state_init, dstop, dt_init=0.001):
 
             continue
 
-    # Accept the timestep.
-    t += dt_step
+        # Accept the timestep.
+        t += dt_step
 
-    dt_trial = dt_step * constants.FLOATDTYPE(0.99) * constants.DT_TOL / eps
+        dt_trial = dt_step * constants.FLOATDTYPE(0.99) * constants.DT_TOL / eps
 
-    print(
-        "accept:",
-        "t=",
-        t,
-        "dt =",
-        dt_step,
-        "eps =",
-        eps,
-        "new dt =",
-        dt_trial,
-        "rho_0=",
-        np.exp(state_new["ln_rho"]).max(),
-    )
+        print(
+            "accept:",
+            "t=",
+            t,
+            "dt =",
+            dt_step,
+            "eps =",
+            eps,
+            "new dt =",
+            dt_trial,
+            "rho_0=",
+            np.exp(state_new["ln_rho"]).max(),
+        )
 
-    state_old = state_new
+        state_old = state_new
