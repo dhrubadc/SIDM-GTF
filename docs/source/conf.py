@@ -14,10 +14,10 @@ sys.path.insert(0, os.path.abspath("../.."))
 
 #project info
 
-project = 'GTF'
+project = 'sidm-gtf'
 copyright = '2026, Dhruba Dutta Chowdhury'
 author = 'Dhruba Dutta Chowdhury'
-release = '0.0'
+release = '0.1.0'
 
 # -- General configuration ---------------------------------------------------
 
