@@ -33,8 +33,11 @@ def evolve(state_init, rho_stop, dt_init=0.001):
     rho_stop must be greater than the central density at t=0 
     for time evolution to proceed.
     """
-    t = 0
+    if np.exp(state_init["ln_rho"]).max() > rho_stop:
+        raise RuntimeError("Increase rho_stop")
 
+    t = 0
+    
     state_old = state_init
     dt_trial = dt_init
 
