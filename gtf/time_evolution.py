@@ -8,7 +8,7 @@ from . import constants
 from . import newton
 
 
-def evolve(state_init, dstop, dt_init=0.001):
+def evolve(state_init, rho_stop, dt_init=0.001):
     r"""Evolve the initial state of the system
     forward in time.
 
