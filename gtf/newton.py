@@ -126,9 +126,9 @@ def iterate(state_old, dt):
     :type dt: :obj:`gtf.constants.FLOATDTYPE`
 
     :return: physical state of the system at time t,
-             :math:`{\rm MAX}(|F|)`, number of iterations
+             final :math:`{\rm MAX}(|F|)`, total number of iterations
     :rtype: tuple(dict, :obj:`gtf.constants.FLOATDTYPE`, int)
-            or None if a converged or acceptable state is not found
+            or None if a suitably converged state is not found
     """
     x_trial = pack_unknowns(state_old["ln_r_edge"], state_old["u"])
 
