@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sidm-gtf"
+version = "0.1.0"
+description = "A fully-implicit coupled gravothermal fluid solver for self-interacting dark matter halos."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+authors = [
+	{name = "Dhruba Dutta Chowdhury"}
+]
+
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7"
+]
+
+[tool.setuptools.packages.find]
+where = ["gtf"]

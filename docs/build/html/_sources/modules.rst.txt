@@ -6,16 +6,16 @@ API Reference
    :recursive:
    :template: custom-module-template.rst
 
-   src.constants
-   src.geometry
-   src.conductivity
-   src.luminosity
-   src.state
-   src.residual
-   src.jacobian
-   src.newton
-   src.initial_conditions
-   src.energy
+   gtf.constants
+   gtf.geometry
+   gtf.conductivity
+   gtf.luminosity
+   gtf.state
+   gtf.residual
+   gtf.jacobian
+   gtf.newton
+   gtf.initial_conditions
+   gtf.energy
    
    
    

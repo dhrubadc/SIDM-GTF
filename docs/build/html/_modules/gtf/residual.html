@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gtf.residual &mdash; GTF 0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=837179f8"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GTF
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/gtf.constants.html">gtf.constants</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.FLOATDTYPE.html">gtf.constants.FLOATDTYPE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.FLOATDTYPE.html#gtf.constants.FLOATDTYPE"><code class="docutils literal notranslate"><span class="pre">FLOATDTYPE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.A.html">gtf.constants.A</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.A.html#gtf.constants.A"><code class="docutils literal notranslate"><span class="pre">A</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.B.html">gtf.constants.B</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.B.html#gtf.constants.B"><code class="docutils literal notranslate"><span class="pre">B</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.SIGMA_OVER_M.html">gtf.constants.SIGMA_OVER_M</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.SIGMA_OVER_M.html#gtf.constants.SIGMA_OVER_M"><code class="docutils literal notranslate"><span class="pre">SIGMA_OVER_M</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.BETA.html">gtf.constants.BETA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.BETA.html#gtf.constants.BETA"><code class="docutils literal notranslate"><span class="pre">BETA</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.ALPHA.html">gtf.constants.ALPHA</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.ALPHA.html#gtf.constants.ALPHA"><code class="docutils literal notranslate"><span class="pre">ALPHA</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.DM.html">gtf.constants.DM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.DM.html#gtf.constants.DM"><code class="docutils literal notranslate"><span class="pre">DM</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.M_EDGE.html">gtf.constants.M_EDGE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.M_EDGE.html#gtf.constants.M_EDGE"><code class="docutils literal notranslate"><span class="pre">M_EDGE</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.R_OUTER.html">gtf.constants.R_OUTER</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.R_OUTER.html#gtf.constants.R_OUTER"><code class="docutils literal notranslate"><span class="pre">R_OUTER</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.N_SHELL.html">gtf.constants.N_SHELL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.N_SHELL.html#gtf.constants.N_SHELL"><code class="docutils literal notranslate"><span class="pre">N_SHELL</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.F_TOL.html">gtf.constants.F_TOL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.F_TOL.html#gtf.constants.F_TOL"><code class="docutils literal notranslate"><span class="pre">F_TOL</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.ITER_MAX.html">gtf.constants.ITER_MAX</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.ITER_MAX.html#gtf.constants.ITER_MAX"><code class="docutils literal notranslate"><span class="pre">ITER_MAX</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.X_TOL.html">gtf.constants.X_TOL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.X_TOL.html#gtf.constants.X_TOL"><code class="docutils literal notranslate"><span class="pre">X_TOL</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.F_ACCEPT.html">gtf.constants.F_ACCEPT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.F_ACCEPT.html#gtf.constants.F_ACCEPT"><code class="docutils literal notranslate"><span class="pre">F_ACCEPT</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.constants.DT_TOL.html">gtf.constants.DT_TOL</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.constants.DT_TOL.html#gtf.constants.DT_TOL"><code class="docutils literal notranslate"><span class="pre">DT_TOL</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/gtf.geometry.html">gtf.geometry</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.geometry.log_cell_centers.html">gtf.geometry.log_cell_centers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.geometry.log_cell_centers.html#gtf.geometry.log_cell_centers"><code class="docutils literal notranslate"><span class="pre">log_cell_centers()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.geometry.log_cell_volumes.html">gtf.geometry.log_cell_volumes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.geometry.log_cell_volumes.html#gtf.geometry.log_cell_volumes"><code class="docutils literal notranslate"><span class="pre">log_cell_volumes()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/gtf.conductivity.html">gtf.conductivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.conductivity.lmfp_conductivity.html">gtf.conductivity.lmfp_conductivity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.conductivity.lmfp_conductivity.html#gtf.conductivity.lmfp_conductivity"><code class="docutils literal notranslate"><span class="pre">lmfp_conductivity()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.conductivity.smfp_conductivity.html">gtf.conductivity.smfp_conductivity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.conductivity.smfp_conductivity.html#gtf.conductivity.smfp_conductivity"><code class="docutils literal notranslate"><span class="pre">smfp_conductivity()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.conductivity.total_conductivity.html">gtf.conductivity.total_conductivity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.conductivity.total_conductivity.html#gtf.conductivity.total_conductivity"><code class="docutils literal notranslate"><span class="pre">total_conductivity()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/gtf.luminosity.html">gtf.luminosity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.luminosity.luminosity.html">gtf.luminosity.luminosity</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.luminosity.luminosity.html#gtf.luminosity.luminosity"><code class="docutils literal notranslate"><span class="pre">luminosity()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/gtf.state.html">gtf.state</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.state.state_from_unknowns.html">gtf.state.state_from_unknowns</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.state.state_from_unknowns.html#gtf.state.state_from_unknowns"><code class="docutils literal notranslate"><span class="pre">state_from_unknowns()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/gtf.residual.html">gtf.residual</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.residual.energy_residual.html">gtf.residual.energy_residual</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.residual.energy_residual.html#gtf.residual.energy_residual"><code class="docutils literal notranslate"><span class="pre">energy_residual()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.residual.energy_terms.html">gtf.residual.energy_terms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.residual.energy_terms.html#gtf.residual.energy_terms"><code class="docutils literal notranslate"><span class="pre">energy_terms()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.residual.hydrostatic_residual.html">gtf.residual.hydrostatic_residual</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.residual.hydrostatic_residual.html#gtf.residual.hydrostatic_residual"><code class="docutils literal notranslate"><span class="pre">hydrostatic_residual()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.residual.hydrostatic_terms.html">gtf.residual.hydrostatic_terms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.residual.hydrostatic_terms.html#gtf.residual.hydrostatic_terms"><code class="docutils literal notranslate"><span class="pre">hydrostatic_terms()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.residual.residual.html">gtf.residual.residual</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.residual.residual.html#gtf.residual.residual"><code class="docutils literal notranslate"><span class="pre">residual()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/gtf.jacobian.html">gtf.jacobian</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.analytic_jacobian.html">gtf.jacobian.analytic_jacobian</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.analytic_jacobian.html#gtf.jacobian.analytic_jacobian"><code class="docutils literal notranslate"><span class="pre">analytic_jacobian()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.delta.html">gtf.jacobian.delta</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.delta.html#gtf.jacobian.delta"><code class="docutils literal notranslate"><span class="pre">delta()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dfenergy_dln_r_edge.html">gtf.jacobian.dfenergy_dln_r_edge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dfenergy_dln_r_edge.html#gtf.jacobian.dfenergy_dln_r_edge"><code class="docutils literal notranslate"><span class="pre">dfenergy_dln_r_edge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dfenergy_du.html">gtf.jacobian.dfenergy_du</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dfenergy_du.html#gtf.jacobian.dfenergy_du"><code class="docutils literal notranslate"><span class="pre">dfenergy_du()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dfhydro_dln_redge.html">gtf.jacobian.dfhydro_dln_redge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dfhydro_dln_redge.html#gtf.jacobian.dfhydro_dln_redge"><code class="docutils literal notranslate"><span class="pre">dfhydro_dln_redge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dfhydro_du.html">gtf.jacobian.dfhydro_du</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dfhydro_du.html#gtf.jacobian.dfhydro_du"><code class="docutils literal notranslate"><span class="pre">dfhydro_du()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.diff_quant.html">gtf.jacobian.diff_quant</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.diff_quant.html#gtf.jacobian.diff_quant"><code class="docutils literal notranslate"><span class="pre">diff_quant()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dkappa_dln_redge.html">gtf.jacobian.dkappa_dln_redge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dkappa_dln_redge.html#gtf.jacobian.dkappa_dln_redge"><code class="docutils literal notranslate"><span class="pre">dkappa_dln_redge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dkappa_du.html">gtf.jacobian.dkappa_du</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dkappa_du.html#gtf.jacobian.dkappa_du"><code class="docutils literal notranslate"><span class="pre">dkappa_du()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dl_dln_redge.html">gtf.jacobian.dl_dln_redge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dl_dln_redge.html#gtf.jacobian.dl_dln_redge"><code class="docutils literal notranslate"><span class="pre">dl_dln_redge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dl_du.html">gtf.jacobian.dl_du</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dl_du.html#gtf.jacobian.dl_du"><code class="docutils literal notranslate"><span class="pre">dl_du()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dln_r_dln_redge.html">gtf.jacobian.dln_r_dln_redge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dln_r_dln_redge.html#gtf.jacobian.dln_r_dln_redge"><code class="docutils literal notranslate"><span class="pre">dln_r_dln_redge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dln_u_du.html">gtf.jacobian.dln_u_du</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dln_u_du.html#gtf.jacobian.dln_u_du"><code class="docutils literal notranslate"><span class="pre">dln_u_du()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dln_v_dln_redge.html">gtf.jacobian.dln_v_dln_redge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dln_v_dln_redge.html#gtf.jacobian.dln_v_dln_redge"><code class="docutils literal notranslate"><span class="pre">dln_v_dln_redge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dr_dln_redge.html">gtf.jacobian.dr_dln_redge</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.dr_dln_redge.html#gtf.jacobian.dr_dln_redge"><code class="docutils literal notranslate"><span class="pre">dr_dln_redge()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.gravity_term.html">gtf.jacobian.gravity_term</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.gravity_term.html#gtf.jacobian.gravity_term"><code class="docutils literal notranslate"><span class="pre">gravity_term()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.jacobian_energy_block.html">gtf.jacobian.jacobian_energy_block</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.jacobian_energy_block.html#gtf.jacobian.jacobian_energy_block"><code class="docutils literal notranslate"><span class="pre">jacobian_energy_block()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.jacobian_hydro_block.html">gtf.jacobian.jacobian_hydro_block</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.jacobian_hydro_block.html#gtf.jacobian.jacobian_hydro_block"><code class="docutils literal notranslate"><span class="pre">jacobian_hydro_block()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.kappa_derivative_common.html">gtf.jacobian.kappa_derivative_common</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.kappa_derivative_common.html#gtf.jacobian.kappa_derivative_common"><code class="docutils literal notranslate"><span class="pre">kappa_derivative_common()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.jacobian.volume_ratio.html">gtf.jacobian.volume_ratio</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.jacobian.volume_ratio.html#gtf.jacobian.volume_ratio"><code class="docutils literal notranslate"><span class="pre">volume_ratio()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/gtf.newton.html">gtf.newton</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.newton.increment_newton_variables.html">gtf.newton.increment_newton_variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.newton.increment_newton_variables.html#gtf.newton.increment_newton_variables"><code class="docutils literal notranslate"><span class="pre">increment_newton_variables()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.newton.iterate.html">gtf.newton.iterate</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.newton.iterate.html#gtf.newton.iterate"><code class="docutils literal notranslate"><span class="pre">iterate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.newton.pack_unknowns.html">gtf.newton.pack_unknowns</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.newton.pack_unknowns.html#gtf.newton.pack_unknowns"><code class="docutils literal notranslate"><span class="pre">pack_unknowns()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.newton.unpack_unknowns.html">gtf.newton.unpack_unknowns</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.newton.unpack_unknowns.html#gtf.newton.unpack_unknowns"><code class="docutils literal notranslate"><span class="pre">unpack_unknowns()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.html">gtf.initial_conditions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.cell_mass.html">gtf.initial_conditions.cell_mass</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.cell_mass.html#gtf.initial_conditions.cell_mass"><code class="docutils literal notranslate"><span class="pre">cell_mass()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.enclosed_mass.html">gtf.initial_conditions.enclosed_mass</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.enclosed_mass.html#gtf.initial_conditions.enclosed_mass"><code class="docutils literal notranslate"><span class="pre">enclosed_mass()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.hydrostatic_u_from_rho.html">gtf.initial_conditions.hydrostatic_u_from_rho</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.hydrostatic_u_from_rho.html#gtf.initial_conditions.hydrostatic_u_from_rho"><code class="docutils literal notranslate"><span class="pre">hydrostatic_u_from_rho()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.make_initial_grid.html">gtf.initial_conditions.make_initial_grid</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.make_initial_grid.html#gtf.initial_conditions.make_initial_grid"><code class="docutils literal notranslate"><span class="pre">make_initial_grid()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.set_up_initial_conditions.html">gtf.initial_conditions.set_up_initial_conditions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.set_up_initial_conditions.html#gtf.initial_conditions.set_up_initial_conditions"><code class="docutils literal notranslate"><span class="pre">set_up_initial_conditions()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.truncated_nfw.html">gtf.initial_conditions.truncated_nfw</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.initial_conditions.truncated_nfw.html#gtf.initial_conditions.truncated_nfw"><code class="docutils literal notranslate"><span class="pre">truncated_nfw()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../_autosummary/gtf.energy.html">gtf.energy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.energy.total_energy.html">gtf.energy.total_energy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.energy.total_energy.html#gtf.energy.total_energy"><code class="docutils literal notranslate"><span class="pre">total_energy()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.energy.total_gravitational_energy.html">gtf.energy.total_gravitational_energy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.energy.total_gravitational_energy.html#gtf.energy.total_gravitational_energy"><code class="docutils literal notranslate"><span class="pre">total_gravitational_energy()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../_autosummary/gtf.energy.total_kinetic_energy.html">gtf.energy.total_kinetic_energy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../_autosummary/gtf.energy.total_kinetic_energy.html#gtf.energy.total_kinetic_energy"><code class="docutils literal notranslate"><span class="pre">total_kinetic_energy()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GTF</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">gtf.residual</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for gtf.residual</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Calculate the fully implicit coupled hydrostatic and energy residuals.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+
+
+<div class="viewcode-block" id="hydrostatic_terms">
+<a class="viewcode-back" href="../../_autosummary/gtf.residual.hydrostatic_terms.html#gtf.residual.hydrostatic_terms">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">hydrostatic_terms</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate individual terms of each</span>
+<span class="sd">    hydrostatic residual.</span>
+
+<span class="sd">    :param state: current physical state of the system</span>
+<span class="sd">    :type state: dict</span>
+
+<span class="sd">    :return: individual terms of each hydrostatic residual</span>
+<span class="sd">    :rtype: Tuple[:obj:`src.constants.N_SHELL` -1,</span>
+<span class="sd">            :obj:`src.constants.N_SHELL` -1,</span>
+<span class="sd">            :obj:`src.constants.N_SHELL` -1]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># pylint: disable=unsubscriptable-object</span>
+
+    <span class="n">dln_r</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;ln_r&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;ln_r&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">dln_rho</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;ln_rho&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;ln_rho&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">dln_u</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;ln_u&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;ln_u&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">u_face</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">FLOATDTYPE</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">rho_slope</span> <span class="o">=</span> <span class="n">dln_rho</span> <span class="o">/</span> <span class="n">dln_r</span>
+    <span class="n">u_slope</span> <span class="o">=</span> <span class="n">dln_u</span> <span class="o">/</span> <span class="n">dln_r</span>
+
+    <span class="n">g_term</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">constants</span><span class="o">.</span><span class="n">FLOATDTYPE</span><span class="p">(</span><span class="mf">3.0</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+        <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">M_EDGE</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="o">/</span> <span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;r_edge&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">u_face</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">rho_slope</span><span class="p">,</span> <span class="n">u_slope</span><span class="p">,</span> <span class="n">g_term</span></div>
+
+
+
+<div class="viewcode-block" id="hydrostatic_residual">
+<a class="viewcode-back" href="../../_autosummary/gtf.residual.hydrostatic_residual.html#gtf.residual.hydrostatic_residual">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">hydrostatic_residual</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the raw hydrostatic residuals defined at each interior edge.</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">       F_{\rm H} &amp;= \frac{{\rm d} \ln \rho}{{\rm d} \ln r} +</span>
+<span class="sd">       \frac{{\rm d} \ln u}{{\rm d} \ln r}</span>
+<span class="sd">       + \frac{3}{2} \frac{m_{\rm edge}[1:-1]}{r_{\rm edge}[1:-1]\ u_{\rm face}}</span>
+
+<span class="sd">       u_{\rm face} &amp;= \frac{1}{2} (u[:-1] + u[1:])</span>
+
+<span class="sd">    Here :math:`m_{\rm edge}` is :obj:`src.constants.M_EDGE`.</span>
+
+<span class="sd">    :param state: current physical state of the system</span>
+<span class="sd">    :type state: dict</span>
+
+<span class="sd">    :return: raw hydrostatic residuals</span>
+<span class="sd">    :type: 1D array of shape :obj:`src.constants.N_SHELL-1`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rho_slope</span><span class="p">,</span> <span class="n">u_slope</span><span class="p">,</span> <span class="n">g_term</span> <span class="o">=</span> <span class="n">hydrostatic_terms</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="n">fhydro</span> <span class="o">=</span> <span class="n">rho_slope</span> <span class="o">+</span> <span class="n">u_slope</span> <span class="o">+</span> <span class="n">g_term</span>
+
+    <span class="k">return</span> <span class="n">fhydro</span></div>
+
+
+
+<div class="viewcode-block" id="energy_terms">
+<a class="viewcode-back" href="../../_autosummary/gtf.residual.energy_terms.html#gtf.residual.energy_terms">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">energy_terms</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">v_old</span><span class="p">,</span> <span class="n">u_old</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate individual terms of each</span>
+<span class="sd">    energy residual.</span>
+
+<span class="sd">    :param state: current physical state of the system</span>
+<span class="sd">    :type state: dict</span>
+
+<span class="sd">    :param v_old: cell volumes at time t-dt</span>
+<span class="sd">    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`</span>
+
+<span class="sd">    :param u_old: cell specific energies at time t-dt</span>
+<span class="sd">    :type u_old: 1D array of shape :obj:`src.constants.N_SHELL`</span>
+
+<span class="sd">    :param dt: timestep</span>
+<span class="sd">    :type dt: float</span>
+
+<span class="sd">    :return: individual terms of each energy residual</span>
+<span class="sd">    :rtype: Tuple[:obj:`src.constants.N_SHELL`,</span>
+<span class="sd">            :obj:`src.constants.N_SHELL`,</span>
+<span class="sd">            :obj:`src.constants.N_SHELL`]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">energy_term</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">u_old</span>
+    <span class="n">compression_term</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">constants</span><span class="o">.</span><span class="n">FLOATDTYPE</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span>
+        <span class="o">*</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;u&quot;</span><span class="p">]</span>
+        <span class="o">*</span> <span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">FLOATDTYPE</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">-</span> <span class="n">v_old</span> <span class="o">/</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">])</span>
+    <span class="p">)</span>
+    <span class="n">conduction_term</span> <span class="o">=</span> <span class="n">dt</span> <span class="o">*</span> <span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;l&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;l&quot;</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">constants</span><span class="o">.</span><span class="n">DM</span>
+
+    <span class="k">return</span> <span class="n">energy_term</span><span class="p">,</span> <span class="n">compression_term</span><span class="p">,</span> <span class="n">conduction_term</span></div>
+
+
+
+<div class="viewcode-block" id="energy_residual">
+<a class="viewcode-back" href="../../_autosummary/gtf.residual.energy_residual.html#gtf.residual.energy_residual">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">energy_residual</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">v_old</span><span class="p">,</span> <span class="n">u_old</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the raw energy residuals defined at each cell midpoint.</span>
+
+<span class="sd">    .. math ::</span>
+
+<span class="sd">       F_{\rm E} = u - u_{\rm old}</span>
+<span class="sd">       + {\rm d}t\ \frac{{\rm d} l}{{\rm d} m} +</span>
+<span class="sd">       \frac{2}{3}\ u\ (1 - \frac{v_{\rm old}}{v})</span>
+
+<span class="sd">    Here dm is :obj:`src.constants.DM`.</span>
+
+<span class="sd">    :param state: current physical state of the system</span>
+<span class="sd">    :type state: dict</span>
+
+<span class="sd">    :param v_old: cell volumes at time t-dt</span>
+<span class="sd">    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`</span>
+
+<span class="sd">    :param u_old: cell specific energies at time t-dt</span>
+<span class="sd">    :type u_old: 1D array of shape :obj:`src.constants.N_SHELL`</span>
+
+<span class="sd">    :param dt: timestep</span>
+<span class="sd">    :type dt: float</span>
+
+<span class="sd">    :return: raw energy residuals</span>
+<span class="sd">    :rtype: 1D array of shape :obj:`src.constants.N_SHELL`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">energy_term</span><span class="p">,</span> <span class="n">compression_term</span><span class="p">,</span> <span class="n">conduction_term</span> <span class="o">=</span> <span class="n">energy_terms</span><span class="p">(</span>
+        <span class="n">state</span><span class="p">,</span> <span class="n">v_old</span><span class="p">,</span> <span class="n">u_old</span><span class="p">,</span> <span class="n">dt</span>
+    <span class="p">)</span>
+
+    <span class="n">fenergy</span> <span class="o">=</span> <span class="n">energy_term</span> <span class="o">+</span> <span class="n">compression_term</span> <span class="o">+</span> <span class="n">conduction_term</span>
+
+    <span class="k">return</span> <span class="n">fenergy</span></div>
+
+
+
+<div class="viewcode-block" id="residual">
+<a class="viewcode-back" href="../../_autosummary/gtf.residual.residual.html#gtf.residual.residual">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">residual</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">v_old</span><span class="p">,</span> <span class="n">u_old</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Combine the hyrostatic and energy residuals.</span>
+
+<span class="sd">    :param state: current physical state of the system</span>
+<span class="sd">    :type state: dict</span>
+
+<span class="sd">    :param v_old: cell volumes at time t-dt</span>
+<span class="sd">    :type v_old: 1D array of shape :obj:`src.constants.N_SHELL`</span>
+
+<span class="sd">    :param u_old: cell specific energies at time t-dt</span>
+<span class="sd">    :type u_old: 1D array of shape :obj:`src.constants.N_SHELL`</span>
+
+<span class="sd">    :param dt: timestep</span>
+<span class="sd">    :type dt: float</span>
+
+<span class="sd">    :return: combined raw residual</span>
+<span class="sd">    :rtype: 1D array of shape 2 X :obj:`src.constants.N_SHELL` - 1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fhydro</span> <span class="o">=</span> <span class="n">hydrostatic_residual</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">fenergy</span> <span class="o">=</span> <span class="n">energy_residual</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">v_old</span><span class="p">,</span> <span class="n">u_old</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">fhydro</span><span class="p">,</span> <span class="n">fenergy</span><span class="p">))</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Dhruba Dutta Chowdhury.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
