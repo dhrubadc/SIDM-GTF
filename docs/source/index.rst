@@ -1,9 +1,9 @@
-.. GTF documentation master file, created by
+.. sidm-gtf documentation master file, created by
    sphinx-quickstart on Sun Sep 20 01:18:34 2026.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to GTF's documentation!
+Welcome to the documentation for sidm-gtf package!
 ===============================
 
 .. toctree::
