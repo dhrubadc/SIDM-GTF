@@ -17,7 +17,7 @@ described in Dutta Chowdhury and Croton (in prep).
 
 ## Citation
 
-If you use this software in a publication, please cite:
+If you use this software in a publication or want to refer to it, please cite:
 
 ```bibtex
 @article{duttachowdhury26,
