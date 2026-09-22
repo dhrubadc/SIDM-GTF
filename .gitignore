@@ -5,5 +5,5 @@ _autosummary/
 
 # Python
 __pycache__/
-.ipynbcheckpoints/
+.ipynb_checkpoints/
 *.egg-info/
