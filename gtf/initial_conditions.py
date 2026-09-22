@@ -178,7 +178,7 @@ def set_up_initial_conditions(r_first, r_t=np.inf, n=1.0):
     :type n: :obj:`gtf.constants.FLOATDTYPE`
 
     :return: log of initial cell edges and specific energy at cell midpoints
-    :rtype: Tuple[np.ndarray, np.ndarray]
+    :rtype: tuple[np.ndarray, np.ndarray]
 
     Also sets :obj:`gtf.constants.DM` and :obj:`gtf.constants.M_EDGE`.
     """
