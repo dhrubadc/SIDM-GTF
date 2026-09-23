@@ -129,4 +129,4 @@ execution_time = end_time - start_time
 print(execution_time)
 ```
 
-Example config files and a run script, which takes the conig file as an argument, are provided in the examples folder.
+Example config files and a run script, which takes the config file as an argument, are provided in the examples folder.
