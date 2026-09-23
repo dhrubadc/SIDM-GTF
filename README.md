@@ -48,21 +48,20 @@ cd SIDM-GTF
 pip install .
 ```
 
-In both cases, you can then import the package in Python:
-
-```python
-import gtf
-```
-
 ## Walkthrough
 
 First we import the required modules.
 
 ```python
+import time
+import shutil
+import os
+
 from gtf import constants
 from gtf import initial_conditions
 from gtf import state
 from gtf import time_evolution
+
 import config
 ```
 where config.py is in the working directory and contains all essential parameters for the code to run.
