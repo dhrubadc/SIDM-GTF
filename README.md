@@ -64,9 +64,10 @@ from gtf import time_evolution
 
 import config
 ```
-where config.py is in the working directory and contains all essential parameters for the code to run.
+Here, config.py is in the working directory and contains all essential parameters for the code to run.
 
-We then set the values for all the runtime parameters:
+
+We then set the values for all the runtime parameters.
 
 ```python
 r_first = constants.FLOATDTYPE(config.R_FIRST)
@@ -99,21 +100,22 @@ os.makedirs(out_direc)
 constants.OUT_DIREC = out_direc 
 ```
 
-Next we set up the initial NFW halo:
+Next, we set up the initial NFW halo.
 
 ```python
 ln_r_edge, u = initial_conditions.set_up_initial_conditions(r_first)
 ```
-
 A truncated NFW can also be set up by providing additional arguments r_t and n.
 
-The initial state of the system is now created with all relevant state variables:
+
+The initial state of the system is now created with all relevant state variables.
 
 ```python
 state_init = state.state_from_unknowns(ln_r_edge, u)
 ```
 
-Finally, the halo is evolved until the central density is greater than constants.RHO_STOP
+
+Finally, the halo is evolved until the central density is greater than constants.RHO_STOP.
 
 ```python
 start_time = time.perf_counter()
@@ -126,3 +128,5 @@ execution_time = end_time - start_time
 
 print(execution_time)
 ```
+
+Example config files and a run script, which takes the conig file as an argument, are provided in the examples folder.
