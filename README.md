@@ -144,3 +144,8 @@ Example config files and a run script, which takes the config file as an argumen
 Results of three different runs are shown in this figure, 
 which tests for convergence in the central density evolution with respect to time-stepping.
 ![dt_test](examples/plots/convergence_test.png).
+
+More results will be updated.
+
+## Acknowledgements
+ChatGPT (Open AI) has been used during development for code-error fixes, consistency checks, and some idea brainstorming, such as convergence criteria for the Newton iterations, line search to keep the Newton variables physical, and timestep controller. All AI-made suggestions were extensively reviewed and verified by the authors before their inclusion in the code-base, and therefore, ownership and accountability for the same lies with the authors.
