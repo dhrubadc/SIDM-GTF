@@ -1,8 +1,17 @@
 # SIDM Gravothermal Fluid Solver
 
 A one-dimensional Lagrangian fully-implicit coupled gravothermal fluid solver for
-self-interacting dark matter halos. The code and associated tests will be 
+self-interacting dark matter halos. The code and associated convergence tests will be 
 described in Dutta Chowdhury and Croton (in prep).
+
+All quantities are in dimensionless units following standard gravothermal evolution work
+such as Balberg 2002, Nishikawa 2020, etc.
+
+However, contrary to standard work where the energy equation is first solved, 
+holding the geometry fixed, and the system is then allowed to 
+adiabatically re-adjust to hydrostatic equilibrium, we simultaneously solve the 
+coupled energy conservation and hydrostatic equlibrium equations uisng a
+fully-implicit scheme.
 
 ## Key Features
 
