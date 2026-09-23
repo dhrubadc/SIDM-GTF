@@ -10,3 +10,7 @@ __pycache__/
 
 #run data
 data/
+
+#other
+Makefile
+make.bat
