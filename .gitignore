@@ -7,3 +7,6 @@ _autosummary/
 __pycache__/
 .ipynb_checkpoints/
 *.egg-info/
+
+#run data
+data/

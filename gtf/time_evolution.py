@@ -16,7 +16,7 @@ def evolve(state_init, dt_init=0.001):
     Evolution stops when central density reaches
     :obj:`gtf.constants.RHO_STOP`
 
-    Initial central density must be less than 
+    Initial central density must be less than
     :obj:`gtf.constants.RHO_STOP` for evolution to proceed.
 
     Time stepping is controlled by the condtion
@@ -34,6 +34,9 @@ def evolve(state_init, dt_init=0.001):
     :param dt_init: initial trial dt, defaults to 0.001
     :type dt_init: :obj:`gtf.constants.FLOATDTYPE`
     """
+
+    # pylint: disable=too-many-locals
+
     if np.exp(state_init["ln_rho"]).max() > constants.RHO_STOP:
         raise RuntimeError("Increase RHO_STOP")
 
@@ -42,6 +45,8 @@ def evolve(state_init, dt_init=0.001):
     t = 0
     state_old = state_init
     dt_trial = dt_init
+
+    rho_c_last_output = np.exp(state_init["ln_rho"]).max()
 
     snapshot_index = 1
 
@@ -65,7 +70,7 @@ def evolve(state_init, dt_init=0.001):
         if eps > constants.DT_TOL:
 
             # reject this timestep
-            dt_trial = dt_step * constants.FLOATDTYPE(0.99) * constants.DT_TOL / eps
+            dt_trial = dt_step * constants.FLOATDTYPE(0.9) * constants.DT_TOL / eps
 
             print("reject:", "dt =", dt_step, "eps =", eps, "new dt =", dt_trial)
 
@@ -74,15 +79,28 @@ def evolve(state_init, dt_init=0.001):
         # Accept the timestep.
         t += dt_step
 
-        write_data = np.column_stack((t, state_new["r_edge"][1:-1], state_new["u"]))
+        if (
+            np.exp(state_new["ln_rho"]).max()
+            >= rho_c_last_output * constants.OUTPUT_FACTOR
+            or np.exp(state_new["ln_rho"]).max()
+            <= rho_c_last_output / constants.OUTPUT_FACTOR
+        ):
 
-        output.write_snapshot(write_data, snapshot_index)
+            write_data = np.concatenate(
+                ([t], state_new["r_edge"][1:-1], state_new["u"])
+            )
 
-        history.append([t, dt_step, eps_u, eps_r, eps, f_max, n_iter, np.exp(state_new["ln_rho"]).max()])
+            output.write_snapshot(write_data, snapshot_index)
 
-        snapshot_index += 1
+            rho_c_last_output = np.exp(state_new["ln_rho"]).max()
 
-        dt_trial = dt_step * constants.FLOATDTYPE(0.99) * constants.DT_TOL / eps
+            snapshot_index += 1
+
+        history.append(
+            [t, dt_step, eps, f_max, n_iter, np.exp(state_new["ln_rho"]).max()]
+        )
+
+        dt_trial = dt_step * constants.FLOATDTYPE(0.9) * constants.DT_TOL / eps
 
         print(
             "accept:",

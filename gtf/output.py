@@ -1,5 +1,4 @@
-r"""Output a state and overall stats
-"""
+r"""Output a state and overall stats"""
 
 import numpy as np
 from . import constants

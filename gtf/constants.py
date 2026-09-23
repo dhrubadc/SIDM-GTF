@@ -101,3 +101,8 @@ OUT_DIREC = None
 r"""
 Output directory for storing the data files.
 """
+
+OUTPUT_FACTOR = None
+r"""
+Controls frequency of outputs
+"""
