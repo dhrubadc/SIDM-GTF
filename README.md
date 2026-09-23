@@ -1,5 +1,8 @@
 # SIDM Gravothermal Fluid Solver
 
+[![Documentation Status](https://app.readthedocs.org/projects/sidm-gtf/badge/?version=latest)](https://sidm-gtf.readthedocs.io/en/latest/)
+
+
 A one-dimensional Lagrangian fully-implicit coupled gravothermal fluid solver for
 self-interacting dark matter halos. The code and associated convergence tests will be 
 described in Dutta Chowdhury and Croton (in prep).
