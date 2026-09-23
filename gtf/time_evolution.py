@@ -9,7 +9,7 @@ from . import newton
 from . import output
 
 
-def evolve(state_init, rho_stop, dt_init=0.001):
+def evolve(state_init, dt_init=0.001):
     r"""Evolve the initial state of the system
     forward in time.
 
@@ -25,17 +25,11 @@ def evolve(state_init, rho_stop, dt_init=0.001):
     :param state_init: physical state of the system at t=0
     :type state_init: dict
 
-    :param rho_stop: maximum central density for stoping the evolution
-    :type rho_stop: :obj:`gtf.constants.FLOATDTYPE`
-
     :param dt_init: initial trial dt, defaults to 0.001
     :type dt_init: :obj:`gtf.constants.FLOATDTYPE`
-
-    rho_stop must be greater than the central density at t=0
-    for time evolution to proceed.
     """
-    if np.exp(state_init["ln_rho"]).max() > rho_stop:
-        raise RuntimeError("Increase rho_stop")
+    if np.exp(state_init["ln_rho"]).max() > constants.RHO_STOP:
+        raise RuntimeError("Increase RHO_STOP")
 
     history = []
 
@@ -45,7 +39,7 @@ def evolve(state_init, rho_stop, dt_init=0.001):
 
     snapshot_index = 1
 
-    while np.exp(state_old["ln_rho"]).max() <= rho_stop:
+    while np.exp(state_old["ln_rho"]).max() <= constants.RHO_STOP:
 
         dt_step = dt_trial
 
@@ -74,11 +68,22 @@ def evolve(state_init, rho_stop, dt_init=0.001):
         # Accept the timestep.
         t += dt_step
 
-        output.write_snapshot(
-            t, state_new["r_edge"][1:-1], state_new["u"], snapshot_index
-        )
+        write_data = np.column_stack((t, state_new["r_edge"][1:-1], state_new["u"]))
 
-        history.append([t, dt_step, eps_u, eps_r, eps, f_max, n_iter])
+        output.write_snapshot(write_data, snapshot_index)
+
+        history.append(
+            [
+                t,
+                dt_step,
+                eps_u,
+                eps_r,
+                eps,
+                f_max,
+                n_iter,
+                np.exp(state_new["ln_rho"]).max(),
+            ]
+        )
 
         snapshot_index += 1
 
@@ -100,4 +105,4 @@ def evolve(state_init, rho_stop, dt_init=0.001):
 
         state_old = state_new
 
-    output.write_stats(history)
+    output.write_stats(np.asarray(history))
