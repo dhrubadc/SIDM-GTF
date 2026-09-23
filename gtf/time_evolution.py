@@ -13,6 +13,12 @@ def evolve(state_init, dt_init=0.001):
     r"""Evolve the initial state of the system
     forward in time.
 
+    Evolution stops when central density reaches
+    :obj:`gtf.constants.RHO_STOP`
+
+    Initial central density must be less than 
+    :obj:`gtf.constants.RHO_STOP` for evolution to proceed.
+
     Time stepping is controlled by the condtion
     :math:`{\rm MAX}(\epsilon_{r}, \epsilon_{u})`
     < :obj:`gtf.constants.DT_TOL`.
@@ -72,18 +78,7 @@ def evolve(state_init, dt_init=0.001):
 
         output.write_snapshot(write_data, snapshot_index)
 
-        history.append(
-            [
-                t,
-                dt_step,
-                eps_u,
-                eps_r,
-                eps,
-                f_max,
-                n_iter,
-                np.exp(state_new["ln_rho"]).max(),
-            ]
-        )
+        history.append([t, dt_step, eps_u, eps_r, eps, f_max, n_iter, np.exp(state_new["ln_rho"]).max()])
 
         snapshot_index += 1
 
