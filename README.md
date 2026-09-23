@@ -54,7 +54,76 @@ In both cases, you can then import the package in Python:
 import gtf
 ```
 
+## Walkthrough
 
+First we import the required modules.
 
+```python
+from gtf import constants
+from gtf import initial_conditions
+from gtf import state
+from gtf import time_evolution
+import config
+```
+where config.py is in the working directory and contains all essential parameters for the code to run.
 
+We then set the values for all the runtime parameters:
 
+```python
+r_first = constants.FLOATDTYPE(config.R_FIRST)
+
+constants.R_OUTER = constants.FLOATDTYPE(config.R_OUTER)
+constants.N_SHELL = config.N_SHELL
+
+constants.SIGMA_OVER_M = constants.FLOATDTYPE(config.SIGMA_OVER_M)
+constants.BETA = constants.FLOATDTYPE(config.BETA)
+constants.ALPHA = constants.FLOATDTYPE(config.ALPHA)
+
+constants.F_TOL = constants.FLOATDTYPE(config.F_TOL)
+constants.F_ACCEPT = constants.FLOATDTYPE(config.F_ACCEPT)
+constants.X_TOL = constants.FLOATDTYPE(config.X_TOL)
+constants.ITER_MAX = config.ITER_MAX
+
+constants.DT_TOL = constants.FLOATDTYPE(config.DT_TOL)
+
+constants.RHO_STOP = constants.FLOATDTYPE(config.RHO_STOP)
+constants.OUTPUT_FACTOR = constants.FLOATDTYPE(config.OUTPUT_FACTOR)
+constants.RUN_ID = config.RUN_ID
+
+out_direc = f"data/run_{constants.RUN_ID:d}/"
+
+if os.path.exists(out_direc):
+    shutil.rmtree(out_direc)
+
+os.makedirs(out_direc)
+
+constants.OUT_DIREC = out_direc 
+```
+
+Next we set up the initial NFW halo:
+
+```python
+ln_r_edge, u = initial_conditions.set_up_initial_conditions(r_first)
+```
+
+A truncated NFW can also be set up by providing additional arguments r_t and n.
+
+The initial state of the system is now created with all relevant state variables:
+
+```python
+state_init = state.state_from_unknowns(ln_r_edge, u)
+```
+
+Finally, the halo is evolved until the central density is greater than constants.RHO_STOP
+
+```python
+start_time = time.perf_counter()
+
+time_evolution.evolve(state_init)
+
+end_time = time.perf_counter()
+
+execution_time = end_time - start_time
+
+print(execution_time)
+```
