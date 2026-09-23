@@ -31,4 +31,4 @@ def write_stats(history):
     :type history: np.ndarray
     """
     with open(constants.OUT_DIREC + "stats.txt", "w", encoding="utf-8") as f:
-        np.savetxt(f, np.column_stack(history))
+        np.savetxt(f, history)
