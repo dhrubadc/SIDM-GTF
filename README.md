@@ -141,5 +141,6 @@ print(execution_time)
 Example config files and a run script, which takes the config file as an argument, are provided in the examples folder.
 
 ## Convergence Tests
-Results of three different runs are shown in ![dt_test](examples/plots/convergence_test.png), 
+Results of three different runs are shown in this figure, 
 which tests for convergence in the central density evolution with respect to time-stepping.
+![dt_test](examples/plots/convergence_test.png).
