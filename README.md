@@ -8,7 +8,7 @@ self-interacting dark matter halos. The code and associated convergence tests wi
 described in Dutta Chowdhury and Croton (in prep).
 
 All quantities are in dimensionless units following standard gravothermal evolution work
-such as Balberg 2002, Nishikawa 2020, etc.
+such as Balberg et al. 2002, Nishikawa et al. 2020, etc.
 
 However, contrary to standard work where the energy equation is first solved, 
 holding the geometry fixed, and the system is then allowed to 
