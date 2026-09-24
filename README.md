@@ -154,4 +154,4 @@ which tests for convergence in the central density evolution with respect to tim
 This section will be updated with more results.
 
 ## Acknowledgements
-ChatGPT (Open AI) has been used during development for code-error fixes, consistency checks, and some idea brainstorming, such as convergence criteria for the Newton iterations, line search to keep the Newton variables physical, and timestep controller. All AI-made suggestions were extensively reviewed and verified by the authors before their inclusion in the code-base, and therefore, ownership and accountability for the same lies with the authors.
+ChatGPT (Open AI) has been used during development for code-error fixes, consistency checks, and some idea brainstorming, such as convergence criteria for the Newton iterations, line search to keep the Newton variables physical, and timestep controller. All AI-made suggestions were extensively reviewed and verified by the authors before their inclusion in the code-base, and therefore, ownership and accountability for the same lies with the authors. We acknowledge insightful discussions with Frank van den Bosch and Yarone Tokayer.
