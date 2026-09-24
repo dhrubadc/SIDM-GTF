@@ -16,6 +16,9 @@ adiabatically re-adjust to hydrostatic equilibrium, we simultaneously solve the
 coupled energy conservation and hydrostatic equlibrium equations uisng a
 fully-implicit scheme.
 
+Note: While this repo is publicly available, the code is under active development
+and testing.
+
 ## Key Features
 
 - Spherically symmetric halo evolution
