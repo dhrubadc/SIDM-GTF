@@ -5,7 +5,7 @@ Implement Newton iterations and related helper functions.
 import numpy as np
 from scipy.sparse import csr_array
 from scipy.sparse.linalg import spsolve
-from . import constants
+from . import settings
 from . import residual
 from . import jacobian
 from . import state
@@ -38,13 +38,13 @@ def unpack_unknowns(x):
     :return: log of cell edges and specific energy at cell midpoints
     :rtype: tuple[np.ndarray, np.ndarray]
     """
-    ln_r_edge = np.empty(constants.N_SHELL + 1, dtype=constants.FLOATDTYPE)
+    ln_r_edge = np.empty(settings.N_SHELL + 1, dtype=settings.FLOATDTYPE)
 
     ln_r_edge[0] = -np.inf
-    ln_r_edge[-1] = np.log(constants.R_OUTER)
-    ln_r_edge[1:-1] = x[: constants.N_SHELL - 1]
+    ln_r_edge[-1] = np.log(settings.R_OUTER)
+    ln_r_edge[1:-1] = x[: settings.N_SHELL - 1]
 
-    u = x[constants.N_SHELL - 1 :]
+    u = x[settings.N_SHELL - 1 :]
 
     return ln_r_edge, u
 
@@ -71,7 +71,7 @@ def increment_newton_variables(x_trial, dx):
     :return: physically valid new trial solutions,
              corresponding full physical state,
              and the accepted :math:`\alpha`.
-    :rtype: tuple[np.ndarray, dict, :obj:`gtf.constants.FLOATDTYPE`]
+    :rtype: tuple[np.ndarray, dict, :obj:`gtf.settings.FLOATDTYPE`]
 
     Here J is the output of :obj:`gtf.jacobian.analytic_jacobian` and
     F is the output of :obj:`gtf.residual.residual`.
@@ -109,25 +109,25 @@ def iterate(state_old, dt):
     F is the output of :obj:`gtf.residual.residual`.
 
     A converged solution for time t is found
-    if :math:`{\rm MAX}(|F|)` < :obj:`gtf.constants.F_TOL`
+    if :math:`{\rm MAX}(|F|)` < :obj:`gtf.settings.F_TOL`
 
     A stagnated but acceptable solution for time t is found
     if between last two iterations
     :math:`{\rm MAX}(|\Delta\ \ln r_{\rm edge}|, |\Delta\ u|/u)`
-    < :obj:`gtf.constants.X_TOL` but :math:`{\rm MAX}(|F|)`
-    < :obj:`gtf.constants.F_ACCEPT`
+    < :obj:`gtf.settings.X_TOL` but :math:`{\rm MAX}(|F|)`
+    < :obj:`gtf.settings.F_ACCEPT`
 
-    Maximum number of iterations tried is :obj:`gtf.constants.ITER_MAX`.
+    Maximum number of iterations tried is :obj:`gtf.settings.ITER_MAX`.
 
     :param state_old: physical state of the system at time t-dt
     :type state_old: dict
 
     :param dt: timestep
-    :type dt: :obj:`gtf.constants.FLOATDTYPE`
+    :type dt: :obj:`gtf.settings.FLOATDTYPE`
 
     :return: physical state of the system at time t,
              final :math:`{\rm MAX}(|F|)`, total number of iterations
-    :rtype: tuple[dict, :obj:`gtf.constants.FLOATDTYPE`, int]
+    :rtype: tuple[dict, :obj:`gtf.settings.FLOATDTYPE`, int]
             or None if a suitably converged state is not found
     """
     x_trial = pack_unknowns(state_old["ln_r_edge"], state_old["u"])
@@ -140,7 +140,7 @@ def iterate(state_old, dt):
 
     f_max = np.max(np.abs(f_trial))
 
-    if f_max < constants.F_TOL:
+    if f_max < settings.F_TOL:
 
         print(
             "state is not updated and same as previous time",
@@ -150,19 +150,19 @@ def iterate(state_old, dt):
 
         return state_old, f_max, 0
 
-    for i in range(1, constants.ITER_MAX):
+    for i in range(1, settings.ITER_MAX):
 
         dx = spsolve(csr_array(j_trial), -f_trial)
 
         x_new, state_new, alpha = increment_newton_variables(x_trial, dx)
 
         dx_r = np.max(
-            np.abs(x_new[: constants.N_SHELL - 1] - x_trial[: constants.N_SHELL - 1])
+            np.abs(x_new[: settings.N_SHELL - 1] - x_trial[: settings.N_SHELL - 1])
         )
 
         dx_u = np.max(
-            np.abs(x_new[constants.N_SHELL - 1 :] - x_trial[constants.N_SHELL - 1 :])
-            / x_trial[constants.N_SHELL - 1 :]
+            np.abs(x_new[settings.N_SHELL - 1 :] - x_trial[settings.N_SHELL - 1 :])
+            / x_trial[settings.N_SHELL - 1 :]
         )
 
         dx_max = np.maximum(dx_r, dx_u)
@@ -183,16 +183,16 @@ def iterate(state_old, dt):
 
         f_max = np.max(np.abs(f_new))
 
-        if f_max < constants.F_TOL:
+        if f_max < settings.F_TOL:
 
             print("Newton iterations have converged in ", i, "iterations.")
             return state_new, f_max, i
 
-        if dx_max < constants.X_TOL:
+        if dx_max < settings.X_TOL:
 
             print("Newton has stagnated after ", i, "iterations.")
 
-            if f_max < constants.F_ACCEPT:
+            if f_max < settings.F_ACCEPT:
 
                 print("Stagnated but acceptable")
                 return state_new, f_max, i

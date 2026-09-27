@@ -3,7 +3,7 @@ Calculate the fully implicit coupled hydrostatic and energy residuals.
 """
 
 import numpy as np
-from . import constants
+from . import settings
 
 
 def hydrostatic_terms(state):
@@ -23,14 +23,14 @@ def hydrostatic_terms(state):
     dln_rho = state["ln_rho"][1:] - state["ln_rho"][:-1]
     dln_u = state["ln_u"][1:] - state["ln_u"][:-1]
 
-    u_face = constants.FLOATDTYPE(0.5) * (state["u"][1:] + state["u"][:-1])
+    u_face = settings.FLOATDTYPE(0.5) * (state["u"][1:] + state["u"][:-1])
 
     rho_slope = dln_rho / dln_r
     u_slope = dln_u / dln_r
 
     g_term = (
-        constants.FLOATDTYPE(3.0 / 2.0)
-        * constants.M_EDGE[1:-1]
+        settings.FLOATDTYPE(3.0 / 2.0)
+        * settings.M_EDGE[1:-1]
         / (state["r_edge"][1:-1] * u_face)
     )
 
@@ -49,7 +49,7 @@ def hydrostatic_residual(state):
 
        u_{\rm face} &= \frac{1}{2} (u[:-1] + u[1:])
 
-    Here :math:`m_{\rm edge}` is :obj:`gtf.constants.M_EDGE`.
+    Here :math:`m_{\rm edge}` is :obj:`gtf.settings.M_EDGE`.
 
     :param state: current physical state of the system
     :type state: dict
@@ -79,7 +79,7 @@ def energy_terms(state, v_old, u_old, dt):
     :type u_old: np.ndarray
 
     :param dt: timestep
-    :type dt: :obj:`gtf.constants.FLOATDTYPE`
+    :type dt: :obj:`gtf.settings.FLOATDTYPE`
 
     :return: individual terms of each energy residual
     :rtype: tuple[np.ndarray, np.ndarray, np.ndarray]
@@ -87,11 +87,11 @@ def energy_terms(state, v_old, u_old, dt):
 
     energy_term = state["u"] - u_old
     compression_term = (
-        constants.FLOATDTYPE(2.0 / 3.0)
+        settings.FLOATDTYPE(2.0 / 3.0)
         * state["u"]
-        * (constants.FLOATDTYPE(1.0) - v_old / state["v"])
+        * (settings.FLOATDTYPE(1.0) - v_old / state["v"])
     )
-    conduction_term = dt * (state["l"][1:] - state["l"][:-1]) / constants.DM
+    conduction_term = dt * (state["l"][1:] - state["l"][:-1]) / settings.DM
 
     return energy_term, compression_term, conduction_term
 
@@ -106,7 +106,7 @@ def energy_residual(state, v_old, u_old, dt):
        + {\rm d}t\ \frac{{\rm d} l}{{\rm d} m} +
        \frac{2}{3}\ u\ (1 - \frac{v_{\rm old}}{v})
 
-    Here dm is :obj:`gtf.constants.DM`.
+    Here dm is :obj:`gtf.settings.DM`.
 
     :param state: current physical state of the system
     :type state: dict
@@ -118,7 +118,7 @@ def energy_residual(state, v_old, u_old, dt):
     :type u_old: np.ndarray
 
     :param dt: timestep
-    :type dt: :obj:`gtf.constants.FLOATDTYPE`
+    :type dt: :obj:`gtf.settings.FLOATDTYPE`
 
     :return: raw energy residuals
     :rtype: np.ndarray
@@ -146,7 +146,7 @@ def residual(state, v_old, u_old, dt):
     :type u_old: np.ndarray
 
     :param dt: timestep
-    :type dt: :obj:`gtf.constants.FLOATDTYPE`
+    :type dt: :obj:`gtf.settings.FLOATDTYPE`
 
     :return: combined raw residual
     :rtype: np.ndarray

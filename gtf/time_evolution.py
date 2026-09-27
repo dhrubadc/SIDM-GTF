@@ -4,7 +4,7 @@ initial state.
 """
 
 import numpy as np
-from . import constants
+from . import settings
 from . import newton
 from . import output
 
@@ -14,14 +14,14 @@ def evolve(state_init, dt_init=0.001):
     forward in time.
 
     Evolution stops when central density reaches
-    :obj:`gtf.constants.RHO_STOP`
+    :obj:`gtf.settings.RHO_STOP`
 
     Initial central density must be less than
-    :obj:`gtf.constants.RHO_STOP` for evolution to proceed.
+    :obj:`gtf.settings.RHO_STOP` for evolution to proceed.
 
     Time stepping is controlled by the condtion
     :math:`{\rm MAX}(\epsilon_{r}, \epsilon_{u})`
-    < :obj:`gtf.constants.DT_TOL`.
+    < :obj:`gtf.settings.DT_TOL`.
 
     Here :math:`\epsilon_{r} = \frac{|\Delta r_{\rm edge}[1:-1]|}{r_{\rm edge}[1:-1]}`
     and :math:`\epsilon_{u}= \frac{|\Delta u|}{u}`
@@ -32,12 +32,12 @@ def evolve(state_init, dt_init=0.001):
     :type state_init: dict
 
     :param dt_init: initial trial dt, defaults to 0.001
-    :type dt_init: :obj:`gtf.constants.FLOATDTYPE`
+    :type dt_init: :obj:`gtf.settings.FLOATDTYPE`
     """
 
     # pylint: disable=too-many-locals
 
-    if np.exp(state_init["ln_rho"]).max() > constants.RHO_STOP:
+    if np.exp(state_init["ln_rho"]).max() > settings.RHO_STOP:
         raise RuntimeError("Increase RHO_STOP")
 
     history = []
@@ -50,7 +50,7 @@ def evolve(state_init, dt_init=0.001):
 
     snapshot_index = 1
 
-    while np.exp(state_old["ln_rho"]).max() <= constants.RHO_STOP:
+    while np.exp(state_old["ln_rho"]).max() <= settings.RHO_STOP:
 
         dt_step = dt_trial
 
@@ -67,10 +67,10 @@ def evolve(state_init, dt_init=0.001):
 
         eps = max(eps_r, eps_u)
 
-        if eps > constants.DT_TOL:
+        if eps > settings.DT_TOL:
 
             # reject this timestep
-            dt_trial = dt_step * constants.FLOATDTYPE(0.9) * constants.DT_TOL / eps
+            dt_trial = dt_step * settings.FLOATDTYPE(0.9) * settings.DT_TOL / eps
 
             print("reject:", "dt =", dt_step, "eps =", eps, "new dt =", dt_trial)
 
@@ -81,9 +81,9 @@ def evolve(state_init, dt_init=0.001):
 
         if (
             np.exp(state_new["ln_rho"]).max()
-            >= rho_c_last_output * constants.OUTPUT_FACTOR
+            >= rho_c_last_output * settings.OUTPUT_FACTOR
             or np.exp(state_new["ln_rho"]).max()
-            <= rho_c_last_output / constants.OUTPUT_FACTOR
+            <= rho_c_last_output / settings.OUTPUT_FACTOR
         ):
 
             write_data = np.concatenate(
@@ -100,7 +100,7 @@ def evolve(state_init, dt_init=0.001):
             [t, dt_step, eps, f_max, n_iter, np.exp(state_new["ln_rho"]).max()]
         )
 
-        dt_trial = dt_step * constants.FLOATDTYPE(0.9) * constants.DT_TOL / eps
+        dt_trial = dt_step * settings.FLOATDTYPE(0.9) * settings.DT_TOL / eps
 
         print(
             "accept:",

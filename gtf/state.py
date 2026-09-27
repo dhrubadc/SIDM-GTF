@@ -7,7 +7,7 @@ import numpy as np
 from . import conductivity
 from . import luminosity
 from . import geometry
-from . import constants
+from . import settings
 
 
 def state_from_unknowns(ln_r_edge, u):
@@ -32,7 +32,7 @@ def state_from_unknowns(ln_r_edge, u):
     ln_v = geometry.log_cell_volumes(ln_r_edge)
     v = np.exp(ln_v)
 
-    ln_rho = np.log(constants.DM) - ln_v
+    ln_rho = np.log(settings.DM) - ln_v
     rho = np.exp(ln_rho)
 
     ln_u = np.log(u)

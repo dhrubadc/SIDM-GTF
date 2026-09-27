@@ -7,7 +7,7 @@ API Reference
    :template: custom-module-template.rst
    
 
-   gtf.constants
+   gtf.settings
    gtf.geometry
    gtf.conductivity
    gtf.luminosity

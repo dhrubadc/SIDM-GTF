@@ -5,7 +5,7 @@
 
 {% if attributes %}
 Variables
---------
+---------
 
 {% for item in attributes %}
 .. autodata:: {{ fullname }}.{{ item }}

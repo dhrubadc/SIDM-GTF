@@ -72,7 +72,7 @@ import time
 import shutil
 import os
 
-from gtf import constants
+from gtf import settings
 from gtf import initial_conditions
 from gtf import state
 from gtf import time_evolution
@@ -85,34 +85,34 @@ Here, config.py is in the working directory and contains all essential parameter
 We then set the values for all the runtime parameters.
 
 ```python
-r_first = constants.FLOATDTYPE(config.R_FIRST)
+r_first = settings.FLOATDTYPE(config.R_FIRST)
 
-constants.R_OUTER = constants.FLOATDTYPE(config.R_OUTER)
-constants.N_SHELL = config.N_SHELL
+settings.R_OUTER = settings.FLOATDTYPE(config.R_OUTER)
+settings.N_SHELL = config.N_SHELL
 
-constants.SIGMA_OVER_M = constants.FLOATDTYPE(config.SIGMA_OVER_M)
-constants.BETA = constants.FLOATDTYPE(config.BETA)
-constants.ALPHA = constants.FLOATDTYPE(config.ALPHA)
+settings.SIGMA_OVER_M = settings.FLOATDTYPE(config.SIGMA_OVER_M)
+settings.BETA = settings.FLOATDTYPE(config.BETA)
+settings.ALPHA = settings.FLOATDTYPE(config.ALPHA)
 
-constants.F_TOL = constants.FLOATDTYPE(config.F_TOL)
-constants.F_ACCEPT = constants.FLOATDTYPE(config.F_ACCEPT)
-constants.X_TOL = constants.FLOATDTYPE(config.X_TOL)
-constants.ITER_MAX = config.ITER_MAX
+settings.F_TOL = settings.FLOATDTYPE(config.F_TOL)
+settings.F_ACCEPT = settings.FLOATDTYPE(config.F_ACCEPT)
+settings.X_TOL = settings.FLOATDTYPE(config.X_TOL)
+settings.ITER_MAX = config.ITER_MAX
 
-constants.DT_TOL = constants.FLOATDTYPE(config.DT_TOL)
+settings.DT_TOL = settings.FLOATDTYPE(config.DT_TOL)
 
-constants.RHO_STOP = constants.FLOATDTYPE(config.RHO_STOP)
-constants.OUTPUT_FACTOR = constants.FLOATDTYPE(config.OUTPUT_FACTOR)
-constants.RUN_ID = config.RUN_ID
+settings.RHO_STOP = settings.FLOATDTYPE(config.RHO_STOP)
+settings.OUTPUT_FACTOR = settings.FLOATDTYPE(config.OUTPUT_FACTOR)
+settings.RUN_ID = config.RUN_ID
 
-out_direc = f"data/run_{constants.RUN_ID:d}/"
+out_direc = f"data/run_{settings.RUN_ID:d}/"
 
 if os.path.exists(out_direc):
     shutil.rmtree(out_direc)
 
 os.makedirs(out_direc)
 
-constants.OUT_DIREC = out_direc 
+settings.OUT_DIREC = out_direc 
 ```
 
 Next, we set up the initial NFW halo.

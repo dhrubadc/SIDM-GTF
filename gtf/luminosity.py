@@ -3,7 +3,7 @@ Calculate conductive luminosity.
 """
 
 import numpy as np
-from . import constants
+from . import settings
 
 
 def luminosity(r_edge, r, u, kappa):
@@ -21,7 +21,7 @@ def luminosity(r_edge, r, u, kappa):
 
     l[0] at r=0 and l[-1] at :math:`r=r_{\rm outer}` are fixed to 0.
 
-    Here :math:`r_{\rm outer}` is :obj:`gtf.constants.R_OUTER`.
+    Here :math:`r_{\rm outer}` is :obj:`gtf.settings.R_OUTER`.
 
     :param r_edge: cell edges
     :type r_edge: np.ndarray
@@ -38,14 +38,12 @@ def luminosity(r_edge, r, u, kappa):
     :return: luminosity at cell edges
     :rtype: np.ndarray
     """
-    l = np.zeros(constants.N_SHELL + 1, dtype=constants.FLOATDTYPE)
+    l = np.zeros(settings.N_SHELL + 1, dtype=settings.FLOATDTYPE)
 
-    kappa_face = constants.FLOATDTYPE(0.5) * (kappa[:-1] + kappa[1:])
+    kappa_face = settings.FLOATDTYPE(0.5) * (kappa[:-1] + kappa[1:])
     du = u[1:] - u[:-1]
     dr = r[1:] - r[:-1]
 
-    l[1:-1] = (
-        -constants.FLOATDTYPE(2.0 / 3.0) * r_edge[1:-1] ** 2 * kappa_face * du / dr
-    )
+    l[1:-1] = -settings.FLOATDTYPE(2.0 / 3.0) * r_edge[1:-1] ** 2 * kappa_face * du / dr
 
     return l

@@ -3,7 +3,7 @@ Calculate SIDM thermal conductivities.
 """
 
 import numpy as np
-from . import constants
+from . import settings
 
 
 def smfp_conductivity(u):
@@ -17,9 +17,9 @@ def smfp_conductivity(u):
        (\frac{2}{3} u)^{1/2}
        \frac{1}{\sigma_{m}^2}
 
-    Here :math:`b` is :obj:`gtf.constants.B`,
-    :math:`a` is :obj:`gtf.constants.A`,
-    and :math:`\sigma_{m}` is :obj:`gtf.constants.SIGMA_OVER_M`.
+    Here :math:`b` is :obj:`gtf.global.B`,
+    :math:`a` is :obj:`gtf.global.A`,
+    and :math:`\sigma_{m}` is :obj:`gtf.global.SIGMA_OVER_M`.
 
     :param u: specific energy at cell midpoints
     :type u: np.ndarray
@@ -27,12 +27,12 @@ def smfp_conductivity(u):
     :return: SMFP conductivity at cell midpoints
     :rtype: np.ndarray
     """
-    v = np.sqrt((constants.FLOATDTYPE(2.0) / constants.FLOATDTYPE(3.0)) * u)
+    v = np.sqrt((settings.FLOATDTYPE(2.0) / settings.FLOATDTYPE(3.0)) * u)
     return (
-        constants.FLOATDTYPE(1.5)
-        * (constants.B / constants.A)
+        settings.FLOATDTYPE(1.5)
+        * (settings.B / settings.A)
         * v
-        / constants.SIGMA_OVER_M**2
+        / settings.SIGMA_OVER_M**2
     )
 
 
@@ -47,7 +47,7 @@ def lmfp_conductivity(rho, u):
       \rho
       (\frac{2}{3} u)^{3/2}
 
-    Here :math:`\beta` is :obj:`gtf.constants.BETA`.
+    Here :math:`\beta` is :obj:`gtf.settings.BETA`.
 
     :param rho: density at cell midpoints
     :type rho: np.ndarray
@@ -58,8 +58,8 @@ def lmfp_conductivity(rho, u):
     :return: LMFP conductivity at cell midpoints
     :rtype: np.ndarray
     """
-    v = np.sqrt((constants.FLOATDTYPE(2.0) / constants.FLOATDTYPE(3.0)) * u)
-    return constants.FLOATDTYPE(1.5) * constants.BETA * rho * v**3
+    v = np.sqrt((settings.FLOATDTYPE(2.0) / settings.FLOATDTYPE(3.0)) * u)
+    return settings.FLOATDTYPE(1.5) * settings.BETA * rho * v**3
 
 
 def total_conductivity(kappa_s, kappa_l):
@@ -71,7 +71,7 @@ def total_conductivity(kappa_s, kappa_l):
       \kappa = \frac{\kappa_s \kappa_l}
       {(\kappa_s^{\alpha} + \kappa_l^{\alpha})^{1/\alpha}}
 
-    Here :math:`\alpha` is :obj:`gtf.constants.ALPHA`.
+    Here :math:`\alpha` is :obj:`gtf.settings.ALPHA`.
 
     :param kappa_s: SMFP conductivity at cell midpoints
     :type kappa_s: np.ndarray
@@ -83,7 +83,7 @@ def total_conductivity(kappa_s, kappa_l):
     :rtype: np.ndarray
     """
     num = kappa_s * kappa_l
-    den = (kappa_s ** (constants.ALPHA) + kappa_l ** (constants.ALPHA)) ** (
-        1.0 / constants.ALPHA
+    den = (kappa_s ** (settings.ALPHA) + kappa_l ** (settings.ALPHA)) ** (
+        1.0 / settings.ALPHA
     )
     return num / den

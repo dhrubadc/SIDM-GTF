@@ -1,7 +1,7 @@
 r"""Output a state and overall stats"""
 
 import numpy as np
-from . import constants
+from . import settings
 
 
 def write_snapshot(write_data, snapshot_index):
@@ -15,7 +15,7 @@ def write_snapshot(write_data, snapshot_index):
     :type snapshot_index: int
     """
     with open(
-        constants.OUT_DIREC + f"snapshot_{snapshot_index:05d}.txt",
+        settings.OUT_DIREC + f"snapshot_{snapshot_index:05d}.txt",
         "w",
         encoding="utf-8",
     ) as f:
@@ -29,5 +29,5 @@ def write_stats(history):
     :param history: array of important global diagnostics
     :type history: np.ndarray
     """
-    with open(constants.OUT_DIREC + "stats.txt", "w", encoding="utf-8") as f:
+    with open(settings.OUT_DIREC + "stats.txt", "w", encoding="utf-8") as f:
         np.savetxt(f, history)

@@ -4,7 +4,7 @@ energy.
 """
 
 import numpy as np
-from . import constants
+from . import settings
 
 
 def total_kinetic_energy(u):
@@ -15,15 +15,15 @@ def total_kinetic_energy(u):
 
        K = \Sigma ({\rm d} m\ u)
 
-    Here :math:`{\rm d} m` is :obj:`gtf.constants.DM`.
+    Here :math:`{\rm d} m` is :obj:`gtf.settings.DM`.
 
     :param u: specific energy at cell midpoints
     :type u: np.ndarray
 
     :return: total kinetic energy
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: :obj:`gtf.settings.FLOATDTYPE`
     """
-    return np.sum(constants.DM * u)
+    return np.sum(settings.DM * u)
 
 
 def total_gravitational_energy(r):
@@ -36,21 +36,19 @@ def total_gravitational_energy(r):
 
        M_{\rm center} &= 0.5\ (M_{\rm edge}[0:-1] + M_{\rm edge}[1:])
 
-    Here :math:`{\rm d} m` is :obj:`gtf.constants.DM` and
-    :math:`M_{\rm edge}` is :obj:`gtf.constants.M_EDGE`.
+    Here :math:`{\rm d} m` is :obj:`gtf.settings.DM` and
+    :math:`M_{\rm edge}` is :obj:`gtf.settings.M_EDGE`.
 
     :param r: cell midpoints
     :type r: np.ndarray
 
     :return: total potential energy
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: :obj:`gtf.settings.FLOATDTYPE`
     """
     # pylint: disable=unsubscriptable-object
 
-    m_center = constants.FLOATDTYPE(0.5) * (
-        constants.M_EDGE[:-1] + constants.M_EDGE[1:]
-    )
-    return -np.sum(constants.DM * m_center / r)
+    m_center = settings.FLOATDTYPE(0.5) * (settings.M_EDGE[:-1] + settings.M_EDGE[1:])
+    return -np.sum(settings.DM * m_center / r)
 
 
 def total_energy(r, u):
@@ -68,7 +66,7 @@ def total_energy(r, u):
     :type u: np.ndarray
 
     :return: total energy
-    :rtype: :obj:`gtf.constants.FLOATDTYPE`
+    :rtype: :obj:`gtf.settings.FLOATDTYPE`
     """
     ke = total_kinetic_energy(u)
     pe = total_gravitational_energy(r)

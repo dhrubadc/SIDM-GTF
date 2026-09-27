@@ -3,7 +3,7 @@ Calculate geometric quantities.
 """
 
 import numpy as np
-from . import constants
+from . import settings
 
 
 def log_cell_centers(ln_r_edge):
@@ -27,7 +27,7 @@ def log_cell_centers(ln_r_edge):
     ln_left = ln_r_edge[:-1]
     ln_right = ln_r_edge[1:]
 
-    return np.logaddexp(ln_right, ln_left) - np.log(constants.FLOATDTYPE(2.0))
+    return np.logaddexp(ln_right, ln_left) - np.log(settings.FLOATDTYPE(2.0))
 
 
 def log_cell_volumes(ln_r_edge):
@@ -50,10 +50,10 @@ def log_cell_volumes(ln_r_edge):
     """
     ln_left = ln_r_edge[:-1]
     ln_right = ln_r_edge[1:]
-    delta = constants.FLOATDTYPE(3.0) * (ln_left - ln_right)
+    delta = settings.FLOATDTYPE(3.0) * (ln_left - ln_right)
 
     return (
-        constants.FLOATDTYPE(3.0) * ln_right
+        settings.FLOATDTYPE(3.0) * ln_right
         + np.log(-np.expm1(delta))
-        - np.log(constants.FLOATDTYPE(3.0))
+        - np.log(settings.FLOATDTYPE(3.0))
     )
