@@ -60,6 +60,22 @@ Number of Lagrangian cells.
 Set by user at runtime.
 """
 
+R_FIRST = None
+r"""
+First non-zero edge.
+Set by user at runtime.
+"""
+
+R_T = None
+r"""Truncation radius for 
+exponentially truncated NFW profile.
+"""
+
+N = None
+r"""Truncation exponent for 
+exponentially truncated NFW profile.
+"""
+
 F_TOL = None
 r"""
 Residual tolerance for convergence of Newton iterations.

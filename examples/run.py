@@ -33,7 +33,7 @@ args = parser.parse_args()
 config = load_config(args.config)
 
 
-r_first = settings.FLOATDTYPE(config.R_FIRST)
+settings.r_FIRST = settings.FLOATDTYPE(config.R_FIRST)
 
 settings.R_OUTER = settings.FLOATDTYPE(config.R_OUTER)
 settings.N_SHELL = config.N_SHELL
@@ -64,7 +64,7 @@ os.makedirs(out_direc)
 settings.OUT_DIREC = out_direc
 
 # set up NFW halo at t=0
-ln_r_edge, u = initial_conditions.set_up_initial_conditions(r_first)
+ln_r_edge, u = initial_conditions.set_up_initial_conditions(settings.r_FIRST)
 
 # create initial state of the system with all relevant state variables
 state_init = state.state_from_unknowns(ln_r_edge, u)
