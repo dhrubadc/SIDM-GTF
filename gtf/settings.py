@@ -62,7 +62,7 @@ Set by user at runtime.
 
 R_FIRST = None
 r"""
-First non-zero edge.
+First non-zero edge at t=0.
 Set by user at runtime.
 """
 
