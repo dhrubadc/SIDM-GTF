@@ -85,7 +85,7 @@ Here, config.py is in the working directory and contains all essential parameter
 We then set the values for all the runtime parameters.
 
 ```python
-r_first = settings.FLOATDTYPE(config.R_FIRST)
+settings.r_FIRST = settings.FLOATDTYPE(config.R_FIRST)
 
 settings.R_OUTER = settings.FLOATDTYPE(config.R_OUTER)
 settings.N_SHELL = config.N_SHELL
@@ -105,6 +105,7 @@ settings.RHO_STOP = settings.FLOATDTYPE(config.RHO_STOP)
 settings.OUTPUT_FACTOR = settings.FLOATDTYPE(config.OUTPUT_FACTOR)
 settings.RUN_ID = config.RUN_ID
 
+# output directory
 out_direc = f"data/run_{settings.RUN_ID:d}/"
 
 if os.path.exists(out_direc):
@@ -112,15 +113,15 @@ if os.path.exists(out_direc):
 
 os.makedirs(out_direc)
 
-settings.OUT_DIREC = out_direc 
+settings.OUT_DIREC = out_direc
 ```
 
 Next, we set up the initial NFW halo.
 
 ```python
-ln_r_edge, u = initial_conditions.set_up_initial_conditions(r_first)
+ln_r_edge, u = initial_conditions.set_up_initial_conditions(settings.R_FIRST)
 ```
-A truncated NFW can also be set up by providing additional arguments r_t and n.
+A truncated NFW can also be set up by providing additional arguments settings.R_T and settings.N.
 
 
 The initial state of the system is now created with all relevant state variables.
@@ -130,7 +131,7 @@ state_init = state.state_from_unknowns(ln_r_edge, u)
 ```
 
 
-Finally, the halo is evolved until the central density is greater than constants.RHO_STOP.
+Finally, the halo is evolved until the central density is greater than settings.RHO_STOP.
 
 ```python
 start_time = time.perf_counter()
