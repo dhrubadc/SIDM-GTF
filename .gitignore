@@ -14,3 +14,6 @@ data/
 #other
 Makefile
 make.bat
+
+.DS_Store
+.coverage
