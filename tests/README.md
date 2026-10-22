@@ -1,6 +1,7 @@
 # SIDM-GTF tests
 
-Run the fast unit suite from the repository root after installing the package and test extra:
+Tests were created using ChatGPT.
+Run the tests from the repository root after installing the package and test extra:
 
 ```bash
 python -m pip install -e '.[test]'
