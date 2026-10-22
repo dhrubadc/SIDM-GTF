@@ -67,6 +67,9 @@ def evolve(state_init, dt_init=0.001):
 
         eps = max(eps_r, eps_u)
 
+        if not np.isfinite(eps):
+            raise RuntimeError(f"Non-finite timestep error estimate: eps={eps}")
+
         if eps > settings.DT_TOL:
 
             # reject this timestep
@@ -100,7 +103,10 @@ def evolve(state_init, dt_init=0.001):
             [t, dt_step, eps, f_max, n_iter, np.exp(state_new["ln_rho"]).max()]
         )
 
-        dt_trial = dt_step * settings.FLOATDTYPE(0.9) * settings.DT_TOL / eps
+        if eps == 0.0:
+            dt_trial = dt_step * settings.FLOATDTYPE(1.2)
+        else:
+            dt_trial = dt_step * settings.FLOATDTYPE(0.9) * settings.DT_TOL / eps
 
         print(
             "accept:",
